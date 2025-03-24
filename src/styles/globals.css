@@ -2,25 +2,36 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+
+  --h1: 64px;
+  --h2: 48px;
+  --h3: 40px;
+  --h4: 24px;
+
+  --margin-x: 120px;
+  --margin-y: 20px;
+
+  --rounded-20: 20px;
+}
+
+.hover_animation {
+  transition: all 150ms ease-in-out;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --text-h1: var(--h1);
+  --text-h2: var(--h2);
+  --text-h3: var(--h3);
+
+  --spacing-h1: calc(var(--h1) + 5px);
+  --spacing-h2: calc(var(--h2) + 5px);
+  --spacing-h3: calc(var(--h3) + 5px);
+
+  --radius-20: var(--rounded-20);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
