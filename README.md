@@ -154,3 +154,15 @@ getGameModule(12, 2);
 // Obtenir les informations d'un casse-tête
 getGameMindgame(12, 1);
 ```
+
+### ID-Module:
+
+1. Téléphone cheminement
+2. Retro-proj
+3. Minitel
+4. Configuration led
+
+### ID-Casse-tête:
+
+1. Equipe Bateau
+2. Equipe Sous-Marin
