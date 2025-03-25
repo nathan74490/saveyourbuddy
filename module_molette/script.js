@@ -1,102 +1,120 @@
+let correctDirection = ""; // Stocke la direction correcte
+let gameStarted = false; // Indique si le jeu a commencé
+let activeCircles = []; // Stocke les indices des cercles actifs
+let intervalId; // Pour stocker l'ID de l'intervalle
 
-//& Timer 
+// DOM
+const circles = document.querySelectorAll('.circle'); // Tous les cercles de la boussole
+const arrow = document.getElementById('arrow'); // La flèche de la boussole
+const message = document.getElementById('message'); // Message
+const validateButton = document.querySelector("button"); // Le bouton de validation
 
-// Début du timer à 31s
-let time = 31;
-let timer;
+// Démarrer le jeu
+function startGame() {
+    gameStarted = true; // Active le jeu
+    resetGame(); // Réinitialise l'état précédent
+    validateButton.style.display = 'block'; // Affiche le bouton de validation
 
-// Démarrer le chronomètre
-function startTimer() {
-  // Intervalle qui appelle la fonction myTimer toutes les 1000ms
-  timer = setInterval(myTimer, 1000);
+    // Commence à changer les cercles toutes les n secondes
+    intervalId = setInterval(() => {
+        activeCircles = getRandomActiveCircles(); // Choisit aléatoirement des cercles lumineux
+        showActiveCircles(activeCircles); // Affiche les cercles actifs
+    }, 3000); // Change les cercles toutes les 3 secondes (3000 ms)
 }
 
-// Fonction exécutée chaque seconde pour mettre à jour le chronomètre
-function myTimer() {
-  time--; // Décrémente le temps
-  
-  // Met à jour l'affichage du chrono
-  document.getElementById("chrono").innerHTML = time + "s";
-
-  // Vérifie si le temps est écoulé
-  if (time === 0) { 
-    clearInterval(timer); // Arrête le chrono à 0
-  }
-}
-
-// Redémarre au reload de la page
-startTimer();
-
-
-
-//& fonction "sonar"
-// Sélectionne l'élément représentant l'aiguille de la boussole
-const needle = document.querySelector('.needle');
-const compass = document.querySelector('.compass');
-
-document.addEventListener('click', (event) => {
-    const rect = compass.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const deltaX = event.clientX - centerX;
-    const deltaY = event.clientY - centerY;
-
-    let angle = 0;
-
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        // Déplacement horizontal : gauche ou droite
-        angle = deltaX > 0 ? 90 : -90; // Droite = 90°, Gauche = -90°
-    } else {
-        // Déplacement vertical : haut ou bas
-        angle = deltaY > 0 ? 180 : 0; // Bas = 180°, Haut = 0°
-    }
-
-    needle.style.transform = `translate(-50%, -90%) rotate(${angle}deg)`;
-});
-
-
-//& Ombres
-
-// Sélection du conteneur
-const container = document.querySelector('.container');
-
-// Stocker les cercles créés
-const circles = [];
-
-// Positions (x, y) pour le placement des cercles
-const positions = [
-    [50, 100], [150, 50], [250, 100], [350, 150], [450, 200], [550, 150], [650, 100], [750, 50],
-    [150, 200], [250, 250], [350, 300], [450, 300], [550, 250], [650, 200]
-];
-
-// Crée et place les cercles aux positions données
-positions.forEach(([x, y]) => {
-    const circle = document.createElement('div'); // Crée un élément div pour chaque cercle
-    circle.classList.add('circle'); // Ajoute la classe CSS "circle"
-    circle.style.left = `${x}px`; // Position horizontale
-    circle.style.top = `${y}px`; // Position verticale
-    container.appendChild(circle); // Ajoute le cercle au DOM
-    circles.push(circle); // Stocke le cercle
-});
-
-// Génère des ombres aléatoires sur certains cercles à des moments différents
-function randomShadows() {
-    // Sélectionne quelques cercles au hasard
-    const selectedCircles = circles.sort(() => 0.5 - Math.random()).slice(0, Math.floor(circles.length / 3));
+// Aléatoirement des cercles 
+function getRandomActiveCircles() {
+    const activeCircles = []; // Tableau pour stocker les indices des cercles 
+    const randomIndex = Math.floor(Math.random() * 2); // Génère 0 ou 1 aléatoirement
     
-    circles.forEach(circle => {
-        if (selectedCircles.includes(circle)) {
-            const randomX = (Math.random() - 0.5) * 40; // Déplacement horizontal aléatoire
-            const randomY = (Math.random() - 0.5) * 40; // Déplacement vertical aléatoire
-            const randomBlur = Math.random() * 20; // Flou aléatoire
+    // Si 0, sélectionne les cercles du haut
+    if (randomIndex === 0) {
+        activeCircles.push(0, 1, 2, 3);
+    } 
+    // Si 1, sélectionne les cercles du bas 
+    else {
+        activeCircles.push(9, 10, 11, 8); 
+    }
+    return activeCircles;
+}
 
-            circle.style.boxShadow = `${randomX}px ${randomY}px ${randomBlur}px rgba(255, 4, 4, 60)`;
-        } else {
-            circle.style.boxShadow = "none"; // Supprime l'ombre des autres cercles
-        }
+// Fonction pour afficher les cercles actifs
+function showActiveCircles(activeCircles) {
+    // Réinitialise tous les cercles lumineux
+    circles.forEach(circle => {
+        circle.style.backgroundColor = '#ddd';
+    });
+
+    // Met en jaune les cercles lumineux
+    activeCircles.forEach(index => {
+        circles[index].style.backgroundColor = 'yellow';
     });
 }
 
-// Mise à jour des ombres toutes les ms
-setInterval(randomShadows, 1000);
+// Gestionnaire d'événement pour le clic sur la boussole
+document.querySelector(".compass").addEventListener("click", (e) => {
+    if (!gameStarted) return; // Ne rien faire si le jeu n'a pas commencé
+
+    // Récupère les dimensions et position de la boussole
+    const compassRect = document.querySelector(".compass").getBoundingClientRect();
+
+    // Calcule les coordonnées du clic relatives à la boussole
+    const clickX = e.clientX - compassRect.left;
+    const clickY = e.clientY - compassRect.top;
+
+    // Calcule le centre de la boussole
+    const centerX = compassRect.width / 2;
+    const centerY = compassRect.height / 2;
+    
+    // Calcule l'angle entre le centre et le point cliqué (en degrés)
+    const angle = Math.atan2(clickY - centerY, clickX - centerX) * (180 / Math.PI);
+    // Normalise l'angle entre 0 et 360 degrés
+    const rotation = angle < 0 ? angle + 360 : angle;
+
+    // Applique la rotation à la flèche
+    arrow.style.transform = `translateX(-50%) rotate(${rotation}deg)`;
+});
+
+// Fonction pour valider la direction de la flèche
+function check() {
+    if (!gameStarted) return; // Si le jeu n'est pas encore commencé, ne rien faire
+
+    // Récupère l'angle actuel de la flèche
+    const arrowRotation = getRotationDegrees(arrow); // Fonction qui extrait l'angle de rotation en degrés
+
+    // Vérifie si la direction est correcte
+    if ((activeCircles.includes(0) || activeCircles.includes(1) || activeCircles.includes(2) || activeCircles.includes(3)) && 
+        (arrowRotation >= 330 || arrowRotation <= 30)) {
+        message.textContent = "Correct! Bravo !";
+        message.style.color = 'green';
+    } 
+    // Cas où les cercles du bas sont actifs et la flèche pointe vers le bas 
+    else if ((activeCircles.includes(8) || activeCircles.includes(9) || activeCircles.includes(10) || activeCircles.includes(11)) && 
+               (arrowRotation >= 150 && arrowRotation <= 210)) {
+        message.textContent = "Correct! Bravo !";
+        message.style.color = 'green';
+    } 
+    // Direction incorrecte
+    else {
+        message.textContent = "Mauvaise direction, essaie encore !";
+        message.style.color = 'red';
+    }
+
+    resetGame(); // Réinitialise le jeu après la validation
+}
+
+// Fonction pour obtenir l'angle de rotation de l'élément flèche
+function getRotationDegrees(element) {
+    const transform = window.getComputedStyle(element).getPropertyValue('transform');
+    const matrix = new WebKitCSSMatrix(transform);
+    return Math.atan2(matrix.m21, matrix.m11) * (180 / Math.PI);
+}
+
+// Fonction pour réinitialiser le jeu
+function resetGame() {
+    gameStarted = false; // Désactive le jeu
+    arrow.style.transform = 'translateX(-50%) rotate(0deg)'; // Réinitialise la flèche
+    message.textContent = ""; // Efface le message
+    validateButton.style.display = 'none'; // Cache le bouton de validation après la fin du jeu
+    clearInterval(intervalId); // Arrête l'intervalle pour changer les cercles
+}
