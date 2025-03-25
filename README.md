@@ -225,7 +225,7 @@ function createTeam(teamName, numero) {
 }
 ```
 
-### 12. get Gane info
+### 12. get Game info
 ```javascript
 function getGame(gameId) {
     const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
