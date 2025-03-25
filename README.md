@@ -238,6 +238,20 @@ function getGame(gameId) {
         .catch(console.error);
 }
 ```
+### 13. get All Teams
+```javascript
+function getTeams() {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?teams`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((teams) => {
+            console.log(teams);
+        })
+        .catch(console.error);
+}
+```
+
 ### ID-Module:
 
 1. Téléphone cheminement
