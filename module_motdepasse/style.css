@@ -26,6 +26,7 @@ body {
     border-radius: 10px;
     width: 420px;
     border: 5px solid #333;
+    gap: 10px;
 }
 .column {
     display: flex;
@@ -75,3 +76,6 @@ body {
 #validate:hover {
     background: #ff4500;
 }
+
+/* TO DO : 
+/* Tout le style, attendre la maquette de Noa */
