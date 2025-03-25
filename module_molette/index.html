@@ -11,29 +11,13 @@
 <body>
 
 
-    <div class="compass">
-        <!-- Cercles de la boussole (12 cercles) -->
-        <div class="circle top" id="top-circle"></div>
-        <div class="circle" id="circle-0"></div>
-        <div class="circle" id="circle-1"></div>
-        <div class="circle" id="circle-2"></div>
-        <div class="circle" id="circle-3"></div>
-        <div class="circle" id="circle-4"></div>
-        <div class="circle" id="circle-5"></div>
-        <div class="circle" id="circle-6"></div>
-        <div class="circle" id="circle-7"></div>
-        <div class="circle" id="circle-8"></div>
-        <div class="circle" id="circle-9"></div>
-        <div class="circle" id="circle-10"></div>
-        <div class="circle bottom" id="bottom-circle"></div>
-    </div>
-    <!-- Flèche -->
-    <div class="arrow" id="arrow"></div>
-    <!-- Message pour afficher si le joueur a gagné ou non -->
-    <div id="message" class="message"></div>
-    <!-- Bouton pour commencer le jeu -->
-    <button onclick="startGame()">Commencer le jeu</button>
-    <button onclick="check()">Valider</button>
+  <div class="led-container" id="ledContainer"></div>
+  <div class="molette" id="molette">UP
+    <div class="aiguille" id="aiguille"></div> <!-- Ajout de l'aiguille -->
+  </div>
+  <button class="validate-btn" id="validate">Valider</button>
+  <div class="countdown" id="countdown">10</div>
+
 
   <script src="script.js"></script>
 </body>

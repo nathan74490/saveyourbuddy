@@ -1,77 +1,63 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #222;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.led-container {
+  display: grid;
+  grid-template-columns: repeat(4, 30px);
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 150px;
+}
+.led {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: grey;
+}
+.molette {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #444, #222);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: transform 0.3s;
+  margin-bottom: 10px;
+}
+.countdown {
+  margin-top: 10px;
+  font-size: 24px;
+}
+.validate-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #747474;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.compass {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 2px solid #000;
-    background-color: #fff;
-    margin-bottom: 20px;
-}
-
-.circle-container {
-    display: flex; /* Afficher les cercles en ligne */
-    justify-content: center; /* Centrer les cercles horizontalement */
-    width: 100%;
-    flex-wrap: nowrap; /* Empêcher les cercles de se déplacer sur plusieurs lignes */
-    overflow-x: auto; /* Permettre de défiler si nécessaire */
-    margin-top: 20px;
-}
-
-.circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #ddd;
-    margin: 5px; /* Ajouter un peu d'espace entre les cercles */
-}
-
-.arrow {
-    position: absolute;
-    top: 120px;
-    left: 50%;
-    transform: translateX(-50%) rotate(0deg);
-    width: 20px;
-    height: 80px;
-    background-color: red;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    transition: transform 0.5s ease-in-out;
-    transform-origin: center center;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.message {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
+#aiguille {
+  position: absolute;
+  width: 4px;
+  height: 50px;
+  background-color: red;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  transform: translateX(-50%) translateY(-100%);
+  transition: transform 0.1s ease;
 }
