@@ -1,6 +1,7 @@
 // Folder variables
 const container = document.querySelector('.container-1');
-const scoreElement = document.querySelector('.score');
+const progressBar = document.querySelector('.progress-bar');
+const maxScore = 5;
 const squareSize = 50;
 let score = 0;
 let gameInterval;
@@ -24,6 +25,8 @@ const points = [
     { angle: 270, radius: 20, data: 'point 7' },
     { angle: 315, radius: 40, data: 'capsule' },
 ];
+
+// -------------------------------------------------------------------------
 
 // Folder functions
 function createRandomSquare() {
@@ -68,10 +71,15 @@ function handleSquareClick(square, type) {
 }
 
 function updateScore() {
-    scoreElement.innerHTML = score;
-    if (score >= 5) {
+    const progressPercentage = (score / maxScore) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
+
+    if (score >= maxScore) {
         clearInterval(gameInterval);
         container.innerHTML = '';
+        document.querySelector('.container-1').style.display = 'none';
+        document.querySelector('.container-2').style.display = 'flex';
+        stopGame();
     }
 }
 
@@ -164,27 +172,7 @@ updateScore();
 createGridLines();
 initializePoints();
 startGame();
-
-// other
-document.getElementById('show-container-1').addEventListener('click', () => {
-    document.querySelector('.container-2').style.display = 'none';
-    document.querySelector('.container-1').style.display = 'block';
-    startGame();
-});
-
-document.getElementById('show-container-2').addEventListener('click', () => {
-    document.querySelector('.container-1').style.display = 'none';
-    document.querySelector('.container-2').style.display = 'flex';
-    stopGame();
-});
-
-document.getElementById('show-container-3').addEventListener('click', () => {
-    document.querySelector('.container-1').style.display = 'none';
-    document.querySelector('.container-2').style.display = 'none';
-    document.querySelector('.container-3').style.display = 'block';
-    stopGame(); // Arrête les autres jeux si nécessaire
-    startMemoryGame(); // Initialise le jeu de mémoire
-});
+startMemoryGame();
 
 function startGame3() {
     const gridSize = 3; // Changez à 5 pour une grille 5x5
