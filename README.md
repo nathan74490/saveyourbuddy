@@ -225,8 +225,19 @@ function createTeam(teamName, numero) {
 }
 ```
 
-
-
+### 12. get Gane info
+```javascript
+function getGame(gameId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
+    
+    fetch(url)
+        .then((response) => response.json())
+        .then((game) => {
+            console.log(game);
+        })
+        .catch(console.error);
+}
+```
 ### ID-Module:
 
 1. Téléphone cheminement
