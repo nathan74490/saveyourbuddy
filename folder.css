@@ -182,3 +182,50 @@ span {
         transform: rotate(360deg);
     }
 }
+
+.grid {
+    display: grid;
+    gap: 5px;
+    margin: 20px auto;
+    width: 300px;
+    height: 300px;
+    grid-template-columns: repeat(3, 1fr); /* Changez à 5 pour une grille 5x5 */
+    grid-template-rows: repeat(3, 1fr);   /* Changez à 5 pour une grille 5x5 */
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+    gap: 10px;
+    margin: 20px auto;
+    width: 320px;
+}
+
+.card {
+    width: 70px;
+    height: 70px;
+    background-color: #ccc;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card.flipped {
+    cursor: default;
+}
