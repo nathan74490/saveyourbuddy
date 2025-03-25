@@ -137,23 +137,95 @@ function updateMindgameStatus(gameId, mindgameNumber, mindgameStatus) {
 }
 ```
 
-### 7.Exemples d'utilisation
+### 8.Get une team
 ```javascript
-// Créer une nouvelle partie
-createGame('ongoing');
-
-// Mettre à jour le statut d'un module
-updateModuleStatus(12, 2, 'success');
-
-// Mettre à jour le statut d'un casse-tête
-updateMindgameStatus(12, 1, 'success');
-
-// Obtenir les informations d'un module
-getGameModule(12, 2);
-
-// Obtenir les informations d'un casse-tête
-getGameMindgame(12, 1);
+function getTeam(teamId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?team=${teamId}`;
+    
+    fetch(url)
+        .then((response) => response.json())
+        .then((team) => {
+            console.log(team);
+        })
+        .catch(console.error);
+}
 ```
+
+### 9.Creer un user
+```javascript
+function createUser(nom, prenom, idTeam) {
+    const userData = {
+        type: 'user',
+        nom: nom,
+        prenom: prenom,
+        id_team: idTeam
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+
+```
+
+### 10.Update une team sur le id_game
+```javascript
+function updateTeamGame(teamId, gameId) {
+    const updateData = {
+        type: 'team',
+        id_team: teamId,
+        id_game: gameId
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+```
+
+### 11.create team
+```javascript
+function createTeam(teamName, numero) {
+    const teamData = {
+        type: 'team',
+        team_name: teamName,
+        numero: numero
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(teamData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+```
+
+
 
 ### ID-Module:
 
