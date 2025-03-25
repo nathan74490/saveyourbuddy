@@ -1,0 +1,62 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  margin: 0;
+}
+
+.content {
+    /* background-color: #D9D9D9; */
+    width: auto;
+    /* border: 2px solid black; */
+    padding: 4px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+
+ 
+.compass {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 5px solid #333;
+    align-items: center;
+    justify-content: center;
+}
+.needle {
+    position: absolute;
+    width: 6px;
+    height: 90px;
+    background: red;
+    top: 50%;
+    left: 50%;
+    transform-origin: 50% 90%;
+  
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80vw;
+  max-width: 800px;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+}
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid white;
+  position: absolute;
+  transition: box-shadow 0.2s ease-out;
+}
+  
+
