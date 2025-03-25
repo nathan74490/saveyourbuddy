@@ -13,9 +13,9 @@ export const Top_Navigation_Bar = () => {
         <div className="bg-gray-500 max-w-36 w-full h-8"></div>
       </div>
       {/* MENU LINK PART */}
-      <div className="flex gap-3 w-full items-center justify-start">
-        {menu_data.map((link) => (
-          <Typography balise="a" mirror="h4" href={link.link}>
+      <div className="flex gap-3 w-full items-center justify-center">
+        {menu_data.map((link, index) => (
+          <Typography key={index} balise="a" mirror="h4" href={link.link}>
             {link.nom}
           </Typography>
         ))}

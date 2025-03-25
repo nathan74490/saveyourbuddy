@@ -1,12 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Aston";
+  src: url("../fonts/astonpoliz/Astonpoliz.ttf");
+}
+
 :root {
   --background: #ffffff;
 
-  --h1: 64px;
-  --h2: 48px;
-  --h3: 40px;
-  --h4: 24px;
+  --water-blue: #007bff;
+
+  --font-aston: "Aston", sans-serif;
+
+  --h1: clamp(48px, 3.33vw, 64px);
+  --h2: clamp(40px, 2.5vw, 48px);
+  --h3: clamp(24px, 2.083vw, 40px);
+  --h4: clamp(14px, 1.25vw, 24px);
 
   --margin-x: 120px;
   --margin-y: 20px;
@@ -20,6 +29,10 @@
 
 @theme inline {
   --color-background: var(--background);
+
+  --color-water-blue: var(--water-blue);
+
+  --font-aston: var(--font-aston);
 
   --text-h1: var(--h1);
   --text-h2: var(--h2);

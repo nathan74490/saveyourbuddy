@@ -3,7 +3,8 @@ import clsx from "clsx";
 interface TypographyProps {
   balise: "h1" | "h2" | "h3" | "h4" | "a";
   mirror?: "h1" | "h2" | "h3" | "h4" | "a";
-  color?: "white";
+  color?: "white" | "black";
+  fontFamily?: "Aston";
   href?: string;
   className?: string;
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export const Typography = ({
   balise: Balise,
   mirror,
   color,
+  fontFamily = "Aston",
   href,
   className,
   children,
@@ -21,6 +23,7 @@ export const Typography = ({
   const aStyle: string = "cursor-pointer hover:opacity-75";
   let baliseStyle: string = "";
   let colorStyle: string = "";
+  let fontFamilyStyle: string = "";
 
   switch (Balise) {
     case "h1":
@@ -44,6 +47,15 @@ export const Typography = ({
     case "white":
       colorStyle = "text-white";
       break;
+    case "black":
+      colorStyle = "text-black";
+      break;
+  }
+
+  switch (fontFamily) {
+    case "Aston":
+      fontFamilyStyle = "font-aston";
+      break;
   }
 
   return (
@@ -54,7 +66,8 @@ export const Typography = ({
         className,
         defaultStyle,
         baliseStyle,
-        colorStyle
+        colorStyle,
+        fontFamilyStyle
       )}
     >
       {children}
