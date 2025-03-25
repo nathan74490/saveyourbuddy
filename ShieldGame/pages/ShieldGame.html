@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Câbles - Connexions Parfaites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0A022D;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: url("../assets/images/SytemeDefenseCadre.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+        .Content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+
+        }
+
+
+        .game-container {
+            display: grid;
+            grid-template-columns: repeat(5, 80px);
+            grid-template-rows: repeat(5, 80px);
+            gap: 65px;
+
+        }
+
+        .cell {
+            width: 140px;
+            height: 140px;
+            background-color: transparent;
+            border: 2px solid #4DADAC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .battery {
+            background-color: #FF5722;
+            font-weight: bold;
+        }
+
+        .shield {
+            background-color: #2196F3;
+            font-weight: bold;
+        }
+
+        .wire {
+            width: 60px;
+            height: 60px;
+            position: relative;
+        }
+
+        .wire-part {
+            position: absolute;
+            background-color: #FFEB3B;
+        }
+
+        /* Styles des câbles */
+        .wire-horizontal {
+            width: 60px;
+            height: 10px;
+            top: 25px;
+            left: 0;
+        }
+
+        .wire-vertical {
+            width: 10px;
+            height: 60px;
+            left: 25px;
+            top: 0;
+        }
+
+        .wire-angle-ne {
+            width: 35px;
+            height: 10px;
+            top: 25px;
+            left: 25px;
+        }
+
+        .wire-angle-ne:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 35px;
+            top: -25px;
+            left: 25px;
+            background-color: #FFEB3B;
+        }
+
+        .wire-angle-nw {
+            width: 35px;
+            height: 10px;
+            top: 25px;
+            left: 0;
+        }
+
+        .wire-angle-nw:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 35px;
+            top: -25px;
+            left: 0;
+            background-color: #FFEB3B;
+        }
+
+        .wire-angle-se {
+            width: 35px;
+            height: 10px;
+            top: 25px;
+            left: 25px;
+        }
+
+        .wire-angle-se:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 35px;
+            top: 10px;
+            left: 25px;
+            background-color: #FFEB3B;
+        }
+
+        .wire-angle-sw {
+            width: 35px;
+            height: 10px;
+            top: 25px;
+            left: 0;
+        }
+
+        .wire-angle-sw:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 35px;
+            top: 10px;
+            left: 0;
+            background-color: #FFEB3B;
+        }
+
+        .status {
+            margin-top: 70px;
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .powered {
+            background-color: rgba(76, 175, 80, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Content">
+        <div class="GameContent">
+
+            <div class="game-container" id="gameGrid"></div>
+
+            <div class="status" id="status">Connectez la batterie au bouclier!</div>
+
+            <div>
+                <button id="resetBtn">RÉINITIALISER</button>
+                <button id="newGameBtn">NOUVEAU JEU</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Types de câbles
+        const WIRE_TYPES = {
+            HORIZONTAL: 0,
+            VERTICAL: 1,
+            ANGLE_NE: 2,
+            ANGLE_NW: 3,
+            ANGLE_SE: 4,
+            ANGLE_SW: 5
+        };
+
+        // Directions
+        const DIRECTIONS = {
+            UP: 0,
+            RIGHT: 1,
+            DOWN: 2,
+            LEFT: 3
+        };
+
+        // Configuration
+        const config = {
+            rows: 5,
+            cols: 5,
+            batteryPos: { row: 0, col: 0 },
+            shieldPos: { row: 4, col: 4 }
+        };
+
+        // État du jeu
+        let gameState = {
+            grid: [],
+            connected: false,
+            poweredCells: new Set(), // Utilisation d'un Set pour éviter les doublons
+            visited: []
+        };
+
+        // Initialisation
+        function initGame() {
+            gameState.grid = [];
+            gameState.connected = false;
+            gameState.poweredCells = new Set();
+            gameState.visited = Array(config.rows).fill().map(() => Array(config.cols).fill(false));
+
+            const gridElement = document.getElementById('gameGrid');
+            gridElement.innerHTML = '';
+
+            createGuaranteedGrid();
+            renderGrid();
+            checkConnection();
+        }
+
+        // Crée une grille avec solution garantie
+        function createGuaranteedGrid() {
+            // Initialiser la grille vide
+            for (let row = 0; row < config.rows; row++) {
+                gameState.grid[row] = [];
+                for (let col = 0; col < config.cols; col++) {
+                    gameState.grid[row][col] = null;
+                }
+            }
+
+            // Placer batterie et bouclier
+            gameState.grid[config.batteryPos.row][config.batteryPos.col] = { type: 'battery' };
+            gameState.grid[config.shieldPos.row][config.shieldPos.col] = { type: 'shield' };
+
+            // Chemin solution testé manuellement
+            const solutionPath = [
+                { row: 0, col: 0 }, // Batterie
+                { row: 0, col: 1, type: WIRE_TYPES.HORIZONTAL },
+                { row: 0, col: 2, type: WIRE_TYPES.ANGLE_SE },
+                { row: 1, col: 0, type: WIRE_TYPES.VERTICAL },
+                { row: 1, col: 2, type: WIRE_TYPES.VERTICAL },
+                { row: 2, col: 2, type: WIRE_TYPES.ANGLE_SW },
+                { row: 2, col: 1, type: WIRE_TYPES.HORIZONTAL },
+                { row: 2, col: 0, type: WIRE_TYPES.ANGLE_SE },
+                { row: 3, col: 0, type: WIRE_TYPES.VERTICAL },
+                { row: 4, col: 0, type: WIRE_TYPES.ANGLE_NE },
+                { row: 4, col: 1, type: WIRE_TYPES.HORIZONTAL },
+                { row: 4, col: 2, type: WIRE_TYPES.HORIZONTAL },
+                { row: 4, col: 3, type: WIRE_TYPES.HORIZONTAL },
+                { row: 4, col: 4 }  // Bouclier
+            ];
+
+            // Placer le chemin solution
+            for (let i = 1; i < solutionPath.length - 1; i++) {
+                const { row, col, type } = solutionPath[i];
+                gameState.grid[row][col] = {
+                    type: 'wire',
+                    wireType: type,
+                    rotation: 0
+                };
+            }
+
+            // Remplir le reste avec des câbles aléatoires
+            const angleTypes = [WIRE_TYPES.ANGLE_NE, WIRE_TYPES.ANGLE_NW, WIRE_TYPES.ANGLE_SE, WIRE_TYPES.ANGLE_SW];
+
+            for (let row = 0; row < config.rows; row++) {
+                for (let col = 0; col < config.cols; col++) {
+                    if (!gameState.grid[row][col]) {
+                        const rand = Math.random();
+                        let wireType;
+
+                        if (rand < 0.4) {
+                            wireType = angleTypes[Math.floor(Math.random() * angleTypes.length)];
+                        } else if (rand < 0.7) {
+                            wireType = WIRE_TYPES.HORIZONTAL;
+                        } else {
+                            wireType = WIRE_TYPES.VERTICAL;
+                        }
+
+                        gameState.grid[row][col] = {
+                            type: 'wire',
+                            wireType: wireType,
+                            rotation: Math.floor(Math.random() * 4)
+                        };
+                    }
+                }
+            }
+        }
+
+        // Affichage de la grille
+        function renderGrid() {
+            const gridElement = document.getElementById('gameGrid');
+            gridElement.innerHTML = '';
+
+            for (let row = 0; row < config.rows; row++) {
+                for (let col = 0; col < config.cols; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+
+                    // Vérifier si la cellule est alimentée
+                    const cellKey = `${row},${col}`;
+                    if (gameState.poweredCells.has(cellKey)) {
+                        cell.classList.add('powered');
+                    }
+
+                    const item = gameState.grid[row][col];
+
+                    if (item.type === 'battery') {
+                        cell.classList.add('battery');
+                        const img = document.createElement('img');
+                        img.src = '../assets/images/Battery.svg';
+                        img.alt = 'Battery';
+                        img.classList.add('icon'); // Ajoute une classe pour le style
+                        cell.appendChild(img);
+                    } else if (item.type === 'shield') {
+                        cell.classList.add('shield');
+                        const img = document.createElement('img');
+                        img.src = '../assets/images/ShieldOFF.svg'; 
+                        img.alt = 'Shield';
+                        img.classList.add('icon');
+                        cell.appendChild(img);
+                    } else if (item.type === 'wire') {
+                        const wireDiv = document.createElement('div');
+                        wireDiv.className = 'wire';
+                        // Autres traitements pour le fil
+                    
+
+
+                    const displayType = getDisplayType(item);
+
+                    if (displayType === WIRE_TYPES.HORIZONTAL) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-horizontal';
+                        wireDiv.appendChild(wire);
+                    } else if (displayType === WIRE_TYPES.VERTICAL) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-vertical';
+                        wireDiv.appendChild(wire);
+                    } else if (displayType === WIRE_TYPES.ANGLE_NE) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-angle-ne';
+                        wireDiv.appendChild(wire);
+                    } else if (displayType === WIRE_TYPES.ANGLE_NW) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-angle-nw';
+                        wireDiv.appendChild(wire);
+                    } else if (displayType === WIRE_TYPES.ANGLE_SE) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-angle-se';
+                        wireDiv.appendChild(wire);
+                    } else if (displayType === WIRE_TYPES.ANGLE_SW) {
+                        const wire = document.createElement('div');
+                        wire.className = 'wire-part wire-angle-sw';
+                        wireDiv.appendChild(wire);
+                    }
+
+                    cell.appendChild(wireDiv);
+                }
+
+                cell.addEventListener('click', () => handleCellClick(row, col));
+                gridElement.appendChild(cell);
+            }
+        }
+        }
+
+        function getDisplayType(item) {
+            if (item.wireType === WIRE_TYPES.HORIZONTAL || item.wireType === WIRE_TYPES.VERTICAL) {
+                return (item.wireType + item.rotation) % 2;
+            }
+
+            const angleTypes = [WIRE_TYPES.ANGLE_NE, WIRE_TYPES.ANGLE_NW, WIRE_TYPES.ANGLE_SW, WIRE_TYPES.ANGLE_SE];
+            const baseIndex = item.wireType - WIRE_TYPES.ANGLE_NE;
+            return angleTypes[(baseIndex + item.rotation) % 4];
+        }
+
+        function handleCellClick(row, col) {
+            const item = gameState.grid[row][col];
+
+            if (item && item.type === 'wire') {
+                item.rotation = (item.rotation + 1) % 4;
+                renderGrid();
+                checkConnection();
+            }
+        }
+
+        function checkConnection() {
+            // Réinitialiser l'état
+            gameState.connected = false;
+            gameState.poweredCells = new Set();
+            gameState.visited = Array(config.rows).fill().map(() => Array(config.cols).fill(false));
+
+            // Démarrer depuis la batterie
+            dfs(config.batteryPos.row, config.batteryPos.col, null);
+
+            // Vérifier si le bouclier est alimenté
+            const shieldKey = `${config.shieldPos.row},${config.shieldPos.col}`;
+            gameState.connected = gameState.poweredCells.has(shieldKey);
+
+            updateStatus();
+            renderGrid(); // Rafraîchir l'affichage
+        }
+
+        function dfs(row, col, fromDirection) {
+            const key = `${row},${col}`;
+
+            // Vérifier les limites et si déjà visité
+            if (row < 0 || row >= config.rows || col < 0 || col >= config.cols || gameState.visited[row][col]) {
+                return;
+            }
+
+            const item = gameState.grid[row][col];
+            if (!item) return;
+
+            // Marquer comme visité et alimenté
+            gameState.visited[row][col] = true;
+            gameState.poweredCells.add(key);
+
+            // Arrivé au bouclier
+            if (item.type === 'shield') {
+                return;
+            }
+
+            // Batterie - ne peut émettre que vers le bas ou la droite
+            if (item.type === 'battery') {
+                if (canEmitToDirection(item, DIRECTIONS.DOWN)) {
+                    dfs(row + 1, col, DIRECTIONS.UP);
+                }
+                if (canEmitToDirection(item, DIRECTIONS.RIGHT)) {
+                    dfs(row, col + 1, DIRECTIONS.LEFT);
+                }
+                return;
+            }
+
+            // Câbles - obtenir les directions de sortie possibles
+            const displayType = getDisplayType(item);
+            const outputDirections = getOutputDirections(displayType, fromDirection);
+
+            // Explorer chaque direction de sortie
+            for (const dir of outputDirections) {
+                let nextRow = row, nextCol = col, nextFromDir;
+
+                switch (dir) {
+                    case DIRECTIONS.UP:
+                        nextRow--;
+                        nextFromDir = DIRECTIONS.DOWN;
+                        break;
+                    case DIRECTIONS.RIGHT:
+                        nextCol++;
+                        nextFromDir = DIRECTIONS.LEFT;
+                        break;
+                    case DIRECTIONS.DOWN:
+                        nextRow++;
+                        nextFromDir = DIRECTIONS.UP;
+                        break;
+                    case DIRECTIONS.LEFT:
+                        nextCol--;
+                        nextFromDir = DIRECTIONS.RIGHT;
+                        break;
+                }
+
+                // Vérifier que la case voisine peut recevoir le courant
+                if (nextRow >= 0 && nextRow < config.rows && nextCol >= 0 && nextCol < config.cols) {
+                    const nextItem = gameState.grid[nextRow][nextCol];
+                    if (nextItem && canReceiveFromDirection(nextItem, nextFromDir)) {
+                        dfs(nextRow, nextCol, nextFromDir);
+                    }
+                }
+            }
+        }
+
+        function canEmitToDirection(item, direction) {
+            if (!item) return false;
+
+            if (item.type === 'battery') {
+                return direction === DIRECTIONS.DOWN || direction === DIRECTIONS.RIGHT;
+            }
+            if (item.type === 'wire') {
+                const displayType = getDisplayType(item);
+                return getConnections(displayType).includes(direction);
+            }
+            return false;
+        }
+
+        function canReceiveFromDirection(item, direction) {
+            if (!item) return false;
+
+            if (item.type === 'shield') {
+                return true;
+            }
+            if (item.type === 'wire') {
+                const displayType = getDisplayType(item);
+                return getConnections(displayType).includes(direction);
+            }
+            return false;
+        }
+
+        function getConnections(wireType) {
+            switch (wireType) {
+                case WIRE_TYPES.HORIZONTAL:
+                    return [DIRECTIONS.LEFT, DIRECTIONS.RIGHT];
+                case WIRE_TYPES.VERTICAL:
+                    return [DIRECTIONS.UP, DIRECTIONS.DOWN];
+                case WIRE_TYPES.ANGLE_NE:
+                    return [DIRECTIONS.LEFT, DIRECTIONS.UP];
+                case WIRE_TYPES.ANGLE_NW:
+                    return [DIRECTIONS.RIGHT, DIRECTIONS.UP];
+                case WIRE_TYPES.ANGLE_SE:
+                    return [DIRECTIONS.LEFT, DIRECTIONS.DOWN];
+                case WIRE_TYPES.ANGLE_SW:
+                    return [DIRECTIONS.RIGHT, DIRECTIONS.DOWN];
+                default:
+                    return [];
+            }
+        }
+
+        function getOutputDirections(wireType, inputDirection) {
+            const connections = getConnections(wireType);
+
+            if (inputDirection === null) return connections;
+
+            if (!connections.includes(inputDirection)) return [];
+
+            return connections.filter(dir => dir !== inputDirection);
+        }
+
+        function updateStatus() {
+            const status = document.getElementById('status');
+            if (gameState.connected) {
+                status.textContent = 'Bouclier alimenté! Mission accomplie!';
+                status.style.color = '#4CAF50';
+            } else {
+                status.textContent = 'Connectez la batterie au bouclier!';
+                status.style.color = 'white';
+            }
+        }
+
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            for (let row = 0; row < config.rows; row++) {
+                for (let col = 0; col < config.cols; col++) {
+                    const item = gameState.grid[row][col];
+                    if (item && item.type === 'wire') {
+                        item.rotation = 0;
+                    }
+                }
+            }
+            renderGrid();
+            checkConnection();
+        });
+
+        document.getElementById('newGameBtn').addEventListener('click', initGame);
+
+        initGame();
+    </script>
+</body>
+
+</html>
