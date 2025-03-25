@@ -44,9 +44,31 @@ document.addEventListener("DOMContentLoaded", function () {
     // Prends un chiffre entre 1 et 4 et le mets dans l'écran.
     function writeRandomNumber() {
         let randomNumber = 1 + Math.floor(Math.random() * 4);
-        screen.innerHTML =  "3";
+        screen.innerHTML =  randomNumber;
     }
 
+    // Mets à jour le status du module (ongoing, sucess, failed).
+    function updateModuleStatus(gameId, moduleNumber, moduleStatus) {
+        const updateData = {
+            type: 'module',
+            id_game: gameId,
+            module_number: moduleNumber,
+            module_status: moduleStatus
+        };
+    
+        fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+    }
 
     // Quand le module est résolue on met l'écran vide, la led verte et on enlève la possibilité d'intéragir.
     function moduleFinish() {
@@ -54,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         led.style.backgroundColor = 'rgb(0, 255, 0)';
         moduleIsFinish = true;
         console.log(`A la fin :${moduleIsFinish}`)
+        updateModuleStatus(12, 3, "sucess");
 
         keys.forEach(key => {
             key.removeEventListener("click", key.clickListener);
@@ -125,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
             addStepInAdvance("remove");
         }
     }
-
 
     if (!moduleIsFinish) {
         writeRandomNumber();
