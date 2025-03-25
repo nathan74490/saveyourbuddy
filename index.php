@@ -11,10 +11,12 @@
 <body>
     <button id="play">jouer</button>
     <div class="table-iframe">
-        <iframe src="modulememoire/module_memoire/index.html" frameborder="2"></iframe>
-        <iframe src="modulemolette/module_molette/index.html" frameborder="3"></iframe>
+        <!-- <iframe src="index.html" frameborder="3"></iframe> -->
 
     </div>
+
+    <!-- <iframe src="modulememoire/module_memoire/index.html" frameborder="2"></iframe>
+    <iframe src="modulemolette/module_molette/index.html" frameborder="3"></iframe> -->
 
     <!-- <iframe src="modulemotsdepasse/modulemotsdepasse/index.html" frameborder="0"></iframe>
         <iframe src="modulequiestlepremier/modulequiestlepremier/index.html" frameborder="0"></iframe> -->
