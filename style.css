@@ -1,18 +1,82 @@
-#ecran{
-    height: 10%;
-    width: 20vw;
-    background-color: bisque;
-    color: black;
+@font-face {
+    font-family: "serpent";
+    src: url("font/Astonpoliz.ttf");
 }
 
-#ecran p{
-    z-index: 100;
+#ecran{
+    height: 20vh;
+    width: 60vw;
+    background-color: bisque;
+    font-family: "trizome";
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'serpent';
+    font-size: 48pt;
+    background-image: url("img/backgroundtext.svg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    color: white;
+    border: solid rgba(226, 124, 5, 1);
+    box-shadow: 0px 0px 30px rgba(226, 124, 5, 1);
 }
+
+
 body{
     height: 100vh;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-image: url("img/background.svg");
+    background-color: black;
+}
+
+body p{
+    font-size: 178pt;
+    color: rgba(226, 124, 5, 1);
 }
 
 #count{
     height: 50px;
+}
+#space_button button{
+    width: 29vw;
+    height: 15vh;
+    border: solid 2px white;
+    background-color: black;
+    color: white;
+    font-size: 40pt;
+    font-family: 'serpent';
+}
+
+#space_button{
+    height: 60vh;
+    width: 60vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#fail {
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: none;
+    z-index: 50;
+}
+
+#fail p{
+    display: none;
+    font-size: 176pt;
+    color: white;
 }

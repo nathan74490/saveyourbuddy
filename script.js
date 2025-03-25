@@ -1,141 +1,153 @@
 let words = [
     {
-        "reference": "READY",
-        "reponse": ["YES", "OKAY", "WHAT", "MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY", "NO", "FIRST", "UHHH", "NOTHING", "WAIT"],
+        "reference": "DELTA",
+        "reponse": ["ALPHA", "BETA", "GAMMA", "EPSILON", "ZETA", "OMEGA", "SIGMA", "TAU", "LAMBDA", "KAPPA", "PHI", "CHARLIE", "PROTOCOL", "VECTOR", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 3
     },
     {
-        "reference": "FIRST",
-        "reponse": ["LEFT", "OKAY", "YES", "MIDDLE", "NO", "RIGHT", "NOTHING", "UHHH", "WAIT", "READY", "BLANK", "WHAT", "PRESS", "FIRST"],
+        "reference": "ALPHA",
+        "reponse": ["CHARLIE", "BRAVO", "DELTA", "ECHO", "FOXTROT", "GAMMA", "SIGMA", "ZETA", "PROTOCOL", "LAMBDA", "VECTOR", "OMEGA", "TAU", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 1
     },
     {
-        "reference": "NO",
-        "reponse": ["BLANK", "UHHH", "WAIT", "FIRST", "WHAT", "READY", "RIGHT", "YES", "NOTHING", "LEFT", "PRESS", "OKAY", "NO", "MIDDLE"],
+        "reference": "OMEGA",
+        "reponse": ["SIGMA", "ZETA", "PROTOCOL", "DELTA", "EPSILON", "ALPHA", "GAMMA", "BETA", "CHARLIE", "LAMBDA", "TAU", "BRAVO", "VECTOR", "KAPPA", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 5
     },
     {
-        "reference": "BLANK",
-        "reponse": ["WAIT", "RIGHT", "OKAY", "MIDDLE", "BLANK", "PRESS", "READY", "NOTHING", "NO", "WHAT", "LEFT", "UHHH", "YES", "FIRST"],
+        "reference": "EPSILON",
+        "reponse": ["PROTOCOL", "GAMMA", "BRAVO", "ZETA", "DELTA", "TAU", "ALPHA", "CHARLIE", "OMEGA", "LAMBDA", "SIGMA", "VECTOR", "BETA", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 2
     },
     {
-        "reference": "NOTHING",
-        "reponse": ["UHHH", "RIGHT", "OKAY", "MIDDLE", "YES", "BLANK", "NO", "PRESS", "LEFT", "WHAT", "WAIT", "FIRST", "NOTHING", "READY"],
+        "reference": "TACTICAL",
+        "reponse": ["ZETA", "GAMMA", "BRAVO", "DELTA", "ALPHA", "EPSILON", "SIGMA", "LAMBDA", "CHARLIE", "OMEGA", "PROTOCOL", "TAU", "VECTOR", "INFILTRATE", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM"],
         "position": 0
     },
     {
-        "reference": "YES",
-        "reponse": ["OKAY", "RIGHT", "UHHH", "MIDDLE", "FIRST", "WHAT", "PRESS", "READY", "NOTHING", "YES", "LEFT", "BLANK", "NO", "WAIT"],
+        "reference": "BETA",
+        "reponse": ["BRAVO", "GAMMA", "ZETA", "DELTA", "ALPHA", "LAMBDA", "TAU", "PROTOCOL", "CHARLIE", "OMEGA", "SIGMA", "EPSILON", "VECTOR", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 4
     },
     {
-        "reference": "WHAT",
-        "reponse": ["UHHH", "WHAT", "LEFT", "NOTHING", "READY", "BLANK", "MIDDLE", "NO", "OKAY", "FIRST", "WAIT", "YES", "PRESS", "RIGHT"],
+        "reference": "GAMMA",
+        "reponse": ["ZETA", "LAMBDA", "SIGMA", "DELTA", "ALPHA", "EPSILON", "BRAVO", "OMEGA", "TAU", "CHARLIE", "PROTOCOL", "BETA", "VECTOR", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 5
     },
     {
-        "reference": "YOU",
-        "reponse": ["SURE", "YOU ARE", "YOU'RE", "NEXT", "UH HUH", "WHAT?", "DONE", "U", "HOLD", "WHAT", "YOU", "UH UH", "LIKE", "DONE", "U"],
+        "reference": "VECTOR",
+        "reponse": ["PROTOCOL", "TACTICAL", "INFILTRATE", "SIGMA", "ZETA", "LAMBDA", "BRAVO", "DELTA", "CHARLIE", "OMEGA", "ALPHA", "GAMMA", "BETA", "TAU", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM"],
         "position": 3
     },
     {
-        "reference": "YOU ARE",
-        "reponse": ["YOUR", "NEXT", "LIKE", "UH HUH", "WHAT?", "DONE", "UH UH", "HOLD", "YOU", "U", "YOU'RE", "SURE", "UR", "YOU ARE"],
+        "reference": "NEXUS",
+        "reponse": ["CIPHER", "QUANTUM", "STELLAR", "ZETA", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "LAMBDA", "SIGMA", "OMEGA", "VECTOR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "BRAVO"],
         "position": 1
     },
     {
-        "reference": "YOUR",
-        "reponse": ["UH UH", "YOU ARE", "UH HUH", "YOUR", "NEXT", "UR", "SURE", "U", "YOU'RE", "YOU", "WHAT?", "HOLD", "LIKE", "DONE"],
+        "reference": "QUANTUM",
+        "reponse": ["STELLAR", "HORIZON", "MAVERICK", "NEXUS", "CIPHER", "PROTOCOL", "TACTICAL", "DELTA", "LAMBDA", "SIGMA", "OMEGA", "VECTOR", "ALPHA", "GAMMA", "BETA", "TAU", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "ZETA", "BRAVO"],
         "position": 2
     },
     {
-        "reference": "YOU'RE",
-        "reponse": ["YOU", "YOU'RE", "UR", "NEXT", "UH UH", "YOU ARE", "U", "YOUR", "WHAT?", "UH HUH", "SURE", "DONE", "LIKE", "HOLD"],
+        "reference": "SENTINEL",
+        "reponse": ["MAVERICK", "PHANTOM", "CRYPTEX", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 0
     },
     {
-        "reference": "UR",
-        "reponse": ["DONE", "U", "UR", "UH HUH", "WHAT?", "SURE", "YOUR", "HOLD", "YOU'RE", "LIKE", "NEXT", "UH UH", "YOU", "WHAT"],
+        "reference": "MAVERICK",
+        "reponse": ["PHANTOM", "SENTINEL", "CRYPTEX", "QUANTUM", "STELLAR", "HORIZON", "NEXUS", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 5
     },
     {
-        "reference": "U",
-        "reponse": ["UH HUH", "SURE", "NEXT", "WHAT?", "YOU'RE", "UR", "UH UH", "DONE", "U", "LIKE", "HOLD", "YOU ARE", "YOUR"],
+        "reference": "CIPHER",
+        "reponse": ["QUANTUM", "STELLAR", "HORIZON", "NEXUS", "MAVERICK", "PHANTOM", "SENTINEL", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 4
     },
     {
-        "reference": "UH HUH",
-        "reponse": ["UH HUH", "YOUR", "YOU ARE", "YOU", "DONE", "HOLD", "UH UH", "NEXT", "SURE", "LIKE", "YOU'RE", "UR", "U", "WHAT?"],
+        "reference": "CRYPTEX",
+        "reponse": ["SENTINEL", "MAVERICK", "PHANTOM", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 1
     },
     {
-        "reference": "UH UH",
-        "reponse": ["UR", "U", "YOU ARE", "YOU'RE", "NEXT", "YOU", "UH UH", "UH HUH", "LIKE", "YOUR", "SURE", "HOLD", "WHAT?", "DONE"],
+        "reference": "HORIZON",
+        "reponse": ["STELLAR", "QUANTUM", "MAVERICK", "NEXUS", "CIPHER", "PHANTOM", "SENTINEL", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 3
     },
     {
-        "reference": "WHAT?",
-        "reponse": ["YOU", "HOLD", "YOU'RE", "YOUR", "U", "DONE", "UH UH", "LIKE", "YOU ARE", "UH HUH", "NEXT", "WHAT?", "SURE"],
+        "reference": "PARADIGM",
+        "reponse": ["INFILTRATE", "TACTICAL", "PROTOCOL", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 2
-    },
-    {
-        "reference": "LIKE",
-        "reponse": ["YOU'RE", "NEXT", "U", "UR", "HOLD", "DONE", "UH UH", "WHAT?", "UH HUH", "YOU", "LIKE", "SURE", "YOU ARE", "YOUR"],
-        "position": 0
     }
-];
+]
 
-
-let body = document.getElementsByTagName("body")[0];
+let space_of_button = document.getElementById("space_button");
 let ecran = document.getElementById("ecran");
 let score_div = document.getElementById('count');
 let score = 0;
 let nbr_de_btn = 6;
-let tab_words = JSON.parse(JSON.stringify(words));
-let IndexOfWordInScreen = Math.floor(Math.random() * words.length)
-let IndexOfWordReference = Math.floor(Math.random() * words.length)
-
-let positionOfWordInScreen = words[IndexOfWordInScreen].position
-let goodPosition = tab_words[IndexOfWordReference].position
-
-
-for (let i = 0; i < nbr_de_btn; i++) {
-    let button = document.createElement("button")
-    button.id = i
-    body.appendChild(button)
-    let textRandomButton = Math.floor(Math.random() * tab_words[IndexOfWordInScreen].reponse.length);
-    button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
-
-    tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
-    ecran.innerHTML = words[IndexOfWordInScreen].reference
-    if (i === positionOfWordInScreen) {
-        button.innerHTML = tab_words[IndexOfWordReference].reference
-
-    }
 
 
 
+function game() {
+    //initialisation des variable aléatoire et d'une copie du tableau initiale pour effectuer des actions dessus
+    let tab_words = JSON.parse(JSON.stringify(words))
+    let IndexOfWordInScreen = Math.floor(Math.random() * words.length)
+    let IndexOfWordReference = Math.floor(Math.random() * words.length)
 
-    button.addEventListener("click", () => {
-        if (i === goodPosition) {
-            console.log("wp")
-        } else {
-            console.log("la bonne reponse etait : " + goodPosition)
+    //initialisation des positions de chaque donnée
+    let positionOfWordInScreen = words[IndexOfWordInScreen].position
+    let goodPosition = tab_words[IndexOfWordReference].position
+    //boucle pour crée les boutons
+    for (let i = 0; i < nbr_de_btn; i++) {
+        //on enregistre le bouton dans une varibale pour pouvoir crée une logique
+        let button = document.createElement("button")
+        //on donne un id pour identifier le bouton clické
+        button.id = i
+        space_of_button.appendChild(button)
+        //on choisie un mot dans la copie de mot du mot de l'ecran
+        let textRandomButton = Math.floor(Math.random() * tab_words[IndexOfWordInScreen].reponse.length);
+        //on ajoute ce mot a un bouton
+        button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
+        //enleve le mot de la copie du tableau pour pas avoir de doublons dans les mots
+        tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
+        //on affiche le mot de l'ecran
+        ecran.innerHTML = words[IndexOfWordInScreen].reference
+        if (i === positionOfWordInScreen) {
+            //si le bouton a le meme id que le
+            button.innerHTML = tab_words[IndexOfWordReference].reference
         }
-        tab_words = JSON.parse(JSON.stringify(words))
-        IndexOfWordInScreen = Math.floor(Math.random() * words.length)
-        IndexOfWordReference = Math.floor(Math.random() * words.length)
-        for (let j = 0; j < nbr_de_btn; j++) {
-            let textRandomButton = Math.floor(Math.random() * tab_words[IndexOfWordInScreen].reponse.length);
-            button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
-
-            tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
-            ecran.innerHTML = words[IndexOfWordInScreen].reference
-            if (j === positionOfWordInScreen) {
-                button.innerHTML = tab_words[IndexOfWordReference].reference
-
+        button.addEventListener("click", () => {
+            if (i === goodPosition) {
+                score++;
+                console.log("wp")
+                score_div.innerHTML = score
+            } else {
+                fail()
+                score = 0;
+                score_div.innerHTML = score
             }
-        }
-    });
+            //quand le joueur atteint 5 le jeux se supprime
+            if (score < 5) {
+                Array.from(document.getElementsByTagName('button')).forEach(element => element.remove());
+                game()
+            }else{
+                Array.from(document.body.children).forEach(element => element.remove());
+                document.body.innerHTML = "bravo tu as gagné"
+            }
+        });
+    }
+}
+game()
+
+function fail(){
+    document.body.style.backgroundImage= "none"
+    setTimeout(()=>{
+        document.body.innerHTML = "<p>error</p>"
+    },300)
+    setInterval(()=>copieEnProfondeur.forEach(element => {
+        document.body.appendChild(element);
+        document.body.style.backgroundImage= "url('img/background.svg')"
+    }, 5000))
+    
 }
