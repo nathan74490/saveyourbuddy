@@ -5,10 +5,10 @@ import { Container } from "../container/Container";
 export const Boat = () => {
   return (
     <Container
-      py={130}
+      py={120}
       className="flex gap-11 flex-col items-center justify-center w-full h-max"
     >
-      <Typography balise="h3" color="black">
+      <Typography balise="h3" color="white">
         Sous pression
       </Typography>
       <Image

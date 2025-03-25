@@ -19,7 +19,7 @@ export const Typography = ({
   className,
   children,
 }: TypographyProps) => {
-  const defaultStyle: string = "flex w-max items-center justify-center gap-2.5";
+  const defaultStyle: string = "flex items-center justify-center gap-2.5";
   const aStyle: string = "cursor-pointer hover:opacity-75";
   let baliseStyle: string = "";
   let colorStyle: string = "";

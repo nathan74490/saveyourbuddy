@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 interface CTAProps {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" | "tertiary";
   rounded: "full" | "basic";
   className?: string;
   dividerColor?: string;
@@ -31,8 +31,8 @@ export const CTA = ({
     case "primary":
       variantStyle = "px-3 py-1 bg-gray-300";
       break;
-    case "secondary":
-      variantStyle = "py-1";
+    case "tertiary":
+      variantStyle = "px-3 py-1 text-white bg-semi-black";
       break;
   }
 

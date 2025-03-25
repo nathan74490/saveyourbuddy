@@ -27,7 +27,7 @@ export const Carrousel = () => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 2, ease: "easeInOut" }}
-        className="w-full h-[90vh] relative z-20"
+        className="w-full h-[93vh] relative z-20"
       >
         <Image
           src={currentData.img}

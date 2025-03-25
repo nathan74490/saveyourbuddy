@@ -6,9 +6,12 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(180deg, #2caaff 0%, #0f1f6a 47%, #00051d 100%);
 
   --water-blue: #007bff;
+  --flowing-menu-blue: #0f1638;
+
+  --semi-black: #1a244f;
 
   --font-aston: "Aston", sans-serif;
 
@@ -17,7 +20,7 @@
   --h3: clamp(24px, 2.083vw, 40px);
   --h4: clamp(14px, 1.25vw, 24px);
 
-  --margin-x: 120px;
+  --margin-x: clamp(40px, 6.25vw, 120px);
   --margin-y: 20px;
 
   --rounded-20: 20px;
@@ -31,6 +34,7 @@
   --color-background: var(--background);
 
   --color-water-blue: var(--water-blue);
+  --color-semi-black: var(--semi-black);
 
   --font-aston: var(--font-aston);
 
