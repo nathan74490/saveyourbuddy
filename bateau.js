@@ -1,130 +1,140 @@
-// Folder variables
-const container = document.querySelector('.container-1');
-const progressBar = document.querySelector('.progress-bar');
-const maxScore = 5;
-const squareSize = 50;
-let score = 0;
-let gameInterval;
-const colorData = {
-    red: { timeout: 800, success: true },
-    green: { timeout: 5000, success: false },
+// -------------------------------------------------------------------------
+// Global Variables
+const gameContainer1 = document.querySelector('.container-1');
+const progressBarElement = document.querySelector('.progress-bar');
+const maxGame1Score = 5;
+const squareDimension = 50;
+let currentScore = 0;
+let game1Interval;
+
+const squareColors = {
+    red: { timeout: 800, isSuccess: true },
+    green: { timeout: 5000, isSuccess: false },
 };
 
-// Sonar variables
-const sonar = document.querySelector('.sonar');
-const radarBar = document.querySelector('.radar-bar');
-const info = document.querySelector('.info');
-let selectedPoint = null;
-const points = [
-    { angle: 0, radius: 20, data: 'point 1' },
-    { angle: 45, radius: 40, data: 'point 2' },
-    { angle: 90, radius: 60, data: 'point 3' },
-    { angle: 135, radius: 80, data: 'point 4' },
-    { angle: 180, radius: 100, data: 'point 5' },
-    { angle: 225, radius: 80, data: 'point 6' },
-    { angle: 270, radius: 20, data: 'point 7' },
-    { angle: 315, radius: 40, data: 'capsule' },
+const sonarElement = document.querySelector('.sonar');
+const radarBarElement = document.querySelector('.radar-bar');
+const infoDisplay = document.querySelector('.info');
+let activePoint = null;
+
+const radarPoints = [
+    { angle: 0, radius: 20, label: 'point 1' },
+    { angle: 45, radius: 40, label: 'point 2' },
+    { angle: 90, radius: 60, label: 'point 3' },
+    { angle: 135, radius: 80, label: 'point 4' },
+    { angle: 180, radius: 100, label: 'point 5' },
+    { angle: 225, radius: 80, label: 'point 6' },
+    { angle: 270, radius: 20, label: 'point 7' },
+    { angle: 315, radius: 40, label: 'capsule' },
 ];
 
 // -------------------------------------------------------------------------
+// Game 1: Random Squares
+function spawnRandomSquare() {
+    const isRedSquare = Math.random() > 0.65;
+    const squareType = isRedSquare ? "red" : "green";
 
-// Folder functions
-function createRandomSquare() {
-    const squareColor = Math.random() > 0.65;
-    const type = squareColor ? "red" : "green";
+    const squareElement = document.createElement("div");
+    squareElement.classList.add(`${squareType}-square`);
 
-    const square = document.createElement("div");
-    square.classList.add(`${type}-square`);
+    positionSquareElement(squareElement);
+    gameContainer1.appendChild(squareElement);
 
-    positionSquare(square);
-    container.appendChild(square);
-
-    handleSquareClick(square, type);
+    handleSquareInteraction(squareElement, squareType);
 }
 
-function positionSquare(square) {
-    const containerRect = container.getBoundingClientRect();
-    const x = Math.random() * (containerRect.width - squareSize);
-    const y = Math.random() * (containerRect.height - squareSize);
-    square.style.left = `${x}px`;
-    square.style.top = `${y}px`;
-    square.style.position = 'absolute';
+function positionSquareElement(squareElement) {
+    const containerBounds = gameContainer1.getBoundingClientRect();
+    const xPosition = Math.random() * (containerBounds.width - squareDimension);
+    const yPosition = Math.random() * (containerBounds.height - squareDimension);
+    squareElement.style.left = `${xPosition}px`;
+    squareElement.style.top = `${yPosition}px`;
+    squareElement.style.position = 'absolute';
 }
 
-function handleSquareClick(square, type) {
-    let isClicked = false;
+function handleSquareInteraction(squareElement, squareType) {
+    let wasClicked = false;
 
-    square.addEventListener("click", () => {
-        isClicked = true;
-        if (colorData[type].success) {
-            score += 1;
-            updateScore();
+    squareElement.addEventListener("click", () => {
+        wasClicked = true;
+        if (squareColors[squareType].isSuccess) {
+            currentScore += 1;
+            updateGame1Score();
         }
-        square.remove();
+        squareElement.remove();
     });
 
     setTimeout(() => {
-        if (!isClicked) {
-            square.remove();
+        if (!wasClicked) {
+            squareElement.remove();
         }
-    }, colorData[type].timeout);
+    }, squareColors[squareType].timeout);
 }
 
-function updateScore() {
-    const progressPercentage = (score / maxScore) * 100;
-    progressBar.style.width = `${progressPercentage}%`;
+function updateGame1Score() {
+    const progressPercentage = (currentScore / maxGame1Score) * 100;
+    progressBarElement.style.width = `${progressPercentage}%`;
 
-    if (score >= maxScore) {
-        clearInterval(gameInterval);
-        container.innerHTML = '';
+    if (currentScore >= maxGame1Score) {
+        clearInterval(game1Interval);
+        gameContainer1.innerHTML = '';
         document.querySelector('.container-1').style.display = 'none';
         document.querySelector('.container-2').style.display = 'flex';
-        stopGame();
+        document.querySelector('.progress').classList.add('hidden');
+        stopGame1();
     }
 }
 
-// Sonar functions
-function createGridLines() {
+// -------------------------------------------------------------------------
+// Game 2: Sonar
+function drawGridLines() {
     for (let i = 1; i < 10; i++) {
         const horizontalLine = document.createElement('div');
         horizontalLine.classList.add('grid-line', 'horizontal');
         horizontalLine.style.top = `${(i * 10)}%`;
-        sonar.appendChild(horizontalLine);
+        sonarElement.appendChild(horizontalLine);
 
         const verticalLine = document.createElement('div');
         verticalLine.classList.add('grid-line', 'vertical');
         verticalLine.style.left = `${(i * 10)}%`;
-        sonar.appendChild(verticalLine);
+        sonarElement.appendChild(verticalLine);
     }
 }
 
-function createPointElement(point) {
+function createRadarPointElement(point) {
     const pointElement = document.createElement('div');
     pointElement.classList.add('point');
     pointElement.style.left = `calc(50% + ${point.radius * 0.5 * Math.cos(point.angle * Math.PI / 180)}%)`;
     pointElement.style.top = `calc(50% + ${point.radius * 0.5 * Math.sin(point.angle * Math.PI / 180)}%)`;
     pointElement.style.opacity = 0;
-    pointElement.setAttribute('data-info', point.data);
+    pointElement.setAttribute('data-label', point.label);
 
-    if (point.data === 'capsule') {
+    if (point.label === 'capsule') {
         pointElement.classList.add('capsule');
     }
 
-    pointElement.addEventListener('click', () => handlePointClick(pointElement, point.data));
+    pointElement.addEventListener('click', () => handleRadarPointClick(pointElement, point.label));
     return pointElement;
 }
 
-function handlePointClick(pointElement, data) {
-    if (selectedPoint) {
-        selectedPoint.classList.remove('selected');
+function handleRadarPointClick(pointElement, label) {
+    if (activePoint) {
+        activePoint.classList.remove('selected');
     }
     pointElement.classList.add('selected');
-    selectedPoint = pointElement;
-    info.textContent = data;
+    activePoint = pointElement;
+    infoDisplay.textContent = label;
+
+    if (label === 'capsule') {
+        document.querySelector('.container-2').style.display = 'none';
+        document.querySelector('.container-3').style.display = 'flex';
+        infoDisplay.textContent = '';
+        startTicTacToeGame();
+    }
 }
 
-function checkPointVisibility(point, pointElement) {
-    const radarTransform = getComputedStyle(radarBar).transform;
+function checkRadarPointVisibility(point, pointElement) {
+    const radarTransform = getComputedStyle(radarBarElement).transform;
     if (radarTransform !== 'none') {
         const values = radarTransform.split('(')[1].split(')')[0].split(',');
         const a = values[0];
@@ -146,147 +156,140 @@ function checkPointVisibility(point, pointElement) {
     }
 }
 
-function initializePoints() {
-    points.forEach(point => {
-        const pointElement = createPointElement(point);
-        sonar.appendChild(pointElement);
+function initializeRadarPoints() {
+    radarPoints.forEach(point => {
+        const pointElement = createRadarPointElement(point);
+        sonarElement.appendChild(pointElement);
 
-        setInterval(() => checkPointVisibility(point, pointElement), 100);
+        setInterval(() => checkRadarPointVisibility(point, pointElement), 100);
     });
 }
 
 // -------------------------------------------------------------------------
-
-function startGame() {
-    if (document.querySelector('.container-1').style.display !== 'none') {
-        gameInterval = setInterval(createRandomSquare, 1000);
-    }
-}
-
-function stopGame() {
-    clearInterval(gameInterval);
-}
-
-// Initialize the game
-updateScore();
-createGridLines();
-initializePoints();
-startGame();
-startMemoryGame();
-
-function startGame3() {
-    const gridSize = 3; // Changez à 5 pour une grille 5x5
-    const grid = document.getElementById('game3-grid');
-    const status = document.getElementById('game3-status');
+// Game 3: Tic-Tac-Toe
+function startTicTacToeGame() {
+    const gridSize = 3;
+    const ticTacToeGrid = document.getElementById('game3-grid');
+    const gameStatus = document.getElementById('game3-status');
     let currentPlayer = 'X';
-    let board = Array(gridSize).fill(null).map(() => Array(gridSize).fill(''));
+    let gameBoard = Array(gridSize).fill(null).map(() => Array(gridSize).fill(''));
 
-    // Réinitialiser la grille
-    grid.innerHTML = '';
-    status.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
+    ticTacToeGrid.innerHTML = '';
+    gameStatus.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
 
-    // Créer la grille
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             const cell = document.createElement('div');
             cell.classList.add('cell');
             cell.dataset.row = row;
             cell.dataset.col = col;
-            cell.addEventListener('click', () => handleCellClick(row, col, cell));
-            grid.appendChild(cell);
+            cell.addEventListener('click', () => handleTicTacToeCellClick(row, col, cell));
+            ticTacToeGrid.appendChild(cell);
         }
     }
 
-    function handleCellClick(row, col, cell) {
-        if (board[row][col] !== '') return; // Case déjà occupée
+    function handleTicTacToeCellClick(row, col, cell) {
+        if (gameBoard[row][col] !== '') return;
 
-        board[row][col] = currentPlayer;
+        gameBoard[row][col] = currentPlayer;
         cell.textContent = currentPlayer;
 
-        if (checkWin(row, col)) {
-            status.textContent = `Joueur ${currentPlayer} a gagné !`;
-            grid.querySelectorAll('.cell').forEach(c => c.removeEventListener('click', handleCellClick));
-        } else if (board.flat().every(cell => cell !== '')) {
-            status.textContent = 'Match nul !';
+        if (checkTicTacToeWin(row, col)) {
+            gameStatus.textContent = `Joueur ${currentPlayer} a gagné !`;
+            ticTacToeGrid.querySelectorAll('.cell').forEach(c => c.removeEventListener('click', handleTicTacToeCellClick));
+        } else if (gameBoard.flat().every(cell => cell !== '')) {
+            gameStatus.textContent = 'Match nul !';
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            status.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
+            gameStatus.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
         }
     }
 
-    function checkWin(row, col) {
-        // Vérifier la ligne
-        if (board[row].every(cell => cell === currentPlayer)) return true;
+    function checkTicTacToeWin(row, col) {
+        if (gameBoard[row].every(cell => cell === currentPlayer)) return true;
 
-        // Vérifier la colonne
-        if (board.every(row => row[col] === currentPlayer)) return true;
+        if (gameBoard.every(row => row[col] === currentPlayer)) return true;
 
-        // Vérifier la diagonale principale
-        if (row === col && board.every((_, i) => board[i][i] === currentPlayer)) return true;
+        if (row === col && gameBoard.every((_, i) => gameBoard[i][i] === currentPlayer)) return true;
 
-        // Vérifier la diagonale secondaire
-        if (row + col === gridSize - 1 && board.every((_, i) => board[i][gridSize - 1 - i] === currentPlayer)) return true;
+        if (row + col === gridSize - 1 && gameBoard.every((_, i) => gameBoard[i][gridSize - 1 - i] === currentPlayer)) return true;
 
         return false;
     }
 }
 
-function startMemoryGame() {
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan'];
-    const pairs = [...colors, ...colors]; // 8 paires
-    const shuffledPairs = pairs.sort(() => Math.random() - 0.5);
-    const grid = document.getElementById('memory-game');
-    const status = document.getElementById('memory-status');
-    let firstCard = null;
-    let secondCard = null;
-    let matches = 0;
+// -------------------------------------------------------------------------
+// Game 4: Memory Game
+function startMemoryMatchingGame() {
+    const cardColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan'];
+    const cardPairs = [...cardColors, ...cardColors];
+    const shuffledCards = cardPairs.sort(() => Math.random() - 0.5);
+    const memoryGameGrid = document.getElementById('memory-game');
+    let firstSelectedCard = null;
+    let secondSelectedCard = null;
+    let matchedPairs = 0;
 
-    // Réinitialiser la grille et l'état
-    grid.innerHTML = '';
-    status.textContent = 'Trouvez toutes les paires !';
-    matches = 0;
+    memoryGameGrid.innerHTML = '';
+    matchedPairs = 0;
 
-    // Créer les cartes
-    shuffledPairs.forEach((color, index) => {
+    shuffledCards.forEach((color, index) => {
         const card = document.createElement('div');
         card.classList.add('card');
         card.dataset.color = color;
         card.dataset.index = index;
-        card.addEventListener('click', () => handleCardClick(card));
-        grid.appendChild(card);
+        card.addEventListener('click', () => handleMemoryCardClick(card));
+        memoryGameGrid.appendChild(card);
     });
 
-    function handleCardClick(card) {
-        if (card.classList.contains('flipped') || secondCard) return;
+    function handleMemoryCardClick(card) {
+        if (card.classList.contains('flipped') || secondSelectedCard) return;
 
         card.style.backgroundColor = card.dataset.color;
         card.classList.add('flipped');
 
-        if (!firstCard) {
-            firstCard = card;
+        if (!firstSelectedCard) {
+            firstSelectedCard = card;
         } else {
-            secondCard = card;
+            secondSelectedCard = card;
 
-            // Vérifier si les deux cartes correspondent
-            if (firstCard.dataset.color === secondCard.dataset.color) {
-                matches++;
-                firstCard = null;
-                secondCard = null;
+            if (firstSelectedCard.dataset.color === secondSelectedCard.dataset.color) {
+                matchedPairs++;
+                firstSelectedCard = null;
+                secondSelectedCard = null;
 
-                if (matches === colors.length) {
-                    status.textContent = 'Félicitations ! Vous avez trouvé toutes les paires !';
+                if (matchedPairs === cardColors.length) {
+                    console.log('Félicitations ! Vous avez trouvé toutes les paires !');
                 }
             } else {
-                // Retourner les cartes après un délai
                 setTimeout(() => {
-                    firstCard.style.backgroundColor = '';
-                    secondCard.style.backgroundColor = '';
-                    firstCard.classList.remove('flipped');
-                    secondCard.classList.remove('flipped');
-                    firstCard = null;
-                    secondCard = null;
+                    firstSelectedCard.style.backgroundColor = '';
+                    secondSelectedCard.style.backgroundColor = '';
+                    firstSelectedCard.classList.remove('flipped');
+                    secondSelectedCard.classList.remove('flipped');
+                    firstSelectedCard = null;
+                    secondSelectedCard = null;
                 }, 1000);
             }
         }
     }
 }
+
+// -------------------------------------------------------------------------
+// Game Control Functions
+function startGame1() {
+    if (document.querySelector('.container-1').style.display !== 'none') {
+        game1Interval = setInterval(spawnRandomSquare, 1000);
+    }
+}
+
+function stopGame1() {
+    clearInterval(game1Interval);
+}
+
+// -------------------------------------------------------------------------
+// Initialize the Game
+updateGame1Score();
+drawGridLines();
+initializeRadarPoints();
+startGame1();
+startMemoryMatchingGame();
