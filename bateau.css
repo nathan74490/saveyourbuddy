@@ -20,6 +20,13 @@
 /* ============== */
 /* GLOBAL STYLES */
 /* ============== */
+:root {
+    --midnight: #0A022D;
+    --pasteldark: #16404B;
+    --cyan: #4DADAC;
+    --sunlight: #E9AE63;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +35,7 @@
 
 body {
     height: 100dvh;
-    background-color: #0A022D;
+    background-color: var(--midnight);
 }
 
 
@@ -79,7 +86,11 @@ h2 {
 .progress-bar-container {
     width: 100%;
     height: 1rem;
-    background-color: #16404B;
+    background-color: #0A022D;
+
+    border: 2.5px solid var(--cyan);
+    border-radius: 0px;
+    box-shadow: 0 0 10px 5px var(--cyan);
     overflow: hidden;
     margin-top: 0.5rem;
 }
@@ -87,7 +98,7 @@ h2 {
 .progress-bar {
     height: 100%;
     width: 0%;
-    background-color: #4DADAC;
+    background-color: var(--sunlight);
     transition: width 0.3s ease;
 }
 
@@ -97,7 +108,7 @@ h2 {
 
 .text {
     color: #ffffff;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 
@@ -117,7 +128,7 @@ h2 {
 
 /* Sonar Game */
 .container-2 {
-    background-color: #16404B;
+    background-color: var(--pasteldark);
     width: 50%;
     height: 70%;
     position: absolute;
@@ -173,7 +184,7 @@ h2 {
     width: 30vw;
     height: 30vw;
     border-radius: 50%;
-    border: 5px solid #4DADAC;
+    border: 5px solid var(--cyan);
     justify-self: center;
     overflow: hidden;
     position: relative;
@@ -183,7 +194,7 @@ h2 {
     position: absolute;
     width: 50%;
     height: 2px;
-    background: linear-gradient(to right, #4DADAC, #16404B);
+    background: linear-gradient(to right, var(--cyan), var(--pasteldark));
     top: 50%;
     left: 50%;
     transform-origin: left center;
@@ -206,7 +217,7 @@ h2 {
 
 .grid-line {
     position: absolute;
-    background-color: #4DADAC;
+    background-color: var(--cyan);
 }
 
 .grid-line.horizontal {
