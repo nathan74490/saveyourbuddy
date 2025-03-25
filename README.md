@@ -137,7 +137,7 @@ function updateMindgameStatus(gameId, mindgameNumber, mindgameStatus) {
 }
 ```
 
-### 7. ## Exemples d'utilisation
+### 7.Exemples d'utilisation
 ```javascript
 // Créer une nouvelle partie
 createGame('ongoing');
