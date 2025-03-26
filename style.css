@@ -25,6 +25,10 @@
 }
 
 
+p {
+    height: 10vh; 
+}
+
 body{
     height: 100vh;
     width: 100vw;
@@ -45,6 +49,7 @@ body p{
 
 #count{
     height: 50px;
+    color: white;
 }
 #space_button button{
     width: 29vw;
@@ -73,10 +78,44 @@ body p{
     position: fixed;
     display: none;
     z-index: 50;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 #fail p{
     display: none;
-    font-size: 176pt;
-    color: white;
+    font-size: 200pt;
+    color: rgba(226, 124, 5, 1);
+    font-family: 'serpent';
+    height: 10vh;
+}
+
+#loading{
+    height: 2vh;
+    width: 90vw;
+    background-color: rgba(226, 124, 5, 1);
+    display: none;
+}
+
+
+.loaded {
+    transform: translateY(-50%);
+    animation: loading 4s forwards ;
+}
+
+
+@keyframes loading {
+    0% {
+        width: 0%;
+    }
+    10% {
+        width: 0%;
+    }
+    80%{
+        width: 50%;
+    }
+    100% {
+        width: 90%;
+    }
 }

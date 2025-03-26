@@ -131,7 +131,7 @@ function game() {
             if (score < 5) {
                 Array.from(document.getElementsByTagName('button')).forEach(element => element.remove());
                 game()
-            }else{
+            } else {
                 Array.from(document.body.children).forEach(element => element.remove());
                 document.body.innerHTML = "bravo tu as gagné"
             }
@@ -140,14 +140,32 @@ function game() {
 }
 game()
 
-function fail(){
-    document.body.style.backgroundImage= "none"
-    setTimeout(()=>{
-        document.body.innerHTML = "<p>error</p>"
-    },300)
-    setInterval(()=>copieEnProfondeur.forEach(element => {
-        document.body.appendChild(element);
-        document.body.style.backgroundImage= "url('img/background.svg')"
-    }, 5000))
-    
+function fail() {
+    document.getElementById("fail").style.display = "flex";
+    let firststep = setTimeout(() => {
+
+        document.getElementById("errorText").style.display = "block"
+        clearTimeout(firststep); // Utilisation de clearTimeout pour arrêter le timeout
+    }, 500);
+
+    let reloadShow = setTimeout(() => {
+        document.getElementById("errorText").innerHTML = "reloading"
+        document.getElementById("loading").style.display = "block"
+        clearTimeout(reloadShow); // Utilisation de clearTimeout pour arrêter le timeout
+    }, 1500);
+
+    let reload = setTimeout(() => {
+        document.getElementById("errorText").innerHTML = "reloading"
+        document.getElementById("loading").style.display = "block"
+        clearTimeout(reload); // Utilisation de clearTimeout pour arrêter le timeout
+    }, 2000);
+
+
+    let final = setInterval(() => {
+        document.getElementById("errorText").innerHTML = 'error'
+        document.getElementById("errorText").style.display = "none";
+        document.getElementById("fail").style.display = "none";
+        document.getElementById("loading").style.display = "none"
+        clearInterval(final);
+    }, 6000);
 }
