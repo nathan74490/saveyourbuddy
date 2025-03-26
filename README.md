@@ -278,8 +278,18 @@ function updateGameFinalTime(gameId, finalTime) {
 // Example usage:
 updateGameFinalTime(18, '50:00'); // Update final time for game 1
 
-### 15. Update game code
+### 15. create random code and Update game code
 ```javascript
+
+function generateRandomCode() {
+    const min = 500;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const randomCode = generateRandomCode();
+console.log(randomCode);
+
 function updateGameData(gameId, finalTime, mindgameCode) {
     const updateData = {
         type: 'game',
