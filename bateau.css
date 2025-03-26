@@ -88,27 +88,33 @@ h2 {
 
 .progress {
     width: 25%;
-    height: auto;
+    height: 70px;
     position: absolute;
     left: 50%;
-    bottom: 6.5%;
+    bottom: 10%;
     transform: translateX(-50%);
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('./assets/images/border.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .progress-bar-container {
-    width: 100%;
-    height: 1rem;
+    width: 60%;
+    height: 0.75rem;
     background-color: var(--midnight);
 
     border: 2.5px solid var(--cyan);
     box-shadow: 0 0 5px 2.5px var(--cyan);
     overflow: hidden;
     margin-top: 0.5rem;
+
+    margin-bottom: 10px;
 }
 
 .progress-bar {
@@ -118,8 +124,46 @@ h2 {
     transition: width 0.3s ease;
 }
 
-.progress.hidden {
-    display: none;
+.progress-2 {
+    width: 25%;
+    height: 70px;
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./assets/images/border.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.progress-bar-container {
+    width: 60%;
+    height: 0.75rem;
+    background-color: var(--midnight);
+
+    border: 2.5px solid var(--cyan);
+    box-shadow: 0 0 5px 2.5px var(--cyan);
+    overflow: hidden;
+    margin-top: 0.5rem;
+
+    margin-bottom: 10px;
+}
+
+.progress-bar-2 {
+    height: 100%;
+    width: 0%;
+    background-color: var(--sunlight);
+    transition: width 0.3s ease;
+}
+
+.hidden {
+    display: none !important;
 }
 
 .text {
@@ -236,8 +280,8 @@ h2 {
 
 /* Sonar Elements */
 .sonar {
-    width: 25vw;
-    height: 25vw;
+    width: 20vw;
+    height: 20vw;
     border-radius: 50%;
     border: 5px solid var(--cyan);
     justify-self: center;
@@ -349,8 +393,19 @@ h2 {
 /* SCREENS */
 /* ============== */
 
-.end-screen {
+#end-screen {
     display: none;
     text-align: center;
     font-size: 2em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    justify-content: center;
+    align-items: center;
+}
+
+#final-code {
 }
