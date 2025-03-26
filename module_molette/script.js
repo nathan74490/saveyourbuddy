@@ -13,9 +13,22 @@ let correctAnswers = 0;  // Compteur pour les bonnes réponses
 const maxMistakes = 2;
 
 const ledPositions = [
-    { x: -110, y: -20}, { x: -80, y: 40 }, { x: -10, y: 80 }, { x: 70, y: 80 },
-    { x: 150, y: 40 }, { x: 200, y: -30}, { x: -110, y: 110}, { x: -80, y: 180 },
-    { x: -10, y: 210 }, { x: 70, y: 210 }, { x: 150, y: 170 }, { x: 200, y: 102}
+    { x: -200, y: 10}, 
+    { x: -120, y: 60 },
+    { x: -20, y: 90 },
+    { x: 90, y: 100 },
+    { x: 190, y: 60 },
+    { x: 270, y: 6 },
+
+    { x: -210, y: 90}, 
+    { x: -140, y: 140 },
+    { x: -40, y: 170 },
+    { x: 90, y: 180 },
+    { x: 220, y: 150 },
+    { x: 290, y: 90 }
+
+
+
 ];
 
 ledPositions.forEach(pos => {
@@ -61,7 +74,7 @@ validateBtn.addEventListener("click", () => {
         correctAnswers++;  // Incrémenter le compteur de bonnes réponses
 
         if (correctAnswers >= 4) {  // Vérifier si l'utilisateur a 4 bonnes réponses
-            messageBox.innerText = "MISSION ACCOMPLIE";
+            messageBox.innerText = "mission accomplie";
             messageBox.style.display = "flex"; // Afficher le pop-up
             validateBtn.disabled = true;
             molette.style.pointerEvents = "none"; // Désactiver la molette
@@ -80,7 +93,7 @@ validateBtn.addEventListener("click", () => {
         mistakes++;
 
         if (mistakes >= maxMistakes) {
-            messageBox.innerText = "ERROR";
+            messageBox.innerText = "error";
             messageBox.style.display = "flex"; // Afficher le pop-up
             validateBtn.disabled = true;
             molette.style.pointerEvents = "none"; // Désactiver la molette
@@ -92,7 +105,7 @@ validateBtn.addEventListener("click", () => {
                 molette.style.pointerEvents = "auto"; // Réactiver la molette
                 mistakes = 0;  // Réinitialiser les erreurs
                 correctAnswers = 0;  // Réinitialiser les bonnes réponses
-            }, 1000);  // 1 seconde
+            }, 2000);  // 1 seconde
         }
     }
 });

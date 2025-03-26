@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'serpent';
+    src: url("font/serpent.otf") format('opentype'),
+    url(font/serpent.ttf) format('truetype');
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -6,7 +12,7 @@ body {
     height: 100vh;
     background-color: #222;
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'serpent';
     background-image: url(./images/background.png);
     margin: 0; 
 }
@@ -52,14 +58,15 @@ header {
 
 .validate-btn {
     padding: 10px 20px;
-    background-color: #140750;
+    background-color: #E07902;
     border: none;
     color: white;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 0 20px 5px #333C98;
-    margin: 0 auto; /* Centrer le bouton horizontalement */
+    margin: 0 auto; 
+    font-family: 'serpent';
 }
 
 
@@ -81,7 +88,9 @@ header {
 }
 
 #container {
-    margin-top: 400px;
+    margin-top: 0;
+
+
 }
 
 .molette {
@@ -99,14 +108,17 @@ header {
 
 #aiguille {
     position: absolute;
-    width: 5px;
-    height: 180px;
-    background-color: #333C98;
-    top: 80%;
+    width: 40px;
+    height: 160px;
+    background-color: #151F66;
+    border-radius: 100px;
+    top: 50%;
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) translateY(-100%);
     transition: transform 0.1s ease;
+    box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px  #333C98;
+
 }
 
 
@@ -151,19 +163,5 @@ header {
     font-weight: bold;
     z-index: 1000;
     display: none; /* Caché par défaut */
-}
-
-#retryButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#retryButton:hover {
-    background-color: #45a049;
+    font-family: 'serpent';
 }
