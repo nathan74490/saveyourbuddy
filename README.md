@@ -252,6 +252,32 @@ function getTeams() {
 }
 ```
 
+### 14. Update game final time
+```javascript
+function updateGameFinalTime(gameId, finalTime) {
+    const updateData = {
+        type: 'game',
+        id_game: gameId,
+        final_time: finalTime
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+```
+// Example usage:
+updateGameFinalTime(18, '50:00'); // Update final time for game 1
+
 ### ID-Module:
 
 1. Téléphone cheminement
