@@ -1,10 +1,14 @@
+*{
+    font-family: 'Minecraftia', sans-serif;
+}
+
 :root{
-    --tertiary: #31738f;
+    --primary: #377a97;
+    --tertiary: #343332;
 }
 body {
     background-image: url('./IMG/bg_img.svg');
     color: #fff;
-    font-family: 'Minecraftia', sans-serif;
     text-align: center;
     margin: 0;
     height: 100vh;
@@ -88,19 +92,18 @@ body {
 }
 .validate {
     background: linear-gradient() ;
-    background-color: black;
-    width: 15%;
+    background-color: var(--primary);
+    width: 12%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     box-shadow: 0px 9px 1px var(--tertiary);
-    border-radius: 5px;
+    border-radius: 10px;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
     color : white;
-    font-family: Serpent;
     font-size: 1.5rem;
-    margin-top: 20px;
+    margin-top: 50px;
     padding: 25px;
 }
  
@@ -110,6 +113,3 @@ body {
     box-shadow: 0px 0px 0px var(--tertiary);
 }
  
-
-/* TO DO : 
-/* Tout le style, attendre la maquette de Noa */

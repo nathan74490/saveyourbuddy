@@ -24,6 +24,7 @@ document.querySelector('.validate').addEventListener('click', () => {
     if (code === codesCorrects[toggle]) {
         document.querySelector('.checkCircle').style.backgroundImage = "url('IMG/green_btn.svg')";
         toggle = 1 - toggle; // Alterne entre 0 et 1
+        updateModuleStatus('sucess');
     } else {
         document.querySelector('.checkCircle').style.backgroundImage = "url('IMG/red_btn.svg')";
         setTimeout(() => {
