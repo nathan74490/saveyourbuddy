@@ -89,7 +89,9 @@ let nbr_de_btn = 6;
 
 
 
+
 function game() {
+    let name_of_button = [];
     //initialisation des variable aléatoire et d'une copie du tableau initiale pour effectuer des actions dessus
     let tab_words = JSON.parse(JSON.stringify(words))
     let IndexOfWordInScreen = Math.floor(Math.random() * words.length)
@@ -97,7 +99,6 @@ function game() {
 
     //initialisation des positions de chaque donnée
     let positionOfWordInScreen = words[IndexOfWordInScreen].position
-    let goodPosition = tab_words[IndexOfWordReference].position
     //boucle pour crée les boutons
     for (let i = 0; i < nbr_de_btn; i++) {
         //on enregistre le bouton dans une varibale pour pouvoir crée une logique
@@ -109,6 +110,26 @@ function game() {
         let textRandomButton = Math.floor(Math.random() * tab_words[IndexOfWordInScreen].reponse.length);
         //on ajoute ce mot a un bouton
         button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
+        //on ajoute la valeur a un tableau en donnant le meme index que l'id du bouton
+        name_of_button.push(tab_words[IndexOfWordInScreen].reponse[textRandomButton])
+        console.log(name_of_button)
+        let goodPosition = -1;
+        for (let i = 0; i < tab_words[IndexOfWordReference].reponse.length; i++) {
+            const currentWord = tab_words[IndexOfWordReference].reponse[i];
+            const wordIndex = name_of_button.indexOf(currentWord);
+            
+            if (wordIndex !== -1) {
+                goodPosition = wordIndex;
+                break; // Exit the loop once we find a match
+            }
+        }
+        
+        // Optional: Add a check to ensure a valid position was found
+        if (goodPosition === -1) {
+            console.error("No matching word found!");
+            // Handle the error appropriately
+        }
+        console.log(goodPosition)
         //enleve le mot de la copie du tableau pour pas avoir de doublons dans les mots
         tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
         //on affiche le mot de l'ecran

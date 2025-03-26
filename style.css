@@ -6,7 +6,7 @@
 #ecran{
     height: 20vh;
     width: 60vw;
-    background-color: bisque;
+    background-color: rgb(0, 0, 0);
     font-family: "trizome";
     color: black;
     display: flex;
@@ -14,7 +14,6 @@
     align-items: center;
     font-family: 'serpent';
     font-size: 48pt;
-    background-image: url("img/backgroundtext.svg");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
@@ -52,9 +51,11 @@ body p{
     color: white;
 }
 #space_button button{
+    
+    box-shadow: 0px 0px 30px rgba(226, 124, 5, 1);
     width: 29vw;
     height: 15vh;
-    border: solid 2px white;
+    border: solid 2px rgba(226, 124, 5, 1);
     background-color: black;
     color: white;
     font-size: 40pt;
