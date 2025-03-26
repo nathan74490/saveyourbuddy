@@ -1,6 +1,4 @@
 let tabModules = [];
-
-// ici on écoute les messages venant des iframes
 // ici on écoute les messages venant des iframes
 window.addEventListener('message', (event) => {
   // on vérifie que l'event a bien un type 'moduleStatusUpdate'

@@ -1,6 +1,3 @@
-const win = document.querySelector('#win');
-const lose = document.querySelector('#lose');
-
 function updateMindGamesStatus(mindgameStatus) {
   let id_game = localStorage.getItem('id_game');
   console.log(id_game);

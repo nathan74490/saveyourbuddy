@@ -1,5 +1,6 @@
 let tabMindGames = [];
-
+const container = document.querySelector('.table-iframe-mindgames');
+const containerModule = document.querySelector('.table-iframe');
 let id_game = localStorage.getItem('id_game') || null;
 if (!id_game) console.log('Aucun ID de jeu trouvé dans le localStorage.');
 
@@ -36,6 +37,8 @@ window.addEventListener('message', (event) => {
     }
 
     updateMindGamesStatus(idGame, mindGamesNumber, status);
+
+    checkIfAllMindGameSuccess();
   }
 });
 
@@ -98,7 +101,6 @@ function getGame(gameId) {
 }
 
 function loadMindGames(gameId, mindGames) {
-  const container = document.querySelector('.table-iframe-mindgames');
   const divGauge = document.querySelector('.gauge');
   divGauge.style.display = 'block';
 
@@ -136,4 +138,32 @@ function updateMindGamesStatus(id_game, mindGamesNumber, status) {
       console.log(tabMindGames);
     })
     .catch(console.error);
+}
+
+function checkIfAllMindGameSuccess() {
+  tabMindGames.forEach((game) => {
+    const allModulesSuccess = game.modules.every(
+      (module) => module.modelStatus === 'success'
+    );
+
+    if (game.modules.length === 2) {
+      if (allModulesSuccess) {
+        console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
+      } else {
+        console.log(
+          `Tous les modules du jeu ${game.id_game} ne sont pas encore en succès.`
+        );
+        container.style.display = 'none';
+        containerModule.style.display = 'block';
+      }
+    } else {
+      console.log(
+        `Le jeu ${
+          game.id_game
+        } n'a pas encore tous ses modules. Modules restants: ${
+          2 - game.modules.length
+        }`
+      );
+    }
+  });
 }
