@@ -43,9 +43,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Prends un chiffre entre 1 et 4 et le mets dans l'écran.
     function writeRandomNumber() {
-        let randomNumber = 1 + Math.floor(Math.random() * 4);
-        screen.innerHTML =  randomNumber;
-    }
+    let randomNumber;
+    let lastNumber = null;
+    do {
+        randomNumber = 1 + Math.floor(Math.random() * 4);
+    } while (randomNumber === lastNumber);
+
+    lastNumber = randomNumber; 
+    // console.log("Dernier nombre :", lastNumber);
+    
+    screen.innerHTML = randomNumber; 
+}
 
     // Mets à jour le status du module (ongoing, sucess, failed).
     function updateModuleStatus(gameId, moduleNumber, moduleStatus) {
@@ -55,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             module_number: moduleNumber,
             module_status: moduleStatus
         };
-    
+
         fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
             method: 'PUT',
             headers: {
@@ -63,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(updateData)
         })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-        })
-        .catch(console.error);
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch(console.error);
     }
 
     // Quand le module est résolue on met l'écran vide, la led verte et on enlève la possibilité d'intéragir.
@@ -75,8 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
         screen.innerHTML = "";
         led.style.backgroundColor = 'rgb(0, 255, 0)';
         moduleIsFinish = true;
-        console.log(`A la fin :${moduleIsFinish}`)
-        updateModuleStatus(12, 3, "sucess");
+        console.log(`A la fin :${moduleIsFinish}`);
+        let idgame = localStorage.getItem("id_game");
+        updateModuleStatus(idgame, 3, "sucess");
 
         keys.forEach(key => {
             key.removeEventListener("click", key.clickListener);
