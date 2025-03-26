@@ -10,6 +10,7 @@ window.addEventListener('message', (event) => {
     );
 
     // on récupère l'id du jeu, le numéro du module et son statut
+
     const moduleNumber = event.data.module_number;
     const status = event.data.status;
     const idGame = event.data.id_game;
@@ -112,8 +113,8 @@ function getGame(gameId) {
 // cette fonction charge les modules dans l'iframe
 function loadModules(gameId, modules) {
   const container = document.querySelector('.table-iframe');
-  const divGauge = document.querySelector('.gauge');
-  divGauge.style.display = 'block';
+  // const divGauge = document.querySelector('.gauge');
+  // divGauge.style.display = 'block';
   container.innerHTML = ''; // on vide le conteneur avant d'ajouter de nouveaux modules
 
   modules.forEach((module) => {
@@ -185,6 +186,7 @@ function checkIfAllModulesSuccess() {
   });
 }
 
+/**********************************OXYGEN************************************************************/
 function initializeOxygenBar(startTime) {
   const maxTime = 30 * 60 * 1000; // 30 minutes in milliseconds
   const oxygenLevel = document.getElementById('oxygenLevel');
