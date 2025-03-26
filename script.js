@@ -44,12 +44,12 @@ window.addEventListener('message', (event) => {
 });
 
 // ici, on écoute le click sur le bouton de démarrage du jeu
-const play = document.querySelector('#play');
+//const play = document.querySelector('#play');
 
-play.addEventListener('click', (e) => {
-  let gameStatus = 'ongoing'; // on définit le statut du jeu comme 'en cours'
-  createGame(gameStatus); // on crée la partie
-});
+// play.addEventListener('click', (e) => {
+//   let gameStatus = 'ongoing'; // on définit le statut du jeu comme 'en cours'
+//   createGame(gameStatus); // on crée la partie
+// });
 
 // cette fonction crée un jeu en envoyant des données à l'API
 function createGame(gameStatus) {

@@ -1,9 +1,3 @@
-const win = document.querySelector('#win');
-const lose = document.querySelector('#lose');
-
-// Lorsque le joueur gagne
-
-
 function updateModuleStatus(moduleStatus) {
   let id_game = localStorage.getItem('id_game');
   console.log(id_game);

@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const screen = document.getElementById("ecran");
     const keys = document.querySelectorAll(".key");
     const led = document.getElementById('led')
+    const statusButton = document.getElementById('statusButton')
+
 
     let step = 1;
     let historical = [];
@@ -12,17 +14,17 @@ document.addEventListener("DOMContentLoaded", function () {
     function isTheGoodKey(YesOrNo) {
         if (YesOrNo === 'yes') {
             if (step < 5) {
-                led.style.backgroundColor = 'rgb(0, 255, 0)';
+                statusButton.src = "pictures/correct-button.svg";
                 setTimeout(() => {
-                    led.style.backgroundColor = 'var(--secondary)';
+                    statusButton.src = "pictures/idle-button.svg";
 
                 }, 600)
             }
 
         } else if (YesOrNo === 'no') {
-            led.style.backgroundColor = 'red';
+            statusButton.src = "pictures/notcorrect-button.svg";
             setTimeout(() => {
-                led.style.backgroundColor = 'var(--secondary)';
+                statusButton.src = "pictures/idle-button.svg";
 
             }, 600)
         }
@@ -33,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const advanceBox = document.getElementById('advance');
 
         if (AddOrRemove === "add") {
-            advanceBox.innerHTML += '<div class="progressStep"></div>'
+            advanceBox.innerHTML += '<div class="progressStep"> <img src="pictures/correct-button.svg" alt = ""> </div> '
         } else if (AddOrRemove === "remove") {
             advanceBox.innerHTML = ''
         }
@@ -43,22 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Prends un chiffre entre 1 et 4 et le mets dans l'écran.
     function writeRandomNumber() {
-    let randomNumber;
-    let lastNumber = null;
-    do {
-        randomNumber = 1 + Math.floor(Math.random() * 4);
-    } while (randomNumber === lastNumber);
+        let randomNumber;
+        let lastNumber = null;
+        do {
+            randomNumber = 1 + Math.floor(Math.random() * 4);
+        } while (randomNumber === lastNumber);
 
-    lastNumber = randomNumber; 
-    // console.log("Dernier nombre :", lastNumber);
-    
-    screen.innerHTML = '2'; 
-}
+        lastNumber = randomNumber;
+        // console.log("Dernier nombre :", lastNumber);
+
+        screen.innerHTML = '2';
+    }
 
     // Quand le module est résolue on met l'écran vide, la led verte et on enlève la possibilité d'intéragir.
     function moduleFinish() {
         screen.innerHTML = "";
-        led.style.backgroundColor = 'rgb(0, 255, 0)';
+        statusButton.src = "pictures/correct-button.svg";
         moduleIsFinish = true;
         console.log(`A la fin :${moduleIsFinish}`);
         updateModuleStatus("sucess");
