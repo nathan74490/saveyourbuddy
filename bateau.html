@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="bateau.css">
 </head>
 <body>
+    <!-- Add a dropdown for development mode -->
+    <select id="game-selector" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+        <option value="game1">Game 1: Random Squares</option>
+        <option value="game2">Game 2: Sonar</option>
+        <option value="game3">Game 3: Memory Game</option>
+    </select>
+
+    <div id="code-display">
+        <span id="code-text">_ _ _ _ _ _</span>
+        <div class="corners top-left"></div>
+        <div class="corners top-right"></div>
+        <div class="corners bottom-left"></div>
+        <div class="corners bottom-right"></div>
+    </div>
     <div class="progress">
         <h2 class="text">dossiers corrompus traités :</h2>
         <div class="progress-bar-container">
@@ -58,6 +72,7 @@
             <div class="sonar">
                 <div class="radar-bar"></div>
             </div>
+            <div class="info"></div>
         </div>
     
         <div class="containers container-3" style="display: none;">
@@ -65,10 +80,8 @@
         </div>
     </section>
 
-    <div class="info"></div>
-
-    <div id="end-screen" style="display: none; text-align: center; font-size: 2em;">
-        <p id="final-code">888888</p>
+    <div id="end-screen">
+        <p id="final-code"></p>
     </div>
 
     <script src="bateau.js"></script>

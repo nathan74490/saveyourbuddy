@@ -28,6 +28,34 @@ const radarPoints = [
     { angle: 315, radius: 40, label: 'capsule' },
 ];
 
+const codeDigits = ['_', '_', '_', '_', '_', '_'];
+const codeDisplay = document.getElementById('code-display');
+let gamesCompleted = 0;
+
+function updateCodeDisplay() {
+    const codeTextElement = document.getElementById('code-text');
+    codeTextElement.textContent = codeDigits.join(' ');
+}
+
+function revealCodeDigits(startIndex, digits) {
+    for (let i = 0; i < digits.length; i++) {
+        codeDigits[startIndex + i] = digits[i];
+    }
+    updateCodeDisplay();
+
+    gamesCompleted++;
+    if (gamesCompleted === 3) {
+        showEndScreen();
+    }
+}
+
+function showEndScreen() {
+    document.querySelector('#main').style.display = 'none';
+    document.querySelector('#end-screen').style.display = 'block';
+    document.getElementById('final-code').textContent = codeDigits.join('');
+    document.getElementById('code-text').style.display = 'none';
+}
+
 // -------------------------------------------------------------------------
 // Game 1: Random Squares
 function spawnSquare() {
@@ -82,6 +110,7 @@ function updateScoreForGame1() {
         document.querySelector('.container-2').style.display = 'flex';
         document.querySelector('.progress').classList.add('hidden');
         stopRandomSquareGame();
+        revealCodeDigits(0, ['1', '2']);
     }
 }
 
@@ -129,6 +158,7 @@ function onRadarPointClick(pointElement, label) {
         document.querySelector('.container-2').style.display = 'none';
         document.querySelector('.container-3').style.display = 'flex';
         infoDisplay.textContent = '';
+        revealCodeDigits(2, ['3', '4']);
     }
 }
 
@@ -166,7 +196,7 @@ function setupRadarPoints() {
 
 
 // -------------------------------------------------------------------------
-// Game 4: Memory Game
+// Game 3: Memory Game
 function initializeMemoryGame() {
     const cardColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan'];
     const cardPairs = [...cardColors, ...cardColors];
@@ -213,6 +243,10 @@ function initializeMemoryGame() {
                     secondSelectedCard = null;
                 }, 1000);
             }
+
+            if (matchedPairs === cardColors.length) {
+                revealCodeDigits(4, ['5', '6']);
+            }
         }
     }
 }
@@ -228,6 +262,30 @@ function startRandomSquareGame() {
 function stopRandomSquareGame() {
     clearInterval(game1Interval);
 }
+
+// Add event listener for game selector
+document.getElementById('game-selector').addEventListener('change', (event) => {
+    const selectedGame = event.target.value;
+
+    // Hide all game containers and reset progress
+    document.querySelector('.container-1').style.display = 'none';
+    document.querySelector('.container-2').style.display = 'none';
+    document.querySelector('.container-3').style.display = 'none';
+    document.querySelector('.progress').classList.add('hidden');
+    stopRandomSquareGame();
+
+    // Show the selected game container
+    if (selectedGame === 'game1') {
+        document.querySelector('.container-1').style.display = 'grid';
+        document.querySelector('.progress').classList.remove('hidden');
+        startRandomSquareGame();
+    } else if (selectedGame === 'game2') {
+        document.querySelector('.container-2').style.display = 'flex';
+    } else if (selectedGame === 'game3') {
+        document.querySelector('.container-3').style.display = 'flex';
+        initializeMemoryGame();
+    }
+});
 
 // -------------------------------------------------------------------------
 // Initialize the Game
