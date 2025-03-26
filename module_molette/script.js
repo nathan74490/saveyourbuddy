@@ -1,4 +1,5 @@
 const molette = document.getElementById("molette");
+const aiguille = document.getElementById("aiguille");  // Référence à l'aiguille
 const ledContainer = document.getElementById("ledContainer");
 const validateBtn = document.getElementById("validate");
 // Pop up
@@ -51,16 +52,12 @@ setInterval(updateLEDs, 5000);
 molette.addEventListener("click", () => {
     rotation += 90;
     if (rotation >= 360) rotation = 0;
-    molette.style.transform = `rotate(${rotation}deg)`;
+    aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`; // Applique la rotation uniquement à l'aiguille
 });
 
 validateBtn.addEventListener("click", () => {
-    const greenCircle = document.querySelector(".green");
-    const redCircle = document.querySelector(".red");
-
     if (rotation === correctPosition) {
-        greenCircle.style.backgroundColor = "green";
-        redCircle.style.backgroundColor = "black";
+        checkCircle.style.backgroundColor = "green"; // Le cercle devient vert si la réponse est correcte
         correctAnswers++;  // Incrémenter le compteur de bonnes réponses
 
         if (correctAnswers >= 4) {  // Vérifier si l'utilisateur a 4 bonnes réponses
@@ -68,7 +65,6 @@ validateBtn.addEventListener("click", () => {
             messageBox.style.display = "flex"; // Afficher le pop-up
             validateBtn.disabled = true;
             molette.style.pointerEvents = "none"; // Désactiver la molette
-
             updateModuleStatus('sucess')
             // Retarder la réactivation après 10 secondes
             setTimeout(() => {
@@ -80,8 +76,7 @@ validateBtn.addEventListener("click", () => {
             }, 10000);  // 10 secondes
         }
     } else {
-        redCircle.style.backgroundColor = "red";
-        greenCircle.style.backgroundColor = "black";
+        checkCircle.style.backgroundColor = "red"; // Le cercle devient rouge si la réponse est incorrecte
         mistakes++;
 
         if (mistakes >= maxMistakes) {
@@ -89,9 +84,7 @@ validateBtn.addEventListener("click", () => {
             messageBox.style.display = "flex"; // Afficher le pop-up
             validateBtn.disabled = true;
             molette.style.pointerEvents = "none"; // Désactiver la molette
-            
             updateModuleStatus('failed')
-
             // Retarder la réactivation après 10 secondes
             setTimeout(() => {
                 messageBox.style.display = "none"; // Masquer le pop-up
@@ -99,7 +92,7 @@ validateBtn.addEventListener("click", () => {
                 molette.style.pointerEvents = "auto"; // Réactiver la molette
                 mistakes = 0;  // Réinitialiser les erreurs
                 correctAnswers = 0;  // Réinitialiser les bonnes réponses
-            }, 1000);  // 10 secondes
+            }, 1000);  // 1 seconde
         }
     }
 });
@@ -108,24 +101,5 @@ updateLEDs();
 
 
 
-// function updateModuleStatus(gameId, moduleNumber, moduleStatus) {
-//     const updateData = {
-//         type: 'module',
-//         id_game: gameId,
-//         module_number: moduleNumber,
-//         module_status: moduleStatus
-//     };
 
-//     fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updateData)
-//     })
-//     .then((response) => response.json())
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch(console.error);
-// }
+
