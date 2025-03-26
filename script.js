@@ -153,7 +153,7 @@ function game() {
                 //score_div.innerHTML = score
             }
             //quand le joueur atteint 5 le jeux se supprime
-            if (score < 5) {
+            if (score < 4) {
                 Array.from(document.getElementsByTagName('button')).forEach(element => element.remove());
                 game()
             } else {
