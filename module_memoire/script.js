@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (step < 5) {
                 led.style.backgroundColor = 'rgb(0, 255, 0)';
                 setTimeout(() => {
-                    led.style.backgroundColor = 'white';
+                    led.style.backgroundColor = 'var(--secondary)';
 
                 }, 600)
             }
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (YesOrNo === 'no') {
             led.style.backgroundColor = 'red';
             setTimeout(() => {
-                led.style.backgroundColor = 'white';
+                led.style.backgroundColor = 'var(--secondary)';
 
             }, 600)
         }
@@ -52,31 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
     lastNumber = randomNumber; 
     // console.log("Dernier nombre :", lastNumber);
     
-    screen.innerHTML = randomNumber; 
+    screen.innerHTML = '2'; 
 }
-
-    // Mets à jour le status du module (ongoing, sucess, failed).
-    function updateModuleStatus(gameId, moduleNumber, moduleStatus) {
-        const updateData = {
-            type: 'module',
-            id_game: gameId,
-            module_number: moduleNumber,
-            module_status: moduleStatus
-        };
-
-        fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updateData)
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-            })
-            .catch(console.error);
-    }
 
     // Quand le module est résolue on met l'écran vide, la led verte et on enlève la possibilité d'intéragir.
     function moduleFinish() {
@@ -84,8 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         led.style.backgroundColor = 'rgb(0, 255, 0)';
         moduleIsFinish = true;
         console.log(`A la fin :${moduleIsFinish}`);
-        let idgame = localStorage.getItem("id_game");
-        updateModuleStatus(idgame, 3, "sucess");
+        updateModuleStatus("sucess");
 
         keys.forEach(key => {
             key.removeEventListener("click", key.clickListener);
