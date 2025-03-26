@@ -15,16 +15,6 @@
 
     </div>
 
-    <!-- <iframe src="modulememoire/module_memoire/index.html" frameborder="2"></iframe>
-    <iframe src="modulemolette/module_molette/index.html" frameborder="3"></iframe> -->
-
-    <!-- <iframe src="modulemotsdepasse/modulemotsdepasse/index.html" frameborder="0"></iframe>
-        <iframe src="modulequiestlepremier/modulequiestlepremier/index.html" frameborder="0"></iframe> -->
-
-
-
-    <!-- <iframe src="modulecasseTete1/modulecasseTete1/index.html" frameborder="0"></iframe>
-    <iframe src="modulecasseTete2/modulecasseTete2/index.html" frameborder="0"></iframe> -->
 </body>
 <script src="script.js"></script>
 
