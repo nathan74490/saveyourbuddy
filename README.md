@@ -278,6 +278,59 @@ function updateGameFinalTime(gameId, finalTime) {
 // Example usage:
 updateGameFinalTime(18, '50:00'); // Update final time for game 1
 
+### 15. Update game code
+```javascript
+function updateGameData(gameId, finalTime, mindgameCode) {
+    const updateData = {
+        type: 'game',
+        id_game: gameId,
+        final_time: finalTime,
+        mindgame_code: mindgameCode
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+
+updateGameData(190, null, 1234); 
+```
+
+### 16. Verify if user submarine code is the right one
+```javascript
+function verifyGameCode(userInput, gameId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((game) => {
+            if (game && game.mindgame_code) {
+                const code = game.mindgame_code.toString();
+                if (userInput.toString() === code) {
+                    console.log('Code correct!');
+                    return true;
+                } else {
+                    console.log('Code incorrect!');
+                    return false;
+                }
+            }
+        })
+        .catch(console.error);
+}
+
+// Example usage:
+verifyGameCode(1234, 190);
+```
+
 ### ID-Module:
 
 1. Téléphone cheminement
