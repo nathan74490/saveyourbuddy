@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <button id="win">gagner</button>
-    <button id="lose">perdu</button>
-  </body>
-  <script src="API.js"></script>
-  <script>
-    win.addEventListener('click', () => {
-      console.log('Le module 4 est gagné !');
-      updateModuleStatus('sucess'); // Appel de la fonction avec statut "success"
-    });
 
-    // Lorsque le joueur perd
-    lose.addEventListener('click', () => {
-      console.log('Le module 4 est perdu...');
-      updateModuleStatus('failed'); // Appel de la fonction avec statut "failed"
-    });
-  </script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Molette</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div id="check">
+            <div class="circle green"></div>
+            <div class="circle red"></div>
+        </div>
+    </header>
+
+
+        <div id="direction-controls">
+            <p id="up">Up</p>
+            <p id="right">Right</p>
+            <p id="down">Down</p>
+            <p id="left">Left</p>
+         
+        </div>
+<div id="container">
+  <div class="molette" id="molette">
+    <div class="aiguille" id="aiguille"></div> <!-- Ajout de l'aiguille -->
+  </div>
+</div>
+  <div class="led-container" id="ledContainer"></div>
+  <button class="validate-btn" id="validate">Valider</button>
+
+  <div id="messageBox">
+    <p id="messageText">YOU LOSE</p>
+</div>
+
+
+<script src="API.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>
