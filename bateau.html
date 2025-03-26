@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Squares</title>
     <link rel="stylesheet" href="bateau.css">
 </head>
+
 <body>
     <!-- Add a dropdown for development mode -->
     <select id="game-selector" style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
@@ -67,14 +69,22 @@
             <div class="items item-35"></div>
             <div class="items item-36"></div>
         </div>
-    
+
         <div class="containers container-2" style="display: none;">
             <div class="sonar">
                 <div class="radar-bar"></div>
             </div>
             <div class="info"></div>
+
+            <div class="confirmation-section">
+                <div id="confirm-button" class="confirm-button">
+                    <img src="./assets/images/button.png" alt="Button" class="button-image">
+                    <img src="./assets/images/confirm.png" alt="Confirm" class="confirm-image">
+                </div>
+                <div id="confirmation-message" class="confirmation-message"></div>
+            </div>
         </div>
-    
+
         <div class="containers container-3" style="display: none;">
             <div id="memory-game" class="memory-grid"></div>
         </div>
@@ -86,4 +96,5 @@
 
     <script src="bateau.js"></script>
 </body>
+
 </html>

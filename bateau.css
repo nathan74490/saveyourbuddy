@@ -270,6 +270,12 @@ h2 {
     opacity: 1 !important;
 }
 
+.point.clicked {
+    background-color: gray !important; /* Change la couleur en gris */
+    opacity: 1 !important; /* Assure que la capsule reste visible */
+    /* Supprime pointer-events pour permettre les clics */
+}
+
 .grid-line {
     position: absolute;
     background-color: var(--cyan);
@@ -353,4 +359,89 @@ h2 {
     display: none;
     text-align: center;
     font-size: 2em;
+}
+
+.confirm-button {
+    width: 100px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.1s ease; /* Ajoute un effet de clic */
+}                   
+
+.confirm-button:active {
+    transform: scale(0.95); /* Réduit légèrement la taille pour un effet de clic */
+}
+
+.confirmation-section {
+    width: 30%;
+    height: fit-content;
+    position: absolute;
+    top: 100%;
+    text-align: center;
+    
+}
+
+.confirmation-message {
+    font-size: 1.2rem;
+    font-family: 'astonpoliz', Arial, sans-serif;
+    color: #ffffff;
+    margin-top: -10%; /* Réduit l'espace entre le bouton et le texte */
+    text-align: center;
+}
+
+/* Conteneur du bouton */
+.confirm-button {
+    position: relative;
+    width: 200px; /* Augmentez la largeur */
+    height: 100px; /* Augmentez la hauteur */
+    margin: 0 auto;
+    cursor: pointer;
+    display: block;
+    overflow: hidden; /* Assurez-vous que rien ne dépasse */
+}
+
+/* Image de base (button.png) */
+.button-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Adapte l'image au conteneur sans la couper */
+    z-index: 1;
+}
+
+/* Image animée (confirm.png) */
+.confirm-image {
+    position: absolute;
+    top: -15px; /* Ajustez pour positionner légèrement au-dessus de button.png */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.1s ease;
+}
+
+/* Animation au clic */
+.confirm-button:active .confirm-image {
+    transform: translateY(10px);
+}
+
+/* Animation de haut en bas */
+@keyframes bounce {
+    0% {
+        transform: translateY(-90%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-90%);
+    }
 }
