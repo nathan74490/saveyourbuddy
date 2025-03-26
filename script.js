@@ -1,81 +1,81 @@
 let words = [
     {
-        "reference": "DELTA",
+        "reference": "delta",
         "reponse": ["ALPHA", "BETA", "GAMMA", "EPSILON", "ZETA", "OMEGA", "SIGMA", "TAU", "LAMBDA", "KAPPA", "PHI", "CHARLIE", "PROTOCOL", "VECTOR", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 3
     },
     {
-        "reference": "ALPHA",
+        "reference": "alpha",
         "reponse": ["CHARLIE", "BRAVO", "DELTA", "ECHO", "FOXTROT", "GAMMA", "SIGMA", "ZETA", "PROTOCOL", "LAMBDA", "VECTOR", "OMEGA", "TAU", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 1
     },
     {
-        "reference": "OMEGA",
+        "reference": "omega",
         "reponse": ["SIGMA", "ZETA", "PROTOCOL", "DELTA", "EPSILON", "ALPHA", "GAMMA", "BETA", "CHARLIE", "LAMBDA", "TAU", "BRAVO", "VECTOR", "KAPPA", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 5
     },
     {
-        "reference": "EPSILON",
+        "reference": "epsilon",
         "reponse": ["PROTOCOL", "GAMMA", "BRAVO", "ZETA", "DELTA", "TAU", "ALPHA", "CHARLIE", "OMEGA", "LAMBDA", "SIGMA", "VECTOR", "BETA", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 2
     },
     {
-        "reference": "TACTICAL",
+        "reference": "tactical",
         "reponse": ["ZETA", "GAMMA", "BRAVO", "DELTA", "ALPHA", "EPSILON", "SIGMA", "LAMBDA", "CHARLIE", "OMEGA", "PROTOCOL", "TAU", "VECTOR", "INFILTRATE", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM"],
         "position": 0
     },
     {
-        "reference": "BETA",
+        "reference": "beta",
         "reponse": ["BRAVO", "GAMMA", "ZETA", "DELTA", "ALPHA", "LAMBDA", "TAU", "PROTOCOL", "CHARLIE", "OMEGA", "SIGMA", "EPSILON", "VECTOR", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 4
     },
     {
-        "reference": "GAMMA",
+        "reference": "gamma",
         "reponse": ["ZETA", "LAMBDA", "SIGMA", "DELTA", "ALPHA", "EPSILON", "BRAVO", "OMEGA", "TAU", "CHARLIE", "PROTOCOL", "BETA", "VECTOR", "INFILTRATE", "TACTICAL", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX"],
         "position": 5
     },
     {
-        "reference": "VECTOR",
+        "reference": "vector",
         "reponse": ["PROTOCOL", "TACTICAL", "INFILTRATE", "SIGMA", "ZETA", "LAMBDA", "BRAVO", "DELTA", "CHARLIE", "OMEGA", "ALPHA", "GAMMA", "BETA", "TAU", "NEXUS", "CIPHER", "QUANTUM", "STELLAR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM"],
         "position": 3
     },
     {
-        "reference": "NEXUS",
+        "reference": "nexus",
         "reponse": ["CIPHER", "QUANTUM", "STELLAR", "ZETA", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "LAMBDA", "SIGMA", "OMEGA", "VECTOR", "HORIZON", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "BRAVO"],
         "position": 1
     },
     {
-        "reference": "QUANTUM",
+        "reference": "quantum",
         "reponse": ["STELLAR", "HORIZON", "MAVERICK", "NEXUS", "CIPHER", "PROTOCOL", "TACTICAL", "DELTA", "LAMBDA", "SIGMA", "OMEGA", "VECTOR", "ALPHA", "GAMMA", "BETA", "TAU", "PHANTOM", "SENTINEL", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "ZETA", "BRAVO"],
         "position": 2
     },
     {
-        "reference": "SENTINEL",
+        "reference": "sentinel",
         "reponse": ["MAVERICK", "PHANTOM", "CRYPTEX", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 0
     },
     {
-        "reference": "MAVERICK",
+        "reference": "maverick",
         "reponse": ["PHANTOM", "SENTINEL", "CRYPTEX", "QUANTUM", "STELLAR", "HORIZON", "NEXUS", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 5
     },
     {
-        "reference": "CIPHER",
+        "reference": "cipher",
         "reponse": ["QUANTUM", "STELLAR", "HORIZON", "NEXUS", "MAVERICK", "PHANTOM", "SENTINEL", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 4
     },
     {
-        "reference": "CRYPTEX",
+        "reference": "cryptex",
         "reponse": ["SENTINEL", "MAVERICK", "PHANTOM", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 1
     },
     {
-        "reference": "HORIZON",
+        "reference": "horizon",
         "reponse": ["STELLAR", "QUANTUM", "MAVERICK", "NEXUS", "CIPHER", "PHANTOM", "SENTINEL", "DELTA", "ALPHA", "GAMMA", "PROTOCOL", "TACTICAL", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CRYPTEX", "PARADIGM", "INFILTRATE", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 3
     },
     {
-        "reference": "PARADIGM",
+        "reference": "paradigme",
         "reponse": ["INFILTRATE", "TACTICAL", "PROTOCOL", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 2
     }
@@ -83,10 +83,9 @@ let words = [
 
 let space_of_button = document.getElementById("space_button");
 let ecran = document.getElementById("ecran");
-let score_div = document.getElementById('count');
 let score = 0;
 let nbr_de_btn = 6;
-
+let goodPosition ;
 
 
 
@@ -112,41 +111,46 @@ function game() {
         button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
         //on ajoute la valeur a un tableau en donnant le meme index que l'id du bouton
         name_of_button.push(tab_words[IndexOfWordInScreen].reponse[textRandomButton])
-        console.log(name_of_button)
-        let goodPosition = -1;
-        for (let i = 0; i < tab_words[IndexOfWordReference].reponse.length; i++) {
-            const currentWord = tab_words[IndexOfWordReference].reponse[i];
-            const wordIndex = name_of_button.indexOf(currentWord);
-            
-            if (wordIndex !== -1) {
-                goodPosition = wordIndex;
-                break; // Exit the loop once we find a match
-            }
-        }
-        
-        // Optional: Add a check to ensure a valid position was found
-        if (goodPosition === -1) {
-            console.error("No matching word found!");
-            // Handle the error appropriately
-        }
-        console.log(goodPosition)
         //enleve le mot de la copie du tableau pour pas avoir de doublons dans les mots
         tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
         //on affiche le mot de l'ecran
-        ecran.innerHTML = words[IndexOfWordInScreen].reference
+        ecran.innerHTML = "<p>" + words[IndexOfWordInScreen].reference + "</p>"
         if (i === positionOfWordInScreen) {
             //si le bouton a le meme id que le
-            button.innerHTML = tab_words[IndexOfWordReference].reference
+            button.innerHTML = tab_words[IndexOfWordReference].reference.toUpperCase()
+            
         }
         button.addEventListener("click", () => {
+            
+            for (let i = 0; i < tab_words[IndexOfWordReference].reponse.length; i++) {
+                const currentWord = tab_words[IndexOfWordReference].reponse[i];
+                const wordIndex = name_of_button.indexOf(currentWord);
+
+                if (wordIndex !== -1) {
+                    goodPosition = wordIndex;
+                    break; // Exit the loop once we find a match
+                }
+            }
+
+            // Optional: Add a check to ensure a valid position was found
+            if (goodPosition === -1) {
+                console.error("No matching word found!");
+                // Handle the error appropriately
+            }
+
             if (i === goodPosition) {
                 score++;
                 console.log("wp")
-                score_div.innerHTML = score
+                document.getElementsByClassName("rep")[score].src="img/bouton_good_ans.svg"
+                //score_div.innerHTML = score
             } else {
+                Array.from(document.getElementsByClassName("rep")).forEach(element=>{
+                    element.src = "img/button_reponse.svg"
+                })
+                
                 fail()
                 score = 0;
-                score_div.innerHTML = score
+                //score_div.innerHTML = score
             }
             //quand le joueur atteint 5 le jeux se supprime
             if (score < 5) {
@@ -155,6 +159,7 @@ function game() {
             } else {
                 Array.from(document.body.children).forEach(element => element.remove());
                 document.body.innerHTML = "bravo tu as gagné"
+                updateModuleStatus("sucess")
             }
         });
     }

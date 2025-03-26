@@ -1,22 +1,34 @@
 @font-face {
     font-family: "serpent";
+    src: url("font/serpent.ttf") format("truetype"),
+    url("font/serpent.otf") format('opentype'),
+    url('serpentdecor.woff2') format('woff2'),
+    url('serpentdecor.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: "astropliz";
     src: url("font/Astonpoliz.ttf");
 }
 
-#ecran{
+#ecran p{
+    font-family: 24pt;
+}
+
+#ecran {
     height: 20vh;
     width: 60vw;
     background-color: rgb(0, 0, 0);
-    font-family: "trizome";
     color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'serpent';
-    font-size: 48pt;
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    font-family: 'serpent' ;
+    font-size: 40pt;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     color: white;
     border: solid rgba(226, 124, 5, 1);
@@ -24,11 +36,9 @@
 }
 
 
-p {
-    height: 10vh; 
-}
 
-body{
+
+body {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -41,28 +51,38 @@ body{
     background-color: black;
 }
 
-body p{
-    font-size: 178pt;
-    color: rgba(226, 124, 5, 1);
+
+
+#count {
+    position: absolute;
+    right: 5%;
+    height: 80%;
+    width: 7%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
 }
 
-#count{
-    height: 50px;
-    color: white;
-}
-#space_button button{
-    
-    box-shadow: 0px 0px 30px rgba(226, 124, 5, 1);
+#space_button button {
     width: 29vw;
     height: 15vh;
-    border: solid 2px rgba(226, 124, 5, 1);
-    background-color: black;
     color: white;
     font-size: 40pt;
-    font-family: 'serpent';
+    font-family: 'astropliz';
+    border-radius: 12px;
+    border: 2px solid #000;
+    background: #E07902;
+    box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25), 4px 4px 22px 0px rgba(255, 255, 255, 0.40) inset, -4px -4px 18px 0px rgba(0, 0, 0, 0.40) inset;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+
 }
 
-#space_button{
+
+
+#space_button {
     height: 60vh;
     width: 60vw;
     display: flex;
@@ -80,19 +100,20 @@ body p{
     display: none;
     z-index: 50;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-#fail p{
+#fail p {
     display: none;
-    font-size: 200pt;
+    font-size: 80pt;
     color: rgba(226, 124, 5, 1);
     font-family: 'serpent';
     height: 10vh;
 }
 
-#loading{
+#loading {
     height: 2vh;
     width: 90vw;
     background-color: rgba(226, 124, 5, 1);
@@ -102,7 +123,7 @@ body p{
 
 .loaded {
     transform: translateY(-50%);
-    animation: loading 4s forwards ;
+    animation: loading 4s forwards;
 }
 
 
@@ -110,13 +131,26 @@ body p{
     0% {
         width: 0%;
     }
+
     10% {
         width: 0%;
     }
-    80%{
+
+    80% {
         width: 50%;
     }
+
     100% {
         width: 90%;
     }
+}
+
+.key {
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+#space_button button:active {
+    transform: translate(0px, 8px);
+    box-shadow: 0px 0px 2px 2px var(--tertiary);
 }
