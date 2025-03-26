@@ -9,5 +9,17 @@
     <button id="win">gagner</button>
     <button id="lose">perdu</button>
   </body>
-  <script src="m1.js"></script>
+  <script src="API.js"></script>
+  <script>
+    win.addEventListener('click', () => {
+      console.log('Le module 1 est gagné !');
+      updateModuleStatus('sucess'); // Appel de la fonction avec statut "success"
+    });
+
+    // Lorsque le joueur perd
+    lose.addEventListener('click', () => {
+      console.log('Le module 1 est perdu...');
+      updateModuleStatus('failed'); // Appel de la fonction avec statut "failed"
+    });
+  </script>
 </html>
