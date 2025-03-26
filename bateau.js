@@ -30,20 +30,20 @@ const radarPoints = [
 
 // -------------------------------------------------------------------------
 // Game 1: Random Squares
-function spawnRandomSquare() {
-    const isRedSquare = Math.random() > 0.65;
-    const squareType = isRedSquare ? "red" : "green";
+function spawnSquare() {
+    const isColoredSquare = Math.random() > 0.65;
+    const squareType = isColoredSquare ? "red" : "green";
 
     const squareElement = document.createElement("div");
     squareElement.classList.add(`${squareType}-square`);
 
-    positionSquareElement(squareElement);
+    setSquarePosition(squareElement);
     gameContainer1.appendChild(squareElement);
 
-    handleSquareInteraction(squareElement, squareType);
+    handleSquareClick(squareElement, squareType);
 }
 
-function positionSquareElement(squareElement) {
+function setSquarePosition(squareElement) {
     const containerBounds = gameContainer1.getBoundingClientRect();
     const xPosition = Math.random() * (containerBounds.width - squareDimension);
     const yPosition = Math.random() * (containerBounds.height - squareDimension);
@@ -52,14 +52,14 @@ function positionSquareElement(squareElement) {
     squareElement.style.position = 'absolute';
 }
 
-function handleSquareInteraction(squareElement, squareType) {
+function handleSquareClick(squareElement, squareType) {
     let wasClicked = false;
 
     squareElement.addEventListener("click", () => {
         wasClicked = true;
         if (squareColors[squareType].isSuccess) {
             currentScore += 1;
-            updateGame1Score();
+            updateScoreForGame1();
         }
         squareElement.remove();
     });
@@ -71,7 +71,7 @@ function handleSquareInteraction(squareElement, squareType) {
     }, squareColors[squareType].timeout);
 }
 
-function updateGame1Score() {
+function updateScoreForGame1() {
     const progressPercentage = (currentScore / maxGame1Score) * 100;
     progressBarElement.style.width = `${progressPercentage}%`;
 
@@ -81,13 +81,13 @@ function updateGame1Score() {
         document.querySelector('.container-1').style.display = 'none';
         document.querySelector('.container-2').style.display = 'flex';
         document.querySelector('.progress').classList.add('hidden');
-        stopGame1();
+        stopRandomSquareGame();
     }
 }
 
 // -------------------------------------------------------------------------
 // Game 2: Sonar
-function drawGridLines() {
+function renderGridLines() {
     for (let i = 1; i < 10; i++) {
         const horizontalLine = document.createElement('div');
         horizontalLine.classList.add('grid-line', 'horizontal');
@@ -101,7 +101,7 @@ function drawGridLines() {
     }
 }
 
-function createRadarPointElement(point) {
+function createRadarPoint(point) {
     const pointElement = document.createElement('div');
     pointElement.classList.add('point');
     pointElement.style.left = `calc(50% + ${point.radius * 0.5 * Math.cos(point.angle * Math.PI / 180)}%)`;
@@ -113,11 +113,11 @@ function createRadarPointElement(point) {
         pointElement.classList.add('capsule');
     }
 
-    pointElement.addEventListener('click', () => handleRadarPointClick(pointElement, point.label));
+    pointElement.addEventListener('click', () => onRadarPointClick(pointElement, point.label));
     return pointElement;
 }
 
-function handleRadarPointClick(pointElement, label) {
+function onRadarPointClick(pointElement, label) {
     if (activePoint) {
         activePoint.classList.remove('selected');
     }
@@ -129,11 +129,10 @@ function handleRadarPointClick(pointElement, label) {
         document.querySelector('.container-2').style.display = 'none';
         document.querySelector('.container-3').style.display = 'flex';
         infoDisplay.textContent = '';
-        startTicTacToeGame();
     }
 }
 
-function checkRadarPointVisibility(point, pointElement) {
+function verifyRadarPointVisibility(point, pointElement) {
     const radarTransform = getComputedStyle(radarBarElement).transform;
     if (radarTransform !== 'none') {
         const values = radarTransform.split('(')[1].split(')')[0].split(',');
@@ -156,71 +155,19 @@ function checkRadarPointVisibility(point, pointElement) {
     }
 }
 
-function initializeRadarPoints() {
+function setupRadarPoints() {
     radarPoints.forEach(point => {
-        const pointElement = createRadarPointElement(point);
+        const pointElement = createRadarPoint(point);
         sonarElement.appendChild(pointElement);
 
-        setInterval(() => checkRadarPointVisibility(point, pointElement), 100);
+        setInterval(() => verifyRadarPointVisibility(point, pointElement), 100);
     });
 }
 
-// -------------------------------------------------------------------------
-// Game 3: Tic-Tac-Toe
-function startTicTacToeGame() {
-    const gridSize = 3;
-    const ticTacToeGrid = document.getElementById('game3-grid');
-    const gameStatus = document.getElementById('game3-status');
-    let currentPlayer = 'X';
-    let gameBoard = Array(gridSize).fill(null).map(() => Array(gridSize).fill(''));
-
-    ticTacToeGrid.innerHTML = '';
-    gameStatus.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
-
-    for (let row = 0; row < gridSize; row++) {
-        for (let col = 0; col < gridSize; col++) {
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            cell.dataset.row = row;
-            cell.dataset.col = col;
-            cell.addEventListener('click', () => handleTicTacToeCellClick(row, col, cell));
-            ticTacToeGrid.appendChild(cell);
-        }
-    }
-
-    function handleTicTacToeCellClick(row, col, cell) {
-        if (gameBoard[row][col] !== '') return;
-
-        gameBoard[row][col] = currentPlayer;
-        cell.textContent = currentPlayer;
-
-        if (checkTicTacToeWin(row, col)) {
-            gameStatus.textContent = `Joueur ${currentPlayer} a gagné !`;
-            ticTacToeGrid.querySelectorAll('.cell').forEach(c => c.removeEventListener('click', handleTicTacToeCellClick));
-        } else if (gameBoard.flat().every(cell => cell !== '')) {
-            gameStatus.textContent = 'Match nul !';
-        } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            gameStatus.textContent = `Joueur ${currentPlayer}, à vous de jouer !`;
-        }
-    }
-
-    function checkTicTacToeWin(row, col) {
-        if (gameBoard[row].every(cell => cell === currentPlayer)) return true;
-
-        if (gameBoard.every(row => row[col] === currentPlayer)) return true;
-
-        if (row === col && gameBoard.every((_, i) => gameBoard[i][i] === currentPlayer)) return true;
-
-        if (row + col === gridSize - 1 && gameBoard.every((_, i) => gameBoard[i][gridSize - 1 - i] === currentPlayer)) return true;
-
-        return false;
-    }
-}
 
 // -------------------------------------------------------------------------
 // Game 4: Memory Game
-function startMemoryMatchingGame() {
+function initializeMemoryGame() {
     const cardColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan'];
     const cardPairs = [...cardColors, ...cardColors];
     const shuffledCards = cardPairs.sort(() => Math.random() - 0.5);
@@ -237,11 +184,11 @@ function startMemoryMatchingGame() {
         card.classList.add('card');
         card.dataset.color = color;
         card.dataset.index = index;
-        card.addEventListener('click', () => handleMemoryCardClick(card));
+        card.addEventListener('click', () => onMemoryCardClick(card));
         memoryGameGrid.appendChild(card);
     });
 
-    function handleMemoryCardClick(card) {
+    function onMemoryCardClick(card) {
         if (card.classList.contains('flipped') || secondSelectedCard) return;
 
         card.style.backgroundColor = card.dataset.color;
@@ -256,10 +203,6 @@ function startMemoryMatchingGame() {
                 matchedPairs++;
                 firstSelectedCard = null;
                 secondSelectedCard = null;
-
-                if (matchedPairs === cardColors.length) {
-                    console.log('Félicitations ! Vous avez trouvé toutes les paires !');
-                }
             } else {
                 setTimeout(() => {
                     firstSelectedCard.style.backgroundColor = '';
@@ -276,20 +219,20 @@ function startMemoryMatchingGame() {
 
 // -------------------------------------------------------------------------
 // Game Control Functions
-function startGame1() {
+function startRandomSquareGame() {
     if (document.querySelector('.container-1').style.display !== 'none') {
-        game1Interval = setInterval(spawnRandomSquare, 1000);
+        game1Interval = setInterval(spawnSquare, 1000);
     }
 }
 
-function stopGame1() {
+function stopRandomSquareGame() {
     clearInterval(game1Interval);
 }
 
 // -------------------------------------------------------------------------
 // Initialize the Game
-updateGame1Score();
-drawGridLines();
-initializeRadarPoints();
-startGame1();
-startMemoryMatchingGame();
+updateScoreForGame1();
+renderGridLines();
+setupRadarPoints();
+startRandomSquareGame();
+initializeMemoryGame();
