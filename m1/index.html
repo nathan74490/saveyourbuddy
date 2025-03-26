@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="win">gagner</button>
+    <button id="lose">perdu</button>
+  </body>
+  <script src="API.js"></script>
+  <script>
+    win.addEventListener('click', () => {
+      console.log('Le module 1 est gagné !');
+      updateModuleStatus('sucess'); // Appel de la fonction avec statut "success"
+    });
+
+    // Lorsque le joueur perd
+    lose.addEventListener('click', () => {
+      console.log('Le module 1 est perdu...');
+      updateModuleStatus('failed'); // Appel de la fonction avec statut "failed"
+    });
+  </script>
+</html>
