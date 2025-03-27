@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderBoard() {
         gameBoard.innerHTML = '';
-        gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 60px)`;
+        gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 110px)`;
 
         for (let x = 0; x < boardSize; x++) {
             for (let y = 0; y < boardSize; y++) {
