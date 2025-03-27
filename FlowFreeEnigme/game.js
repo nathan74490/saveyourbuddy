@@ -228,6 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+        let linkSound = new Audio("./assets/LinkSound.mp3")
+        linkSound.volume = 0.1;
+        linkSound.play();
         return count === 1; // Only one other dot of this color exists
     }
 
@@ -387,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (level >= MAX_LEVEL) {
                     alert('Congratulations! You won the game!');
-                    document.location.href = "../../ShieldGame/pages/HubLevelUnlock.html";
+                    document.location.href = "../../../workshop/ShieldGame/pages/HubLevelUnlock.html";
                 } else {
                     alert('Level completed! Moving to next level.');
                     nextLevel();
