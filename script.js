@@ -116,38 +116,6 @@ function updateModuleStatus(id_game, moduleNumber, moduleStatus) {
     .catch(console.error); // gestion des erreurs
 }
 
-// function checkIfAllMindGamesSuccess() {
-//   tabMindGames.forEach((game) => {
-//     // Vérifie s'il y a exactement 2 modules dans ce jeu
-//     if (game.modules.length === 2) {
-//       // Vérifie si tous les modules ont le statut 'success'
-//       const allModulesSuccess = game.modules.every(
-//         (module) => module.modelStatus === 'success'
-//       );
-
-//       if (allModulesSuccess) {
-//         console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
-//         container.style.display = 'none';
-//         containerModule.style.display = 'none';
-//         const divGauge = document.querySelector('.gauge');
-//         divGauge.style.display = 'none';
-//       } else {
-//         console.log(
-//           `Tous les modules du jeu ${game.id_game} ne sont pas encore en succès.`
-//         );
-//       }
-//     } else {
-//       console.log(
-//         `Le jeu ${
-//           game.id_game
-//         } n'a pas encore ses 2 modules complets. Modules restants: ${
-//           2 - game.modules.length
-//         }`
-//       );
-//     }
-//   });
-// }
-
 function checkIfAllModulesSuccess() {
   tabModules.forEach((game) => {
     // Vérifie si tous les modules du jeu ont le statut 'sucess'
