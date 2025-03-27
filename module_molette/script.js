@@ -4,13 +4,12 @@ const aiguille = document.getElementById("aiguille");
 const ledContainer = document.getElementById("ledContainer");
 const validateBtn = document.getElementById("validate");
 const messageBox = document.getElementById("messageBox");
-const checkCircle = document.getElementById("checkCircle");
+const checkCircle = document.getElementById("circle");
 
 // Variables de suivi du jeu
 let rotation = 0;
 let correctPosition = 0; // Toujours démarrer avec 180
 let leds = [];
-let mistakes = 0;
 let correctAnswers = 0;
 const maxMistakes = 2;
 let ledRotation = 0;
@@ -79,13 +78,19 @@ function updateLEDs() {
     });
 }
 // Fonction de validation des réponses
+// Fonction de validation des réponses
 validateBtn.addEventListener("click", () => {
     if (rotation === correctPosition) {
+        // Changer la couleur des cercles en vert pour la réponse correcte
+        document.querySelectorAll('.circle').forEach(circle => {
+            circle.style.backgroundColor = "green"; // Tout devient vert
+        });
         checkCircle.style.backgroundColor = "green";
         setTimeout(() => {
             checkCircle.style.backgroundColor = "black";
-        }, 500)
+        }, 500);
         correctAnswers++;
+        console.log(correctAnswers);
         newCorrectPosition();
         updateLEDs();
 
@@ -95,20 +100,25 @@ validateBtn.addEventListener("click", () => {
             messageBox.style.display = "flex";
             validateBtn.disabled = true;
             sonar.style.pointerEvents = "none";
-
+            updateModuleStatus("sucess");
         }
     } else {
+        // Si la réponse est incorrecte, changer `lastCircle` en rouge
+        document.querySelectorAll('.circle').forEach(circle => {
+            circle.style.backgroundColor = "green"; // Rendre les autres cercles verts
+        });
+        const lastCircle = document.getElementById("lastCircle");
+        lastCircle.style.backgroundColor = "red"; // `lastCircle` devient rouge en cas d'erreur
+
         checkCircle.style.backgroundColor = "red";
-        mistakes++;
-        if (mistakes >= maxMistakes) {
-            messageBox.innerText = "Erreur!";
-            messageBox.style.display = "flex";
-            validateBtn.disabled = true;
-            sonar.style.pointerEvents = "none";
-            setTimeout(resetGame, 2000);
-        }
+        console.log(correctAnswers);
+        setTimeout(() => {
+            checkCircle.style.backgroundColor = "black";
+        }, 500);
+        correctAnswers = 0; // Réinitialiser les bonnes réponses en cas d'échec
     }
 });
+
 
 // Initialisation des LEDs
 updateLEDs();

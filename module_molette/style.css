@@ -46,7 +46,6 @@ header {
     justify-content: space-between;
     padding: 0 20px; 
 }
-
 #check {
     display: flex;
     margin-left: auto; 
@@ -54,21 +53,19 @@ header {
 }
 
 .circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border-style: groove;
-    border-color: black;
-    background-color: transparent;
-}
-
-#check .circle {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: black;
+    border-style: groove;
+    border-color: black;
     transition: background-color 0.3s;
 }
+
+#check .circle:nth-child(5) {
+    margin-left: 60px; 
+}
+
 
 
 
