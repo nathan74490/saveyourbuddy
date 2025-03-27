@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const led = document.getElementById('led')
     const statusButton = document.getElementById('statusButton')
 
+    let finish_module = new Audio("sounds/finish.mp3")
+    let correct_sound = new Audio("sounds/correct.wav")
+    let wrong_sound = new Audio("sounds/wrong.mp3")
 
     let step = 1;
     let historical = [];
@@ -30,12 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function turnOneDivIdToDisplayNone(id, displayStatus) {
+        id = document.getElementById(id);
+        id.style.display = displayStatus;
+    }
+
     // Permet d'ajouter un bloc blanc dans la box pour voir l'avancée ou de la vider s'il y a une erreur.
     function addStepInAdvance(AddOrRemove) {
         const advanceBox = document.getElementById('advance');
 
         if (AddOrRemove === "add") {
-            advanceBox.innerHTML += '<div class="progressStep"> <img src="pictures/correct-button.svg" alt = ""> </div> '
+            advanceBox.innerHTML += '<div class="progressStep"></div> '
         } else if (AddOrRemove === "remove") {
             advanceBox.innerHTML = ''
         }
@@ -54,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         lastNumber = randomNumber;
         // console.log("Dernier nombre :", lastNumber);
 
-        screen.innerHTML = '2';
+        screen.innerHTML = randomNumber;
     }
 
     // Quand le module est résolue on met l'écran vide, la led verte et on enlève la possibilité d'intéragir.
@@ -62,9 +70,18 @@ document.addEventListener("DOMContentLoaded", function () {
         screen.innerHTML = "";
         statusButton.src = "pictures/correct-button.svg";
         moduleIsFinish = true;
-        console.log(`A la fin :${moduleIsFinish}`);
+        // console.log(`A la fin :${moduleIsFinish}`);
         updateModuleStatus("sucess");
 
+        setTimeout(() => {
+            turnOneDivIdToDisplayNone("led", "none")
+            turnOneDivIdToDisplayNone("interface", "none")
+            turnOneDivIdToDisplayNone("screenFinish", "block")
+        }, 500)
+        setTimeout(() => {
+            finish_module.play();
+
+        }, 800)
         keys.forEach(key => {
             key.removeEventListener("click", key.clickListener);
         });
@@ -114,22 +131,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if ((expectedPosition !== undefined && expectedPosition === positionClicked) || expectedValue === valueClicked) {
-            console.log(`✅ Étape ${step} OK !`);
+            // console.log(`✅ Étape ${step} OK !`);
             historical.push({ position: positionClicked, valeur: valueClicked });
             isTheGoodKey("yes");
             writeRandomNumber();
             addStepInAdvance("add");
-            console.log(historical)
             step++;
-            console.log(moduleIsFinish)
-
+            correct_sound.playbackRate = 1.8;
+            correct_sound.play();
             if (step === 6) {
                 moduleFinish();
             }
 
         } else {
-            console.log(`❌ Mauvais choix à l'étape ${step} !`);
+            // console.log(`❌ Mauvais choix à l'étape ${step} !`);
             step = 1;
+            wrong_sound.play();
             writeRandomNumber();
             isTheGoodKey("no");
             addStepInAdvance("remove");

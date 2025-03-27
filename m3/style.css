@@ -6,11 +6,8 @@
 :root {
     --primary: #47C6BB;
     --secondary: black;
-    --tertiary: #F4AB54;
-
-    /* button */
-    --button-correct: #41f038;
-    --button-notcorrect: #52D44B;
+    --tertiary: #88DEB1;
+    --button-color: #8EBFA5;
 }
 
 @font-face {
@@ -26,38 +23,80 @@ body {
     width: 100vw;
 
     background-image: url(pictures/background_module.svg);
+    background-color: black;
     background-size: cover;
 
 }
 
 #module {
     /* border: 3px solid black; */
-    height: 100%;
-    width: 100%;
+    height: 90%;
+    width: 90%;
 
     display: flex;
-    /* justify-content: center; */
+    justify-content: center;
     align-items: center;
 
     position: relative;
 
+    background-image: url(pictures/module_border.svg);
+    background-position: center;
+    background-size: cover;
 
 }
 
 #led {
 
     position: absolute;
-    top: 10px;
-    right: 15px;
+    top: 6%;
+    right: 5%;
+    display: block;
+    /* display: none; */
 
+}
+
+#screenFinish {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-family: Serpent;
+    /* display: block; */
+    display: none;
+
+}
+
+#backgroundFinish {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#backgroundFinish img {
+    /* width: 100%; */
+    /* height: 100%; */
+    object-fit: cover;
+    max-width: 150%;
+    max-height: 150%;
+}
+
+#screenFinish p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
 
 #interface {
-    height: 90%;
-    width: 80%;
-
+    height: 75%;
+    width: 70%;
+    /* display: none; */
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -69,6 +108,7 @@ body {
     gap: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 #ecran {
@@ -77,12 +117,12 @@ body {
     background-position: center;
     background-size: cover;
     height: 75%;
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    color: #E07902;
+    color: white;
     border-radius: 2px;
     font-family: Serpent;
 }
@@ -103,15 +143,15 @@ body {
 
 #keys {
     height: 25%;
-
+    width: 100%;
     display: flex;
     gap: 10px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 
 .key {
-    background-color: #E07902;
-    width: 25%;
+    background-color: var(--button-color);
+    width: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,7 +190,7 @@ body {
 #advance {
     position: relative;
     background-color: black;
-    width: 80%;
+    width: 70%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
@@ -172,32 +212,27 @@ body {
     border-radius: 10px;
     filter: blur(1px);
     pointer-events: none;
+    overflow: hidden;
 }
 
 .progressStep {
-    background-color: var(--primary);
-    border: 1px solid white;
-    box-shadow: 0px 0px 10px 1px white;
-    border-radius: 20px;
-    height: 30px;
-    width: 30px;
+    background-color: var(--tertiary);
+    /* border: 1px solid var(--tertiary); */
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px 1px var(--tertiary);
+    height: 25px;
+    width: 80%;
 
-    margin-bottom: 12px;
+    margin-bottom: 40%;
 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.progressStep img {
-    width: 120%;
-    height: 120%;
-    object-fit: contain;
-}
-
 .led {
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 30px;
     border: 2px solid black;
 
