@@ -1,0 +1,120 @@
+body {
+    overflow: hidden;
+    font-family: Astonpoliz, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-image: url("assets/background.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #0A022D;
+}
+
+@font-face {
+    font-family: "Astonpoliz";
+    src: url("fonts/Astonpoliz.ttf");
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 40px;
+    color: #88DEB1;
+    width: 90%;
+    height: 100%;
+}
+
+#game-container {
+    display: inline-block;
+    margin: 12vh auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#game-board {
+    display: grid;
+    grid-gap: 3px;
+    background-color: #333;
+    padding: 8px;
+    border-radius: 8px;
+    touch-action: none;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.cell.color-1 { background-color: #FF5252; }
+.cell.color-2 { background-color: #FFEB3B; }
+.cell.color-3 { background-color: #4CAF50; }
+.cell.color-4 { background-color: #2196F3; }
+.cell.color-5 { background-color: #9C27B0; }
+.cell.color-6 { background-color: #FF9800; }
+.cell.color-7 { background-color: #607D8B; }
+.cell.color-8 { background-color: #795548; }
+
+.cell.path {
+    opacity: 0.7;
+}
+
+.cell.endpoint {
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.3) inset;
+}
+
+#controls {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#level-info {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .cell {
+        width: 50px;
+        height: 50px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
