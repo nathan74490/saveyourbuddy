@@ -18,14 +18,26 @@ const infoDisplay = document.querySelector('.info');
 let activePoint = null;
 
 const radarPoints = [
-  { angle: 0, radius: 20, label: 'point 1' },
-  { angle: 45, radius: 40, label: 'point 2' },
-  { angle: 90, radius: 60, label: 'point 3' },
-  { angle: 135, radius: 80, label: 'point 4' },
-  { angle: 180, radius: 100, label: 'point 5' },
-  { angle: 225, radius: 80, label: 'point 6' },
-  { angle: 270, radius: 20, label: 'point 7' },
-  { angle: 315, radius: 40, label: 'capsule' },
+    { angle: 240, radius: 50, label: 'HYDRA-3X' }, // Capsule HYDRA-3X en haut à gauche
+    { angle: 0, radius: 20, label: 'POD-22X' },
+    { angle: 45, radius: 40, label: 'OCEAN-7B' },
+    { angle: 90, radius: 60, label: 'AQUA-12' },
+    { angle: 135, radius: 80, label: 'MARINE-8' },
+    { angle: 180, radius: 100, label: '??@#-12X' },
+    { angle: 225, radius: 80, label: 'X!@#-Z9' },
+    { angle: 270, radius: 20, label: 'CRYPT-99' },
+    { angle: 300, radius: 40, label: 'ZETA-77' },
+    { angle: 330, radius: 60, label: 'OMEGA-3' },
+    { angle: 15, radius: 80, label: 'TITAN-5' },
+    { angle: 45, radius: 100, label: 'NOVA-1' },
+    { angle: 75, radius: 20, label: 'AERO-9' },
+    { angle: 105, radius: 40, label: '??@#-X1' },
+    { angle: 135, radius: 60, label: 'CRYPT-88' },
+    { angle: 165, radius: 80, label: 'ZETA-99' },
+    { angle: 195, radius: 100, label: 'OMEGA-7' },
+    { angle: 225, radius: 20, label: 'DELTA-4' },
+    { angle: 255, radius: 40, label: 'ALPHA-2' },
+    { angle: 285, radius: 60, label: 'BETA-3' },
 ];
 
 const codeDigits = ['_', '_', '_', '_', '_', '_'];
@@ -185,21 +197,16 @@ function createRadarPoint(point) {
 }
 
 function onRadarPointClick(pointElement, label) {
-  if (activePoint) {
-    activePoint.classList.remove('selected');
-  }
-  pointElement.classList.add('selected');
-  activePoint = pointElement;
-  infoDisplay.textContent = label;
+    if (activePoint) {
+        activePoint.classList.remove('selected');
+    }
+    pointElement.classList.add('selected');
+    pointElement.classList.add('clicked'); // Ajoute une classe pour les capsules cliquées
+    activePoint = pointElement;
 
-  if (label === 'capsule') {
-    document.querySelector('.container-2').style.display = 'none';
-    document.querySelector('.container-3').style.display = 'flex';
-    infoDisplay.textContent = '';
-    document.querySelector('.progress-2').classList.remove('hidden');
-    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-    revealCodeDigits(2, randomDigits.map(String));
-  }
+    // Affiche les informations de la capsule
+    displayCapsuleInfo(label);
+    
 }
 
 function verifyRadarPointVisibility(point, pointElement) {
@@ -348,6 +355,21 @@ document.getElementById('game-selector').addEventListener('change', (event) => {
   }
 });
 
+document.getElementById('confirm-button').addEventListener('click', () => {
+    const confirmationMessage = document.getElementById('confirmation-message');
+
+    if (activePoint && activePoint.getAttribute('data-label') === 'HYDRA-3X') {
+        confirmationMessage.textContent = 'Réussi ! Capsule HYDRA-3X trouvée.';
+        confirmationMessage.style.color = 'lime';
+        document.querySelector('.container-2').style.display = 'none';
+        document.querySelector('.container-3').style.display = 'flex';
+        revealCodeDigits(2, ['3', '4']); // Débloque la suite de chiffres
+    } else {
+        confirmationMessage.textContent = 'Échec ! Ce n\'est pas la bonne capsule.';
+        confirmationMessage.style.color = 'red';
+    }
+});
+
 // -------------------------------------------------------------------------
 // Initialize the Game
 updateScoreForGame1();
@@ -355,3 +377,242 @@ renderGridLines();
 setupRadarPoints();
 startRandomSquareGame();
 initializeMemoryGame();
+
+const capsules = [
+    // Capsules connues
+    {
+        name: "HYDRA-3X",
+        manufacturer: "Arasaka",
+        year: 2077,
+        depthLimit: 6500,
+        survivalTime: "30min",
+        extendedSurvivalTime: "7 jours",
+        material: "Alliage de titane renforcé au carbure de néon",
+        color: ["rouge", "noir"],
+    },
+    {
+        name: "POD-22X",
+        manufacturer: "Renaud",
+        year: 2186,
+        depthLimit: 11000,
+        survivalTime: "16h",
+        extendedSurvivalTime: "10 jours",
+        material: "Coque en titane de grade aérospatial avec fenêtres en quartz synthétique",
+        color: ["violet", "noir"],
+    },
+    {
+        name: "OCEAN-7B",
+        manufacturer: "DeepCore",
+        year: 2194,
+        depthLimit: 5800,
+        survivalTime: "18h",
+        extendedSurvivalTime: "16 jours",
+        material: "Alliage de titane renforcé au carbure de néon",
+        color: ["vert", "violet"],
+    },
+    {
+        name: "AQUA-12",
+        manufacturer: "NeptuneTech",
+        year: 2201,
+        depthLimit: 7200,
+        survivalTime: "12h",
+        extendedSurvivalTime: "5 jours",
+        material: "Alliage composite renforcé",
+        color: ["bleu", "argent"],
+    },
+    {
+        name: "MARINE-8",
+        manufacturer: "Oceanic Systems",
+        year: 2175,
+        depthLimit: 5000,
+        survivalTime: "10h",
+        extendedSurvivalTime: "3 jours",
+        material: "Acier inoxydable renforcé",
+        color: ["gris", "bleu"],
+    },
+    // Capsules inconnues avec données cryptées
+    {
+        name: "??@#-12X",
+        manufacturer: "jior@?8*+q",
+        year: "2@#%",
+        depthLimit: "??@@",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "??@# alliage",
+        color: ["??", "??"],
+    },
+    {
+        name: "X!@#-Z9",
+        manufacturer: "qwe@!9*+",
+        year: "2!@#",
+        depthLimit: "!!@@",
+        survivalTime: "!@h",
+        extendedSurvivalTime: "!@ jours",
+        material: "!@# alliage",
+        color: ["!@", "!@"],
+    },
+    {
+        name: "CRYPT-99",
+        manufacturer: "Unknown",
+        year: "????",
+        depthLimit: "????",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Cryptic material",
+        color: ["???", "???"],
+    },
+    {
+        name: "ZETA-77",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "OMEGA-3",
+        manufacturer: "Unknown",
+        year: "??##",
+        depthLimit: "??##",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    // Capsules supplémentaires connues
+    {
+        name: "TITAN-5",
+        manufacturer: "DeepSea Corp",
+        year: 2210,
+        depthLimit: 8000,
+        survivalTime: "20h",
+        extendedSurvivalTime: "8 jours",
+        material: "Alliage de titane avancé",
+        color: ["noir", "argent"],
+    },
+    {
+        name: "NOVA-1",
+        manufacturer: "StarMarine",
+        year: 2230,
+        depthLimit: 9000,
+        survivalTime: "24h",
+        extendedSurvivalTime: "10 jours",
+        material: "Carbone renforcé",
+        color: ["blanc", "bleu"],
+    },
+    {
+        name: "AERO-9",
+        manufacturer: "SkyTech",
+        year: 2225,
+        depthLimit: 7000,
+        survivalTime: "15h",
+        extendedSurvivalTime: "6 jours",
+        material: "Alliage composite",
+        color: ["bleu", "noir"],
+    },
+    // Capsules inconnues supplémentaires
+    {
+        name: "??@#-X1",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "CRYPT-88",
+        manufacturer: "Unknown",
+        year: "????",
+        depthLimit: "????",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["???", "???"],
+    },
+    {
+        name: "ZETA-99",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "OMEGA-7",
+        manufacturer: "Unknown",
+        year: "??##",
+        depthLimit: "??##",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "DELTA-4",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "ALPHA-2",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+    {
+        name: "BETA-3",
+        manufacturer: "Unknown",
+        year: "??!!",
+        depthLimit: "??!!",
+        survivalTime: "??h",
+        extendedSurvivalTime: "?? jours",
+        material: "Unknown",
+        color: ["??", "??"],
+    },
+];
+
+function displayCapsuleInfo(capsuleName) {
+    const capsule = capsules.find(c => c.name === capsuleName);
+    if (capsule) {
+        infoDisplay.innerHTML = `
+            <strong>Nom :</strong> ${capsule.name}<br>
+            <strong>Conçu par :</strong> ${capsule.manufacturer}<br>
+            <strong>Année :</strong> ${capsule.year}<br>
+            <strong>Profondeur limite :</strong> ${capsule.depthLimit} m<br>
+            <strong>Mode survie :</strong> ${capsule.survivalTime}<br>
+            <strong>Mode survie étendu :</strong> ${capsule.extendedSurvivalTime}<br>
+            <strong>Matériau :</strong> ${capsule.material}<br>
+            <strong>Couleurs :</strong> ${capsule.color.join(", ")}<br>
+        `;
+    } else {
+        infoDisplay.textContent = "Capsule inconnue.";
+    }
+}
+
+function decryptCapsuleData(capsuleName) {
+    const capsule = capsules.find(c => c.name === capsuleName);
+    if (capsule && capsule.name.includes('?')) {
+        capsule.name = "Decrypted Name";
+        capsule.manufacturer = "Decrypted Manufacturer";
+        capsule.year = "Decrypted Year";
+        capsule.depthLimit = "Decrypted Depth Limit";
+        capsule.survivalTime = "Decrypted Survival Time";
+        capsule.extendedSurvivalTime = "Decrypted Extended Survival Time";
+        capsule.material = "Decrypted Material";
+        capsule.color = ["Decrypted Color 1", "Decrypted Color 2"];
+    }
+}
