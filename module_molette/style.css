@@ -13,35 +13,35 @@ body {
     background-color: #222;
     color: white;
     font-family: 'serpent';
-    background-image: url(./images/background.png);
+    background-image: url(./images/module.png);
     margin: 0; 
+    border: 5px solid #3CC;
+    position: relative;
 }
 
 header {
     width: 100%;
-    height: 8%;
-    background-color: #140750;
+    height: 10%;
+    background-color: transparent;
     position: absolute;  
-    top: 0;
+    top: 10px;
     left: 0;
-    z-index: 100;
     display: flex;
     align-items: center; 
-    justify-content: space-between; /* Espace entre les éléments (cercles et bouton) */
-    padding: 0 20px; /* Espacement à gauche et à droite */
+    justify-content: space-between;
+    padding: 0 20px; 
 }
 
 #check {
     display: flex;
-    justify-content: space-between;
-    width: 100px;
+    margin-left: auto; 
+    margin-right: 40px;
 }
 
 .circle {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    display: block;
     border-style: groove;
     border-color: black;
     background-color: transparent;
@@ -56,25 +56,13 @@ header {
 }
 
 
-.validate-btn {
-    padding: 10px 20px;
-    background-color: #E07902;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 20px 5px #333C98;
-    margin: 0 auto; 
-    font-family: 'serpent';
-}
-
 
 .led-container {
     position: relative;
     grid-template-columns: repeat(4, 30px);
     gap: 10px;
     width: 150px;
+    top: 0;
 }
 
 .led {
@@ -86,14 +74,15 @@ header {
     border-radius: 50%;
     background-color: grey;
 }
-
+#ledContainer {
+    top: 0;
+    margin-bottom: 100px;
+}
 #container {
     margin-top: 0;
-
-
 }
 
-.molette {
+.sonar {
     width: 300px;
     height: 300px;
     border-radius: 50%;
@@ -106,47 +95,83 @@ header {
     box-shadow: 0 0 20px 5px #333C98;
 }
 
+.back {
+    border-radius: 100%;
+    box-shadow: 0 0 20px 5px #333C98;
+}
+
 #aiguille {
     position: absolute;
     width: 40px;
     height: 160px;
     background-color: #151F66;
     border-radius: 100px;
-    top: 50%;
+    top: 42%;
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) translateY(-100%);
     transition: transform 0.1s ease;
-    box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px  #333C98;
-
+    animation: neonAnimation 1.5s ease-in-out infinite;
+  transition: all 0.3s ease;
 }
 
+@keyframes neonAnimation {
+    0% {
+      box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px #333C98;
+    }
+    50% {
+      box-shadow: 0 4px 8px #6A59FF, 0 8px 32px #6A59FF, 0 12px 48px #6A59FF;
+    }
+    100% {
+      box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px #333C98;
+    }
+  }
+  
+
+.poly_aig {
+    width: 35px;
+    padding-left: 5px;
+    padding-top: 5px;
+    align-items: center;
+    justify-content: center;
+}
+#direction-controls {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
+
+#direction-controls p {
+    position: absolute;
+    font-size: 20px;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 
 #up {
-    position: absolute;
-    z-index: 99;
-    top: 80px; 
+    top: 0;
+    left: 50%;
 }
 
 #right {
-    position: absolute;
-    z-index: 99;
-    top: 250px; 
-    right: 250px;
-}
-
-#left {
-    position: absolute;
-    z-index: 99;
-    top: 250px;
-    left: 30px;
+    top: 50%;
+    right: 0;
 }
 
 #down {
-    position: absolute;
-    z-index: 99;
-    top: 510px;
+    bottom: 0;
+    left: 150%;
+
 }
+
+#left {
+    top: 50%;
+    left: 0;
+}
+
 
 #messageBox {
     position: fixed;
@@ -165,3 +190,23 @@ header {
     display: none; /* Caché par défaut */
     font-family: 'serpent';
 }
+
+.validate-btn {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'serpent';
+    position: absolute;     
+    right: 20px;    
+    z-index: 9999;  
+     
+}
+
+
+.img_valide {
+    width: 90px;
+    bottom: 20px;
+    right: 20px;
+}
+

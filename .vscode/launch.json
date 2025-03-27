@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "/Users/celeste/Documents/GitHub/saveyourbuddy/module_molette/index.html"
+            "file": "/Users/celeste/Documents/GitHub/saveyourbuddy/module_sonar/index.html"
         }
     ]
 }
