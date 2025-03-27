@@ -380,7 +380,7 @@ function showEndScreen() {
     endScreen.classList.add('show');
 
 
-    endScreenSound = new Audio('../assets/Sounds/SucessSoundEffect.mp3');
+    endScreenSound = new Audio('../assets/sounds/SucessSoundEffect.mp3');
     endScreenSound.play().catch(e => console.error("Erreur de lecture audio:", e));
 }
 
