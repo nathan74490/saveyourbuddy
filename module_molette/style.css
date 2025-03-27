@@ -109,8 +109,9 @@ header {
 
 .front {
     position: absolute;
-    width: 45%;
+    width: 490px;
     border-radius: 100%;
+
    
 }
 
@@ -126,7 +127,7 @@ header {
     height: 160px;
     background-color: #151F66;
     border-radius: 100px;
-    top: 42%;
+    top: 46%;
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) translateY(-100%);
@@ -248,7 +249,6 @@ header {
     display: none; 
     font-family: 'serpent';
 }
-
 .validate-btn {
     border: none;
     font-size: 16px;
@@ -256,15 +256,27 @@ header {
     border-radius: 5px;
     font-family: 'serpent';
     position: fixed; 
-    bottom: 100px; 
-    right: 20px;   
+    bottom: 160px;  
+    right: 100px;   
     z-index: 9999;   
+    background: none;
+    padding: 0;
+    position: fixed;
+    display: inline-block;
 }
-
 
 .img_valide {
     width: 180px;
-    bottom: 20px;
-    right: 1px;
+    display: block;
 }
 
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
