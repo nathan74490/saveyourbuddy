@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <title>Flow Free Enigme</title>
+</head>
+<body>
+<div class="instructions">
+  <div class="text">
+    <div class="blur-bg"></div>
+    <p>Connecter les fils<br>
+      de la meme couleur<br>
+      sans les superposer<br>
+      afin de rétablir<br>
+      l'alimentation</p>
+  </div>
+</div>
+
+
+<div id="game-container">
+  <div id="game-board"></div>
+  <button id="restart">recommencer</button>
+</div>
+
+<div id="progress-info">
+  <div class="text">
+    <div class="blur-bg"></div>
+    <p>0 sur 4</p>
+  </div>
+</div>
+
+<img class="barCodeImg" src="./assets/barCode.svg" alt="">
+<img class="waveFormImg" src="./assets/waveForm.svg" alt="">
+<img class="circleImg" src="./assets/circle.svg" alt="">
+<script src="game.js"></script>
+</body>
+</html>
