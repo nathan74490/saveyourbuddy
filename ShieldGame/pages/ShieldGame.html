@@ -41,6 +41,7 @@
             display: flex;
             flex-direction: row;
             gap: 60px;
+            margin-bottom: 40px;
         }
 
         .Instructions {
@@ -153,7 +154,7 @@
             display: inline-block;
             padding: 10px;
         }
-        
+
 
         .blur-bg2 {
             position: absolute;
@@ -161,7 +162,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(49,255,147, 0.5);
+            background: rgba(49, 255, 147, 0.5);
             /* Couleur similaire au fond */
             filter: blur(105px);
             z-index: -1;
@@ -231,21 +232,49 @@
         }
 
         #SoundBar {
-            position:absolute;
+            position: absolute;
             bottom: 75px;
             right: 1120px;
             height: 100px;
             width: 550px;
-            
+
         }
 
         #Circle {
-            position:absolute;
+            position: absolute;
             bottom: 810px;
             right: 1100px;
             height: 130px;
             width: 550px;
         }
+
+        #linkToEnterCode{
+            animation: zoom-in-zoom-out 2s ease infinite;
+        }
+
+        #linkSuccess {
+            color: #31FF93;
+            font-family: 'Astonpoliz';
+            font-size: 1.5em;
+            text-decoration: none;
+            margin-top: 20px;
+            
+        }
+
+        @keyframes zoom-in-zoom-out {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
     </style>
 </head>
 
@@ -287,6 +316,9 @@
                 <div class="blur-bg2"></div>
                 <div class="text2">
                     <h1>SYSTÈME DE COMMUNICATION ACTIVÉ</h1>
+                </div>
+                <div id="linkToEnterCode">
+                    <a id="linkSuccess" href="../pages/ValidationCode.html">Appuyer pour entrer le code de validation</a>
                 </div>
             </div>
             <!-- <button id="restartButton">Rejouer</button> -->
@@ -668,15 +700,27 @@
             }
         }
 
+       
+        let endScreenSound;
+
         function showEndScreen() {
             const endScreen = document.getElementById('endScreen');
             endScreen.classList.add('show');
 
+            
+            endScreenSound = new Audio('../assets/Sounds/SucessSoundEffect.mp3');
+            endScreenSound.play().catch(e => console.error("Erreur de lecture audio:", e));
         }
 
         function hideEndScreen() {
             const endScreen = document.getElementById('endScreen');
             endScreen.classList.remove('show');
+
+            // Arrêter le son si besoin
+            if (endScreenSound) {
+                endScreenSound.pause();
+                endScreenSound.currentTime = 0;
+            }
         }
 
         // document.getElementById('resetBtn').addEventListener('click', () => {
