@@ -1,3 +1,4 @@
+import { updateMindGamesStatus } from './APIMindGame.js';
 // -------------------------------------------------------------------------
 // Global Variables
 const gameContainer1 = document.querySelector('.container-1');
@@ -355,12 +356,11 @@ document.getElementById('confirm-button').addEventListener('click', () => {
   const confirmationMessage = document.getElementById('confirmation-message');
 
   if (activePoint && activePoint.getAttribute('data-label') === 'HYDRA-3X') {
-    confirmationMessage.textContent = 'Réussi ! Capsule HYDRA-3X trouvée.';
-    confirmationMessage.style.color = 'lime';
     document.querySelector('.container-2').style.display = 'none';
     document.querySelector('.container-3').style.display = 'flex';
+    document.querySelector('.progress').classList.remove('hidden');
     const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-    revealCodeDigits(4, randomDigits.map(String));
+    revealCodeDigits(2, randomDigits.map(String));
   } else {
     confirmationMessage.textContent = 'Échec ! Ce n\'est pas la bonne capsule.';
     confirmationMessage.style.color = 'red';
