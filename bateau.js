@@ -579,28 +579,6 @@ function stopRandomSquareGame() {
 // =========================================================================
 // EVENT LISTENERS
 // =========================================================================
-document.getElementById('game-selector').addEventListener('change', (event) => {
-  const selectedGame = event.target.value;
-
-  document.querySelector('.container-1').style.display = 'none';
-  document.querySelector('.container-2').style.display = 'none';
-  document.querySelector('.container-3').style.display = 'none';
-  document.querySelector('.progress').classList.add('hidden');
-  document.querySelector('.progress-2').classList.add('hidden');
-  stopRandomSquareGame();
-
-  if (selectedGame === 'game1') {
-    document.querySelector('.container-1').style.display = 'grid';
-    document.querySelector('.progress').classList.remove('hidden');
-    startRandomSquareGame();
-  } else if (selectedGame === 'game2') {
-    document.querySelector('.container-2').style.display = 'flex';
-  } else if (selectedGame === 'game3') {
-    document.querySelector('.container-3').style.display = 'flex';
-    document.querySelector('.progress-2').classList.remove('hidden');
-    initializeMemoryGame();
-  }
-});
 
 document.getElementById('confirm-button').addEventListener('click', () => {
   const confirmationMessage = document.getElementById('confirmation-message');
