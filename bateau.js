@@ -62,11 +62,41 @@ function revealCodeDigits(startIndex, digits) {
 }
 
 function showEndScreen() {
-    document.querySelector('#main').style.display = 'none';
-    document.querySelector('#end-screen').style.display = 'block';
-    document.getElementById('final-code').textContent = codeDigits.join('');
-    document.getElementById('code-text').style.display = 'none';
+    document.querySelector('.container-1').style.display = 'none';
+    document.querySelector('.container-2').style.display = 'none';
+    document.querySelector('.container-3').style.display = 'none';
+    document.querySelector('#end-screen').style.display = 'flex';
+    
+    const code = document.getElementById('final-code').textContent = codeDigits.join(' ');
+    document.getElementById('code-display').style.display = 'none';
+    updateMindGamesStatus('sucess');
+    let id_game = localStorage.getItem('id_game');
+    console.log(id_game);
+    updateGameData(id_game, null, code);
 }
+
+function updateGameData(gameId, finalTime, mindgameCode) {
+    const updateData = {
+        type: 'game',
+        id_game: gameId,
+        final_time: finalTime,
+        mindgame_code: mindgameCode
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+
 
 // -------------------------------------------------------------------------
 // Game 1: Random Squares
@@ -168,6 +198,7 @@ function onRadarPointClick(pointElement, label) {
 
     // Affiche les informations de la capsule
     displayCapsuleInfo(label);
+    
 }
 
 function verifyRadarPointVisibility(point, pointElement) {
@@ -205,6 +236,19 @@ function setupRadarPoints() {
 
 // -------------------------------------------------------------------------
 // Game 3: Memory Game
+const progressBarElement2 = document.querySelector('.progress-bar-2');
+
+function updateScoreForGame3(matchedPairs, totalPairs) {
+    const progressPercentage = (matchedPairs / totalPairs) * 100;
+    progressBarElement2.style.width = `${progressPercentage}%`;
+
+    if (matchedPairs === totalPairs) {
+        document.querySelector('.container-3').style.display = 'none';
+        document.querySelector('.progress-2').classList.add('hidden');
+        revealCodeDigits(4, ['5', '6']);
+    }
+}
+
 function initializeMemoryGame() {
     const cardColors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'cyan'];
     const cardPairs = [...cardColors, ...cardColors];
@@ -239,6 +283,7 @@ function initializeMemoryGame() {
 
             if (firstSelectedCard.dataset.color === secondSelectedCard.dataset.color) {
                 matchedPairs++;
+                updateScoreForGame3(matchedPairs, cardColors.length);
                 firstSelectedCard = null;
                 secondSelectedCard = null;
             } else {
@@ -250,10 +295,6 @@ function initializeMemoryGame() {
                     firstSelectedCard = null;
                     secondSelectedCard = null;
                 }, 1000);
-            }
-
-            if (matchedPairs === cardColors.length) {
-                revealCodeDigits(4, ['5', '6']);
             }
         }
     }
@@ -271,15 +312,14 @@ function stopRandomSquareGame() {
     clearInterval(game1Interval);
 }
 
-// Add event listener for game selector
 document.getElementById('game-selector').addEventListener('change', (event) => {
     const selectedGame = event.target.value;
 
-    // Hide all game containers and reset progress
     document.querySelector('.container-1').style.display = 'none';
     document.querySelector('.container-2').style.display = 'none';
     document.querySelector('.container-3').style.display = 'none';
     document.querySelector('.progress').classList.add('hidden');
+    document.querySelector('.progress-2').classList.add('hidden');
     stopRandomSquareGame();
 
     // Show the selected game container
@@ -291,6 +331,7 @@ document.getElementById('game-selector').addEventListener('change', (event) => {
         document.querySelector('.container-2').style.display = 'flex';
     } else if (selectedGame === 'game3') {
         document.querySelector('.container-3').style.display = 'flex';
+        document.querySelector('.progress-2').classList.remove('hidden');
         initializeMemoryGame();
     }
 });
