@@ -3,23 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <title>ALERTE</title>
   </head>
   <body>
-    <button id="win">gagné</button>
-    <button id="lose">perdu</button>
-  </body>
-  <script src="APIMindGame.js"></script>
-  <script>
-    win.addEventListener('click', () => {
-      console.log('Le casse tete 1 est gagné !');
-      updateMindGamesStatus('sucess');
-    });
+    <audio id="background-music" loop>
+      <source src="./assets/Sounds/AlarmSound.mp3" type="audio/mpeg" />
+    </audio>
 
-    // Lorsque le joueur perd
-    lose.addEventListener('click', () => {
-      console.log('Le casse tete 1 est perdu...');
-      updateMindGamesStatus('failed');
-    });
-  </script>
+    <div class="Content">
+      <div id="Alerte">
+        <img id="AlerteTilte" src="./assets/images/Alerte.svg" alt="" />
+      </div>
+    </div>
+    <div class="Bottom">
+      <div id="logoAlerte">
+        <img src="./assets/images/AlerteLogo.svg" alt="" />
+      </div>
+      <div class="Bottom__content">
+        <a href="./pages/HubLevel.html">
+          <img id="FixBtn" src="./assets/images/FixButton.svg" alt="" />
+        </a>
+      </div>
+      <div id="logoAlerte">
+        <img src="./assets/images/AlerteLogo.svg" alt="" />
+      </div>
+    </div>
+  </body>
+ 
+  <script src="script.js"></script>
 </html>

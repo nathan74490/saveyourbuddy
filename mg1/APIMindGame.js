@@ -3,7 +3,7 @@ function updateMindGamesStatus(mindgameStatus) {
   console.log(id_game);
 
   let params = new URLSearchParams(document.location.search);
-  let mindGameNumber = params.get('nbmodule');
+  let mindGameNumber = params.get('nbMindGame');
   console.log('mindGameNumber ' + mindGameNumber);
 
   if (mindGameNumber) {

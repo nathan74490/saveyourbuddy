@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a022d;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-image: url('./assets/images/AlerteCadre.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.Bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 70px;
+  width: 90%;
+}
+
+#FixBtn {
+  height: 500px;
+  width: 500px;
+}
+
+.top-layer {
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+}
+.top-layer:active {
+  transform: translateY(26px);
+}
+.bottom-layer {
+  opacity: 1;
+  transition: opacity 0.1s ease;
+}
+.bottom-layer:active {
+  opacity: 0;
+}

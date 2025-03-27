@@ -37,17 +37,9 @@ window.addEventListener('message', (event) => {
     updateModuleStatus(idGame, moduleNumber, status);
 
     // Vérification après mise à jour
-    checkIfAllModulesSuccess();
+    checkIfAllMindGamesSuccess();
   }
 });
-
-// ici, on écoute le click sur le bouton de démarrage du jeu
-//const play = document.querySelector('#play');
-
-// play.addEventListener('click', (e) => {
-//   let gameStatus = 'ongoing'; // on définit le statut du jeu comme 'en cours'
-//   createGame(gameStatus); // on crée la partie
-// });
 
 function getGameForModule(gameId) {
   const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
@@ -124,29 +116,32 @@ function updateModuleStatus(id_game, moduleNumber, moduleStatus) {
     .catch(console.error); // gestion des erreurs
 }
 
-function checkIfAllModulesSuccess() {
-  tabModules.forEach((game) => {
-    // Vérifie si tous les modules du jeu ont le statut 'sucess'
-    const allModulesSuccess = game.modules.every(
-      (module) => module.modelStatus === 'sucess'
-    );
+function checkIfAllMindGamesSuccess() {
+  tabMindGames.forEach((game) => {
+    // Vérifie s'il y a exactement 2 modules dans ce jeu
+    if (game.modules.length === 2) {
+      // Vérifie si tous les modules ont le statut 'success'
+      const allModulesSuccess = game.modules.every(
+        (module) => module.modelStatus === 'success'
+      );
 
-    if (game.modules.length === 4) {
-      // On vérifie qu'il y a bien 4 modules pour ce jeu
       if (allModulesSuccess) {
         console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
+        container.style.display = 'none';
+        containerModule.style.display = 'none';
+        const divGauge = document.querySelector('.gauge');
+        divGauge.style.display = 'none';
       } else {
         console.log(
           `Tous les modules du jeu ${game.id_game} ne sont pas encore en succès.`
         );
-        containerModule.style.display = 'none';
       }
     } else {
       console.log(
         `Le jeu ${
           game.id_game
-        } n'a pas encore tous ses modules. Modules restants: ${
-          4 - game.modules.length
+        } n'a pas encore ses 2 modules complets. Modules restants: ${
+          2 - game.modules.length
         }`
       );
     }

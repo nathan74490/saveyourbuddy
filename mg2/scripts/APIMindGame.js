@@ -1,13 +1,8 @@
-const win = document.querySelector('#win');
-const lose = document.querySelector('#lose');
-
 function updateMindGamesStatus(mindgameStatus) {
   let id_game = localStorage.getItem('id_game');
   console.log(id_game);
-
-  let params = new URLSearchParams(document.location.search);
-  let mindGameNumber = params.get('nbmodule');
-  console.log('mindGameNumber ' + mindGameNumber);
+  let mindGameNumber = localStorage.getItem('mindGameNumber');
+  console.log(mindGameNumber);
 
   if (mindGameNumber) {
     window.parent.postMessage(
