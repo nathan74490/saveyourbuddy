@@ -1,0 +1,273 @@
+@font-face {
+    font-family: 'serpent';
+    src: url("font/serpent.otf") format('opentype'),
+    url(font/serpent.ttf) format('truetype');
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #222;
+    color: white;
+    font-family: 'serpent' !important;
+    background-image: url(./images/background.png);
+    margin: 0; 
+    position: relative;
+   
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); 
+    background-image: url(./images/TRAME.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: -1; 
+    pointer-events: none; /* Pour éviter que l'image bloque l'interaction */
+}
+
+header {
+    width: 100%;
+    height: 10%;
+    background-color: transparent;
+    position: absolute;  
+    top: 10px;
+    left: 0;
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding: 0 20px; 
+}
+
+#check {
+    display: flex;
+    margin-left: auto; 
+    margin-right: 40px;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border-style: groove;
+    border-color: black;
+    background-color: transparent;
+}
+
+#check .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: black;
+    transition: background-color 0.3s;
+}
+
+
+
+.led-container {
+    position: relative;
+    grid-template-columns: repeat(4, 30px);
+    gap: 10px;
+    width: 150px;
+    top: 0;
+}
+
+.led {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: grey;
+}
+#ledContainer {
+    top: 0;
+    margin-bottom: 100px;
+}
+#container {
+    margin-top: 0;
+}
+
+.sonar {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #231c44, #140750);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+  
+}
+
+.front {
+    position: absolute;
+    width: 45%;
+    border-radius: 100%;
+   
+}
+
+.back {
+    z-index: 999;
+  
+   
+}
+
+#aiguille {
+    position: absolute;
+    width: 40px;
+    height: 160px;
+    background-color: #151F66;
+    border-radius: 100px;
+    top: 42%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%) translateY(-100%);
+    transition: transform 0.1s ease;
+    animation: neonAnimation 1.5s ease-in-out infinite;
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+@keyframes neonAnimation {
+    0% {
+      box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px #333C98;
+    }
+    50% {
+      box-shadow: 0 4px 8px #6A59FF, 0 8px 32px #6A59FF, 0 12px 48px #6A59FF;
+    }
+    100% {
+      box-shadow: 0 4px 6px #333C98, 0 8px 16px #333C98, 0 12px 24px #333C98;
+    }
+  }
+  
+
+.poly_aig {
+    width: 35px;
+    padding-left: 5px;
+    padding-top: 5px;
+    align-items: center;
+    justify-content: center;
+
+}#direction-controls {
+    position: absolute;
+    font-family: 'serpent' !important;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+}
+
+#direction-controls p {
+    position: absolute;
+    font-size: 20px;
+    font-family: 'serpent' !important;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+#up {
+    bottom: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+
+#img_up {
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+
+#right {
+    top: 30%;
+    left: 130%;
+    transform: translateY(-50%);
+}
+
+#img_right {
+    top: 30%;
+    left: 130%;
+    transform: translateY(-50%);
+   
+}
+
+#down {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+
+#img_down {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+   
+}
+
+#left {
+    top: 30%;
+    right: 130%;
+    transform: translateY(-50%);
+}
+
+#img_left {
+    top: 30%;
+    right: 130%;
+    transform: translateY(-50%);
+   
+}
+
+#messageBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    z-index: 9999;
+    display: none; 
+    font-family: 'serpent';
+}
+
+.validate-btn {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'serpent';
+    position: fixed; 
+    bottom: 100px; 
+    right: 20px;   
+    z-index: 9999;   
+}
+
+
+.img_valide {
+    width: 180px;
+    bottom: 20px;
+    right: 1px;
+}
+
