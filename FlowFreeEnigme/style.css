@@ -141,15 +141,16 @@ h1 {
 }
 
 #restart {
-    margin-top: 50px;
-    font-family: Serpentdeco;
+    position: absolute;
+    bottom: 70px;
+    right: 625px;
 }
 
 button {
     width: 404px;
     height: 65px;
     flex-shrink: 0;
-    background-color: #4DADAC;
+    fill: #4DADAC;
     stroke-width: 2px;
     stroke: #0A022D;
     box-shadow: -4px -4px 22px 0px rgba(0, 0, 0, 0.60) inset, 4px 4px 18px 0px rgba(0, 0, 0, 0.60) inset;
@@ -160,6 +161,98 @@ button {
     margin: 10px 0;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.container2 {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+
+.blur-bg2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(49, 255, 147, 0.5);
+    /* Couleur similaire au fond */
+    filter: blur(105px);
+    z-index: -1;
+
+}
+
+.text2 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+
+.end-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 2, 45, 100);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-image: url("../ShieldGame/assets/images/SystemeComCadre.svg"),
+    url('../ShieldGame/assets/images/FondCercles.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.end-screen.show {
+    display: flex;
+    opacity: 1;
+}
+
+.end-screen-content {
+    text-align: center;
+
+}
+
+.end-screen h1 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 5.3em;
+    margin-bottom: 20px;
+}
+#linkToEnterCode{
+    animation: zoom-in-zoom-out 2s ease infinite;
+}
+
+#linkSuccess {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-top: 20px;
+
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 @media (max-width: 600px) {

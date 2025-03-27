@@ -125,7 +125,7 @@
     .cell.color-1 { background-color: #254A7F; }
     .cell.color-2 { background-color: #151F66; }
     .cell.color-3 { background-color: #68C7AF; }
-    .cell.color-4 { background-color: #140750; }
+    .cell.color-4 { background-color: #6AA7AC; }
     .cell.color-5 { background-color: #9C27B0; }
     .cell.color-6 { background-color: #FF9800; }
     .cell.color-7 { background-color: #607D8B; }
@@ -211,8 +211,8 @@
       z-index: 1000;
       opacity: 0;
       transition: opacity 0.5s ease;
-      background-image: url("./assets/background.svg"),
-      url('../assets/images/FondCercles.svg');
+      background-image: url("../ShieldGame/assets/images/SystemeComCadre.svg"),
+      url('../ShieldGame/assets/images/FondCercles.svg');
       background-repeat: no-repeat;
       background-position: center;
 
@@ -715,7 +715,8 @@
       if (completedPairs === colors.length) {
         setTimeout(() => {
           if (level >= MAX_LEVEL) {
-            document.location.href = "../../../workshop/ShieldGame/pages/HubLevelUnlock.html";
+            const endScreen = document.getElementById('endScreen');
+            endScreen.classList.add('show');
           } else {
             nextLevel();
           }

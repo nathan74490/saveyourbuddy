@@ -383,7 +383,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (completedPairs === colors.length) {
             setTimeout(() => {
                 if (level >= MAX_LEVEL) {
-                    document.location.href = "../../ShieldGame/pages/HubLevelUnlock.html";
+                    const endScreen = document.getElementById('endScreen');
+                    endScreen.classList.add('show');
+                    let successSound = new Audio('./assets/SuccessSong.mp3')
+                    successSound.volume = 1;
+                    successSound.play();
                 } else {
                     nextLevel();
                 }
