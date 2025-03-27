@@ -57,7 +57,6 @@ body {
     font-weight: bold;
     background-color: rgba(77, 173, 172, 0.9);
     border: 4px solid #80D0A9;
-    border-radius: 5px;
     color: #FFFFFF;
     position: relative;
     transition: all 0.3s ease-in-out;
