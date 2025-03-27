@@ -60,6 +60,8 @@ document.getElementById("codeForm").addEventListener("submit", function (event) 
 
 function verifyGameCode(userInput, id_game) {
     const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${id_game}`;
+    const errorMessage = document.getElementById("error-message");
+    const endScreen = document.getElementById("endScreen");
 
     fetch(url)
         .then((response) => response.json())
@@ -68,15 +70,33 @@ function verifyGameCode(userInput, id_game) {
                 const code = game.mindgame_code.toString();
                 if (userInput.toString() === code) {
                     console.log('Code correct!');
-                    updateMindGamesStatus('sucess')
+                    updateMindGamesStatus('success');
+                    
+                    // Afficher l'écran de fin
+                    endScreen.style.display = "flex";
+                    // Cache le message d'erreur s'il était affiché
+                    if (errorMessage) {
+                        errorMessage.style.display = "none";
+                    }
                     return true;
                 } else {
                     console.log('Code incorrect!');
+
+                    // Affiche un message d'erreur
+                    if (errorMessage) {
+                        errorMessage.textContent = "Code incorrect, veuillez réessayer.";
+                        errorMessage.style.display = "block";
+                    }
 
                     return false;
                 }
             }
         })
-        .catch(console.error);
+        .catch((error) => {
+            console.error(error);
+            if (errorMessage) {
+                errorMessage.textContent = "Une erreur est survenue, veuillez réessayer.";
+                errorMessage.style.display = "block";
+            }
+        });
 }
-
