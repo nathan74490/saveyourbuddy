@@ -1,0 +1,209 @@
+@font-face {
+    font-family: "serpent";
+    src: url("font/serpent.ttf") format("truetype"),
+    url("font/serpent.otf") format('opentype'),
+    url('serpentdecor.woff2') format('woff2'),
+    url('serpentdecor.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: "astropliz";
+    src: url("font/Astonpoliz.ttf");
+}
+
+
+#ecran {
+    height: 20vh;
+    width: 50vw;
+    background-image: url("img/bgd_screen.svg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'serpent' ;
+    font-size: clamp(16px, 1.667vw,32px);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    color: white;
+}
+
+
+
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-image: url("img/background.svg");
+    background-color: black;
+    background-size: cover;
+}
+
+#finish p{
+    color: green;
+    font-family: "serpent";
+    font-size: 56pt;
+    text-align: center;
+}
+
+
+
+#count {
+    position: absolute;
+    right: 0%;
+    width: 20%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+#count img{
+    width: 100%;
+}
+
+#space_button button {
+    width: 20vw;
+    height: 15vh;
+    color: white;
+    font-size:clamp(16px, 1.667vw,32px);
+    font-family: 'astropliz';
+    border-radius: 12px;
+    border: 2px solid #000;
+    background: #E07902;
+    box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25), 4px 4px 22px 0px rgba(255, 255, 255, 0.40) inset, -4px -4px 18px 0px rgba(0, 0, 0, 0.40) inset,0px 10px   rgba(102, 55, 0, 1);
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+
+}
+
+
+
+#space_button {
+    height: 60vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#fail {
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    display: none;
+    z-index: 50;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#fail img{
+    display: none;
+}
+
+#fail p {
+    display: none;
+    font-size: clamp(30px, 4.167vw,80px);
+    color: rgba(225, 7, 10, 1);
+    font-family: 'serpent';
+    height: 10vh;
+}
+
+#loading {
+    height: 2vh;
+    width: 90vw;
+    background-color: rgba(225, 7, 10, 1);
+    display: none;
+}
+
+
+.loaded {
+    transform: translateY(-50%);
+    animation: loading 4s forwards;
+}
+
+
+@keyframes loading {
+    0% {
+        width: 0%;
+    }
+
+    5% {
+        width: 0%;
+    }
+
+    60% {
+        width: 50%;
+    }
+
+    70% {
+        width: 90%;
+        opacity: 1;
+    }
+    75%{
+        opacity: 0;
+    }
+    80%{
+        opacity: 1;
+    }
+    85%{
+        opacity: 0;
+    }
+    90%{
+        opacity: 1;
+
+    }
+    95%{
+        background-color: rgba(225, 7, 10, 1);
+    }
+    100%{
+        opacity: 1;
+        background-color: #E07902;
+    }
+}
+
+
+.brigthning {
+    animation: brigth 2s forwards;
+}
+
+
+@keyframes brigth{
+    0%{
+        filter: brightness(1);
+    }
+    25%{
+        filter: brightness(2);
+    }
+    50%{
+        filter: brightness(1);
+    }
+    75%{
+        filter: brightness(2);
+    }
+    100%{
+        filter: brightness(2);
+    }
+
+}
+.key {
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+#space_button button:active {
+    transform: translate(0px, 8px);
+    box-shadow: 0px 0px;
+    border: solid 2px rgb(255, 190, 39);
+}
