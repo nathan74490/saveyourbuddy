@@ -359,8 +359,9 @@ document.getElementById('confirm-button').addEventListener('click', () => {
     confirmationMessage.style.color = 'lime';
     document.querySelector('.container-2').style.display = 'none';
     document.querySelector('.container-3').style.display = 'flex';
-    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-    revealCodeDigits(4, randomDigits.map(String));
+
+    // Initialiser le nouveau jeu de mémoire
+    initializeMemoryGame();
   } else {
     confirmationMessage.textContent = 'Échec ! Ce n\'est pas la bonne capsule.';
     confirmationMessage.style.color = 'red';

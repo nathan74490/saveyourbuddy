@@ -91,7 +91,15 @@
         </div>
 
         <div class="containers container-3" style="display: none;">
-            <div id="memory-game" class="memory-grid"></div>
+            <div id="memory-game" class="memory-grid">
+                <div class="card">
+                    <img src="./assets/images/anchor.png" alt="Anchor">
+                </div>
+                <div class="card">
+                    <img src="./assets/images/coral.png" alt="Coral">
+                </div>
+                <!-- Ajoutez les autres cartes ici -->
+            </div>
         </div>
     </section>
 
@@ -100,6 +108,71 @@
     </div>
 
     <script src="bateau.js"></script>
+    <script>
+        function initializeMemoryGame() {
+            const cardImages = [
+                'anchor',
+                'coral',
+                'helmet',
+                'medusa',
+                'O2',
+                'shell',
+            ]; // Liste des images
+            const cardPairs = [...cardImages, ...cardImages]; // Duplique les images pour créer des paires
+            const shuffledCards = cardPairs.sort(() => Math.random() - 0.5); // Mélange les cartes
+            const memoryGameGrid = document.getElementById('memory-game');
+            let firstSelectedCard = null;
+            let secondSelectedCard = null;
+            let matchedPairs = 0;
+
+            memoryGameGrid.innerHTML = ''; // Réinitialise la grille
+            matchedPairs = 0;
+
+            shuffledCards.forEach((imageName, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.image = imageName; // Associe l'image à la carte
+                card.dataset.index = index;
+
+                // Ajoute un événement de clic pour retourner la carte
+                card.addEventListener('click', () => onMemoryCardClick(card));
+                memoryGameGrid.appendChild(card);
+            });
+
+            function onMemoryCardClick(card) {
+                if (card.classList.contains('flipped') || secondSelectedCard) return;
+
+                // Affiche l'image de la carte
+                card.style.backgroundImage = `url('./assets/images/${card.dataset.image}.png')`;
+                card.style.backgroundSize = 'cover';
+                card.classList.add('flipped');
+
+                if (!firstSelectedCard) {
+                    firstSelectedCard = card;
+                } else {
+                    secondSelectedCard = card;
+
+                    // Vérifie si les deux cartes correspondent
+                    if (firstSelectedCard.dataset.image === secondSelectedCard.dataset.image) {
+                        matchedPairs++;
+                        updateScoreForGame3(matchedPairs, cardImages.length);
+                        firstSelectedCard = null;
+                        secondSelectedCard = null;
+                    } else {
+                        // Retourne les cartes après un délai si elles ne correspondent pas
+                        setTimeout(() => {
+                            firstSelectedCard.style.backgroundImage = '';
+                            secondSelectedCard.style.backgroundImage = '';
+                            firstSelectedCard.classList.remove('flipped');
+                            secondSelectedCard.classList.remove('flipped');
+                            firstSelectedCard = null;
+                            secondSelectedCard = null;
+                        }, 1000);
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
