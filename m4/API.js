@@ -1,3 +1,9 @@
+const win = document.querySelector('#win');
+const lose = document.querySelector('#lose');
+
+// Lorsque le joueur gagne
+
+
 function updateModuleStatus(moduleStatus) {
   let id_game = localStorage.getItem('id_game');
   console.log(id_game);
@@ -14,7 +20,7 @@ function updateModuleStatus(moduleStatus) {
         module_number: moduleNumber, // Envoi du module_number
         status: moduleStatus, // Envoi du statut du module
       },
-      '*' // On permet d'envoyer à n'importe quelle origine, mais tu peux préciser l'origine ici pour plus de sécurité
+      '*' // On permet d'envoyer à n'importe quelle origine
     );
   }
 }

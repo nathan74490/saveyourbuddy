@@ -1,23 +1,38 @@
-const molette = document.getElementById("molette");
+// Sélection des éléments HTML nécessaires
+const sonar = document.getElementById("sonar");
+const aiguille = document.getElementById("aiguille");
 const ledContainer = document.getElementById("ledContainer");
 const validateBtn = document.getElementById("validate");
-// Pop up
 const messageBox = document.getElementById("messageBox");
+const checkCircle = document.getElementById("checkCircle");
 
+// Variables de suivi du jeu
 let rotation = 0;
-let correctPosition = Math.floor(Math.random() * 4) * 90;
+let correctPosition = 0; // Toujours démarrer avec 180
 let leds = [];
 let mistakes = 0;
-let correctAnswers = 0;  // Compteur pour les bonnes réponses
+let correctAnswers = 0;
 const maxMistakes = 2;
+let ledRotation = 0;
 
-const ledPositions = [
-    { x: -110, y: -20}, { x: -80, y: 40 }, { x: -10, y: 80 }, { x: 70, y: 80 },
-    { x: 150, y: 40 }, { x: 200, y: -30}, { x: -110, y: 110}, { x: -80, y: 180 },
-    { x: -10, y: 210 }, { x: 70, y: 210 }, { x: 150, y: 170 }, { x: 200, y: 102}
+// Données des LEDs
+const ledData = [
+    { x: -200, y: 10, haut: 0, bas: 0, gauche: 0, droite: 1 },
+    { x: -120, y: 60, haut: 0, bas: 1, gauche: 0, droite: 0 },
+    { x: -20, y: 90, haut: 1, bas: 1, gauche: 0, droite: 1 },
+    { x: 90, y: 100, haut: 0, bas: 0, gauche: 0, droite: 1 },
+    { x: 190, y: 60, haut: 1, bas: 0, gauche: 1, droite: 1 },
+    { x: 270, y: 6, haut: 1, bas: 1, gauche: 0, droite: 1 },
+    { x: -210, y: 90, haut: 1, bas: 1, gauche: 1, droite: 1 },
+    { x: -140, y: 140, haut: 1, bas: 1, gauche: 0, droite: 0 },
+    { x: -40, y: 170, haut: 1, bas: 1, gauche: 0, droite: 1 },
+    { x: 90, y: 180, haut: 1, bas: 1, gauche: 1, droite: 1 },
+    { x: 220, y: 150, haut: 0, bas: 0, gauche: 1, droite: 0 },
+    { x: 290, y: 90, haut: 1, bas: 1, gauche: 1, droite: 0 }
 ];
 
-ledPositions.forEach(pos => {
+// Création des LEDs 
+ledData.forEach(pos => {
     let led = document.createElement("div");
     led.classList.add("led");
     led.style.width = "50px";
@@ -28,104 +43,79 @@ ledPositions.forEach(pos => {
     leds.push(led);
 });
 
-const patterns = {
-    haut: [1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-    bas: [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1],
-    gauche: [1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0],
-    droite: [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1]
-};
+function newCorrectPosition() {
+    const angles = [0, 90, 180, 270];
+    const randomIndex = Math.floor(Math.random() * angles.length);
+    correctPosition = angles[randomIndex];
+}
+newCorrectPosition()
 
+console.log(correctPosition)
+// Fonction pour mettre à jour l'affichage des LEDs
 function updateLEDs() {
-    const directions = Object.keys(patterns);
-    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
-    let pattern = patterns[randomDirection];
-
     leds.forEach((led, index) => {
-        led.style.backgroundColor = pattern[index] ? "yellow" : "white";
-        led.style.boxShadow = pattern[index] ? "0 0 10px 1px white" : "none";
+        let currentLed = ledData[index];
+        let active = false;
+
+
+        switch (correctPosition) {
+            case 0:
+                active = currentLed.haut;
+                break;
+            case 90:
+                active = currentLed.droite;
+                break;
+            case 180:
+                active = currentLed.bas;
+                break;
+            case 270:
+                active = currentLed.gauche;
+                break;
+        }
+
+
+        led.style.backgroundColor = active ? "yellow" : "white";
+        led.style.boxShadow = active ? "0 0 10px 1px white" : "none";
     });
 }
-
-setInterval(updateLEDs, 5000);
-
-molette.addEventListener("click", () => {
-    rotation += 90;
-    if (rotation >= 360) rotation = 0;
-    molette.style.transform = `rotate(${rotation}deg)`;
-});
-
+// Fonction de validation des réponses
 validateBtn.addEventListener("click", () => {
-    const greenCircle = document.querySelector(".green");
-    const redCircle = document.querySelector(".red");
-
     if (rotation === correctPosition) {
-        greenCircle.style.backgroundColor = "green";
-        redCircle.style.backgroundColor = "black";
-        correctAnswers++;  // Incrémenter le compteur de bonnes réponses
+        checkCircle.style.backgroundColor = "green";
+        setTimeout(() => {
+            checkCircle.style.backgroundColor = "black";
+        }, 500)
+        correctAnswers++;
+        newCorrectPosition();
+        updateLEDs();
 
-        if (correctAnswers >= 4) {  // Vérifier si l'utilisateur a 4 bonnes réponses
-            messageBox.innerText = "MISSION ACCOMPLIE";
-            messageBox.style.display = "flex"; // Afficher le pop-up
+        console.log(correctPosition);
+        if (correctAnswers >= 4) {
+            messageBox.innerText = "Mission accomplie!";
+            messageBox.style.display = "flex";
             validateBtn.disabled = true;
-            molette.style.pointerEvents = "none"; // Désactiver la molette
+            sonar.style.pointerEvents = "none";
 
-            updateModuleStatus('sucess')
-            // Retarder la réactivation après 10 secondes
-            setTimeout(() => {
-                messageBox.style.display = "none"; // Masquer le pop-up
-                validateBtn.disabled = false;
-                molette.style.pointerEvents = "auto"; // Réactiver la molette
-                correctAnswers = 0;  // Réinitialiser les bonnes réponses pour recommencer
-                mistakes = 0;  // Réinitialiser les erreurs
-            }, 10000);  // 10 secondes
         }
     } else {
-        redCircle.style.backgroundColor = "red";
-        greenCircle.style.backgroundColor = "black";
+        checkCircle.style.backgroundColor = "red";
         mistakes++;
-
         if (mistakes >= maxMistakes) {
-            messageBox.innerText = "ERROR";
-            messageBox.style.display = "flex"; // Afficher le pop-up
+            messageBox.innerText = "Erreur!";
+            messageBox.style.display = "flex";
             validateBtn.disabled = true;
-            molette.style.pointerEvents = "none"; // Désactiver la molette
-            
-            updateModuleStatus('failed')
-
-            // Retarder la réactivation après 10 secondes
-            setTimeout(() => {
-                messageBox.style.display = "none"; // Masquer le pop-up
-                validateBtn.disabled = false;
-                molette.style.pointerEvents = "auto"; // Réactiver la molette
-                mistakes = 0;  // Réinitialiser les erreurs
-                correctAnswers = 0;  // Réinitialiser les bonnes réponses
-            }, 1000);  // 10 secondes
+            sonar.style.pointerEvents = "none";
+            setTimeout(resetGame, 2000);
         }
     }
 });
 
+// Initialisation des LEDs
 updateLEDs();
 
-
-
-// function updateModuleStatus(gameId, moduleNumber, moduleStatus) {
-//     const updateData = {
-//         type: 'module',
-//         id_game: gameId,
-//         module_number: moduleNumber,
-//         module_status: moduleStatus
-//     };
-
-//     fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updateData)
-//     })
-//     .then((response) => response.json())
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch(console.error);
-// }
+// Gestion du clic sur la sonar
+sonar.addEventListener("click", () => {
+    rotation = (rotation + 90) % 360;
+    aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
+    // Les LEDs ne changent pas ici
+});
