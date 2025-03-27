@@ -403,7 +403,6 @@ h2 {
     display: none;
     text-align: center;
     font-size: 2em;
-<<<<<<< HEAD
 }
 
 .confirm-button {
@@ -453,14 +452,10 @@ h2 {
 /* Image de base (button.png) */
 .button-image {
     position: absolute;
-=======
-    position: fixed;
->>>>>>> c60ee4e7f17a448a826d5aebfe65faa6ad228c6c
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-<<<<<<< HEAD
     object-fit: contain; /* Adapte l'image au conteneur sans la couper */
     z-index: 1;
 }
@@ -493,12 +488,4 @@ h2 {
     100% {
         transform: translateY(-90%);
     }
-=======
-
-    justify-content: center;
-    align-items: center;
-}
-
-#final-code {
->>>>>>> c60ee4e7f17a448a826d5aebfe65faa6ad228c6c
 }
