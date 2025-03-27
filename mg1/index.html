@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Squares</title>
+    <link rel="stylesheet" href="bateau.css" />
+  </head>
+  <body>
+    <select
+      id="game-selector"
+      style="position: absolute; top: 10px; left: 10px; z-index: 1000"
+    >
+      <option value="game1">Game 1: Random Squares</option>
+      <option value="game2">Game 2: Sonar</option>
+      <option value="game3">Game 3: Memory Game</option>
+    </select>
+
+    <div id="code-display">
+      <span id="code-text">_ _ _ _ _ _</span>
+      <div class="corners top-left"></div>
+      <div class="corners top-right"></div>
+      <div class="corners bottom-left"></div>
+      <div class="corners bottom-right"></div>
+    </div>
+    <div class="progress">
+      <h2 class="text">dossiers corrompus traités :</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="progress-2 hidden">
+      <h2 class="text">paires trouvées :</h2>
+      <div class="progress-bar-container">
+        <div class="progress-bar-2"></div>
+      </div>
+    </div>
+
+    <section id="main">
+      <div class="containers container-1">
+        <div class="items item-1"></div>
+        <div class="items item-2"></div>
+        <div class="items item-3"></div>
+        <div class="items item-4"></div>
+        <div class="items item-5"></div>
+        <div class="items item-6"></div>
+        <div class="items item-7"></div>
+        <div class="items item-8"></div>
+        <div class="items item-9"></div>
+        <div class="items item-10"></div>
+        <div class="items item-11"></div>
+        <div class="items item-12"></div>
+        <div class="items item-13"></div>
+        <div class="items item-14"></div>
+        <div class="items item-15"></div>
+        <div class="items item-16"></div>
+        <div class="items item-17"></div>
+        <div class="items item-18"></div>
+        <div class="items item-19"></div>
+        <div class="items item-20"></div>
+        <div class="items item-21"></div>
+        <div class="items item-22"></div>
+        <div class="items item-23"></div>
+        <div class="items item-24"></div>
+        <div class="items item-25"></div>
+        <div class="items item-26"></div>
+        <div class="items item-27"></div>
+        <div class="items item-28"></div>
+        <div class="items item-29"></div>
+        <div class="items item-30"></div>
+        <div class="items item-31"></div>
+        <div class="items item-32"></div>
+        <div class="items item-33"></div>
+        <div class="items item-34"></div>
+        <div class="items item-35"></div>
+        <div class="items item-36"></div>
+      </div>
+
+      <div class="containers container-2" style="display: none">
+        <div class="sonar">
+          <div class="radar-bar"></div>
+        </div>
+        <div class="info"></div>
+      </div>
+
+      <div class="containers container-3" style="display: none">
+        <div id="memory-game" class="memory-grid"></div>
+      </div>
+    </section>
+
+    <div id="end-screen">
+      <p id="final-code"></p>
+    </div>
+    <script src="APIMindGame.js"></script>
+    <script src="bateau.js"></script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Téléphonique</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+        
+</head>
+<body>
+    <div id="container">
+        <div id="screen"> 
+            <div class="column">
+                <img class="arrow up" data-index="0" data-dir="up" src="IMG/up_arrow.svg">
+                <div class="digit" data-index="0">e</div>
+                <img class="arrow down" data-index="0" data-dir="down" src="IMG/down_arrow.svg">
+            </div>
+            <div class="column">
+                <img class="arrow up" data-index="1" data-dir="up" src="IMG/up_arrow.svg">
+                <div class="digit" data-index="1">c</div>
+                <img class="arrow down" data-index="1" data-dir="down" src="IMG/down_arrow.svg">
+            </div>
+            <div class="column">
+                <img class="arrow up" data-index="2" data-dir="up" src="IMG/up_arrow.svg">
+                <div class="digit" data-index="2">h</div>
+                <img class="arrow down" data-index="2" data-dir="down" src="IMG/down_arrow.svg">
+            </div>
+            <div class="column">
+                <img class="arrow up" data-index="3" data-dir="up" src="IMG/up_arrow.svg">
+                <div class="digit" data-index="3">o</div>
+                <img class="arrow down" data-index="3" data-dir="down" src="IMG/down_arrow.svg">
+            </div> 
+        </div>
+        <div id="validate">
+            <img src='IMG/button.svg'>
+            <img id="backButton" src='IMG/back-button.svg'>
+        </div>
+        <div id="screenFinish">
+            <div id="backgroundFinish"><img src="IMG/bg_end.svg" alt=""></div>
+            <p>mission accomplie</p>
+    
+        </div>
+    </div>
+
+    
+    <script src="API.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

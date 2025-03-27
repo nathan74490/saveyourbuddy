@@ -1,0 +1,191 @@
+@font-face {
+    font-family: 'Astonpoliz';
+    src: url('../assets/fonts/Astonpoliz.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0A022D;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image: url("../assets/images/CodeValidation.svg"),
+        url("../assets/images/CodeCadre.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.Content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Astonpoliz';
+    font-size: 2.3em;
+    margin-top: 30px;
+    color: #4DADAC;
+}
+
+.code-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.code-input {
+    font-family: 'Astonpoliz';
+    width: 140px;
+    height: 200px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    background-color: rgba(77, 173, 172, 0.9);
+    border: 4px solid #80D0A9;
+    color: #FFFFFF;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+} 
+
+
+.code-input::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 173, 172, 0.5);
+    border-radius: 10px;
+    z-index: -1;
+    transform: rotate(2deg);
+}
+
+.code-input::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(77, 173, 172, 0.3);
+    border-radius: 10px;
+    z-index: -2;
+    transform: rotate(-3deg);
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #A1E8CC;
+    box-shadow: 0px 0px 20px rgba(128, 208, 169, 0.8);
+    transform: scale(1.05);
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 100px;
+}
+
+.container2 {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+
+.blur-bg2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(49, 255, 147, 0.5);
+    /* Couleur similaire au fond */
+    filter: blur(105px);
+    z-index: -1;
+
+}
+
+.text2 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+
+.end-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 2, 45, 100);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-image: url("../assets/images/CodeCadre.svg"),
+        url('../assets/images/FondCercles.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.end-screen.show {
+    display: flex;
+    opacity: 1;
+}
+
+.end-screen-content {
+    text-align: center;
+
+}
+
+.end-screen h1 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 5.3em;
+    margin-bottom: 20px;
+}
+
+
