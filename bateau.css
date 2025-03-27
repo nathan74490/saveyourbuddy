@@ -43,6 +43,14 @@ body {
     overflow: hidden;
 }
 
+.hidden {
+    display: none !important;
+}
+
+
+/* ============== */
+/* MAIN STRUCTURES */
+/* ============== */
 #main {
     width: 100%;
     height: 140%;
@@ -50,6 +58,41 @@ body {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+}
+
+#end-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 140%;
+    background-image: url('./assets/images/blank_end.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    text-align: center;
+    font-size: 2em;
+}
+
+#end-screen h2 {
+    font-family: 'serpent';
+    font-size: 0.9rem;
+    color: var(--cyan);
+    position: absolute;
+    top: 32.5%;
+}
+
+#end-screen h3 {
+    font-family: 'serpent';
+    font-size: 0.6rem;
+    color: var(--cyan);
+    position: absolute;
+    top: 37.5%;
 }
 
 
@@ -68,15 +111,52 @@ h2 {
     z-index: 100;
 }
 
+.text {
+    color: #ffffff;
+    font-size: 0.8rem;
+}
+
 
 /* ============== */
-/* LAYOUT COMPONENTS */
+/* GAME CONTAINERS */
 /* ============== */
+.containers {
+    width: 40%;
+    height: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--pasteldark);
+    border: 5px solid var(--cyan);
+    border-radius: 10px;
+    box-shadow: 0 0 5px 2.5px var(--cyan);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-1 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.items {
+    width: 100%;
+    height: 100%;
+    outline: 0.5px solid #ffffff;
+    border-radius: 0;
+}
+
 .info {
     background-color: var(--pasteldark);
     color: #ffffff;
     width: 25%;
-    height: 75%;
+    height: auto;
+    min-height: 75%;
     position: absolute;
     top: 50%;
     right: -50%;
@@ -85,93 +165,13 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 0 5px 2.5px var(--cyan);
     padding: 10px;
+    font-size: 15px;
 }
 
-.progress {
-    width: 25%;
-    height: 70px;
-    position: absolute;
-    left: 50%;
-    bottom: 10%;
-    transform: translateX(-50%);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('./assets/images/border.svg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
-.progress-bar-container {
-    width: 60%;
-    height: 0.75rem;
-    background-color: var(--midnight);
-
-    border: 2.5px solid var(--cyan);
-    box-shadow: 0 0 5px 2.5px var(--cyan);
-    overflow: hidden;
-    margin-top: 0.5rem;
-
-    margin-bottom: 10px;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background-color: var(--sunlight);
-    transition: width 0.3s ease;
-}
-
-.progress-2 {
-    width: 25%;
-    height: 70px;
-    position: absolute;
-    left: 50%;
-    bottom: 10%;
-    transform: translateX(-50%);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('./assets/images/border.svg');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.progress-bar-container {
-    width: 60%;
-    height: 0.75rem;
-    background-color: var(--midnight);
-
-    border: 2.5px solid var(--cyan);
-    box-shadow: 0 0 5px 2.5px var(--cyan);
-    overflow: hidden;
-    margin-top: 0.5rem;
-
-    margin-bottom: 10px;
-}
-
-.progress-bar-2 {
-    height: 100%;
-    width: 0%;
-    background-color: var(--sunlight);
-    transition: width 0.3s ease;
-}
-
-.hidden {
-    display: none !important;
-}
-
-.text {
-    color: #ffffff;
-    font-size: 0.8rem;
-}
-
+/* ============== */
+/* CODE DISPLAYS */
+/* ============== */
 #code-display {
     color: var(--classicblue);
     position: fixed;
@@ -258,44 +258,58 @@ h2 {
     letter-spacing: 0.5rem;
 }
 
+
 /* ============== */
-/* GAME CONTAINERS */
+/* PROGRESS BARS */
 /* ============== */
-.containers {
-    width: 40%;
-    height: 50%;
+.progress,
+.progress-2 {
+    width: 25%;
+    height: 70px;
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--pasteldark);
-    border: 5px solid var(--cyan);
-    border-radius: 10px;
-    box-shadow: 0 0 5px 2.5px var(--cyan);
+    bottom: 10%;
+    transform: translateX(-50%);
+    color: #ffffff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('./assets/images/border.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.container-1 {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    border-radius: 10px;
+.progress-bar-container {
+    width: 60%;
+    height: 0.75rem;
+    background-color: var(--midnight);
+    border: 2.5px solid var(--cyan);
+    box-shadow: 0 0 5px 2.5px var(--cyan);
     overflow: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 10px;
 }
 
-.items {
-    width: 100%;
+.progress-bar {
     height: 100%;
-    outline: 0.5px solid #ffffff;
-    border-radius: 0;
+    width: 0%;
+    background-color: var(--sunlight);
+    transition: width 0.3s ease;
 }
+
+.progress-bar-2 {
+    height: 100%;
+    width: 0%;
+    background-color: var(--sunlight);
+    transition: width 0.3s ease;
+}
+
 
 /* ============== */
 /* GAME ELEMENTS */
 /* ============== */
-/* Squares */
 .red-square {
     width: 50px;
     height: 50px;
@@ -304,7 +318,7 @@ h2 {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0px 0px 15px rgba(255, 0, 0, 0.5));
 }
 
 .green-square {
@@ -315,10 +329,9 @@ h2 {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0px 0px 15px rgba(0, 255, 0, 0.5));
 }
 
-/* Sonar Elements */
 .sonar {
     width: 20vw;
     height: 20vw;
@@ -376,17 +389,8 @@ h2 {
 
 
 /* ============== */
-/* ANIMATIONS */
+/* GAME GRIDS */
 /* ============== */
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .grid {
     display: grid;
     gap: 5px;
@@ -450,26 +454,55 @@ h2 {
     transform: scale(1.05);
 }
 
-/* ============== */
-/* SCREENS */
-/* ============== */
 
-#end-screen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* ============== */
+/* ANIMATIONS */
+/* ============== */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(-90%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-90%);
+    }
+}
+
+
+/* ============== */
+/* CONFIRMATION BUTTON (LEFT EXACTLY AS WAS) */
+/* ============== */
+.confirmation-section {
     width: 100%;
-    height: 140%;
-    background-image: url('./assets/images/blank_end.svg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    height: fit-content;
+    position: absolute;
+    top: 110%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    display: none;
+    gap: 75px;
+}
+
+.confirmation-message {
+    font-size: 1.2rem;
+    font-family: 'astonpoliz', Arial, sans-serif;
+    color: #ffffff;
+    margin-top: -10%;
     text-align: center;
-    font-size: 2em;
+    text-wrap: nowrap;
 }
 
 .confirm-button {
@@ -486,29 +519,6 @@ h2 {
 
 .confirm-button:active {
     transform: scale(0.95);
-}
-
-.confirmation-section {
-    width: 100%;
-    height: fit-content;
-    position: absolute;
-    top: 110%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 75px;
-    
-}
-
-.confirmation-message {
-    font-size: 1.2rem;
-    font-family: 'astonpoliz', Arial, sans-serif;
-    color: #ffffff;
-    margin-top: -10%;
-    text-align: center;
-    text-wrap: nowrap;
 }
 
 .confirm-button {
@@ -545,16 +555,4 @@ h2 {
 
 .confirm-button:active .confirm-image {
     transform: translateY(10px);
-}
-
-@keyframes bounce {
-    0% {
-        transform: translateY(-90%);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(-90%);
-    }
 }
