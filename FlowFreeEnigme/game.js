@@ -389,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (completedPairs === colors.length) {
             setTimeout(() => {
                 if (level >= MAX_LEVEL) {
-                    document.location.href = "../../../workshop/ShieldGame/pages/HubLevelUnlock.html";
+                    document.location.href = "../../ShieldGame/pages/HubLevelUnlock.html";
                 } else {
                     nextLevel();
                 }
