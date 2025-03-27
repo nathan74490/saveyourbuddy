@@ -8,7 +8,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-image: url("../assets/images/AlerteCadre.svg");
+    background-image: url("./assets/images/AlerteCadre.svg");
     background-repeat: no-repeat;
     background-position: center;
     overflow-y: hidden;
