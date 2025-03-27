@@ -252,6 +252,29 @@ function getTeams() {
 }
 ```
 
+### 14. Delete Team an user associated
+```javascript
+function deleteTeam(teamId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?team=${teamId}`;
+
+    fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+
+// Example usage:
+deleteTeam(24);  
+```
+
+
 ### ID-Module:
 
 1. Téléphone cheminement
