@@ -169,6 +169,98 @@
       font-weight: bold;
     }
 
+    .container2 {
+      position: relative;
+      display: inline-block;
+      padding: 10px;
+    }
+
+
+    .blur-bg2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(49, 255, 147, 0.5);
+      /* Couleur similaire au fond */
+      filter: blur(105px);
+      z-index: -1;
+
+    }
+
+    .text2 {
+      color: #31FF93;
+      font-family: 'Astonpoliz';
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+
+    .end-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(10, 2, 45, 100);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background-image: url("./assets/background.svg"),
+      url('../assets/images/FondCercles.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+
+    }
+
+    .end-screen.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .end-screen-content {
+      text-align: center;
+
+    }
+
+    .end-screen h1 {
+      color: #31FF93;
+      font-family: 'Astonpoliz';
+      font-size: 5.3em;
+      margin-bottom: 20px;
+    }
+    #linkToEnterCode{
+      animation: zoom-in-zoom-out 2s ease infinite;
+    }
+
+    #linkSuccess {
+      color: #31FF93;
+      font-family: 'Astonpoliz';
+      font-size: 1.5em;
+      text-decoration: none;
+      margin-top: 20px;
+
+    }
+
+    @keyframes zoom-in-zoom-out {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
     @media (max-width: 600px) {
       .cell {
         width: 80px;
@@ -212,6 +304,22 @@
   </div>
 </div>
 
+
+<div class="end-screen" id="endScreen">
+
+  <div class="end-screen-content">
+    <div class="container2">
+      <div class="blur-bg2"></div>
+      <div class="text2">
+        <h1>SYSTÈME DE COMMUNICATION ACTIVÉ</h1>
+      </div>
+      <div id="linkToEnterCode">
+        <a id="linkSuccess" href="../ShieldGame/pages/HubLevelUnlock.html">Appuyer pour passer à la suite</a>
+      </div>
+    </div>
+    <!-- <button id="restartButton">Rejouer</button> -->
+  </div>
+</div>
 <img class="barCodeImg" src="./assets/barCode.svg" alt="">
 <img class="waveFormImg" src="./assets/waveForm.svg" alt="">
 <img class="circleImg" src="./assets/circle.svg" alt="">
