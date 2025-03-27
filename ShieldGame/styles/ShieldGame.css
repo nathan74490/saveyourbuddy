@@ -1,0 +1,272 @@
+@font-face {
+    font-family: 'Astonpoliz';
+    src: url('../assets/Font/Astonpoliz.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0A022D;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-image: url("../assets/images/SystemeComCadre.svg"),
+        url('../assets/images/FondCercles.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.Content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.Game {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.Instructions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 80px;
+}
+
+
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 65px;
+}
+
+.cell {
+    width: 140px;
+    height: 140px;
+    background-color: transparent;
+    border: 2px solid #4DADAC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.battery {
+    background-color: #FF5722;
+    font-weight: bold;
+}
+
+.shield {
+    background-color: #F00E1326;
+    font-weight: bold;
+}
+
+.wire {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wire img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.status {
+    margin-top: 70px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.powered {
+    background-color: rgba(76, 175, 80, 0.3);
+}
+
+.container {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+.blur-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(244, 171, 84, 0.5);
+    /* Couleur similaire au fond */
+    filter: blur(105px);
+    z-index: -1;
+    top: 35px;
+    left: 35px;
+    right: 35px;
+    bottom: 35px;
+}
+
+.text {
+    position: relative;
+    color: #F4AB54;
+    font-size: 1.4em;
+    text-align: center;
+    font-family: 'Astonpoliz';
+}
+
+.container2 {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+}
+
+
+.blur-bg2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(49, 255, 147, 0.5);
+    /* Couleur similaire au fond */
+    filter: blur(105px);
+    z-index: -1;
+
+}
+
+.text2 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+
+.end-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 2, 45, 100);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background-image: url("../assets/images/SystemeComCadre.svg"),
+        url('../assets/images/FondCercles.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.end-screen.show {
+    display: flex;
+    opacity: 1;
+}
+
+.end-screen-content {
+    text-align: center;
+
+}
+
+.end-screen h1 {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 5.3em;
+    margin-bottom: 20px;
+}
+
+/* 
+.end-screen button {
+    background-color: #4DADAC;
+    color: #0A022D;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+} */
+
+.end-screen button:hover {
+    background-color: #3D8D8C;
+}
+
+#SoundBar {
+    position: absolute;
+    bottom: 75px;
+    right: 1120px;
+    height: 100px;
+    width: 550px;
+
+}
+
+#Circle {
+    position: absolute;
+    bottom: 810px;
+    right: 1100px;
+    height: 130px;
+    width: 550px;
+}
+
+#linkToEnterCode{
+    animation: zoom-in-zoom-out 2s ease infinite;
+}
+
+#linkSuccess {
+    color: #31FF93;
+    font-family: 'Astonpoliz';
+    font-size: 1.5em;
+    text-decoration: none;
+    margin-top: 20px;
+    
+}
+
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.accesNextPage{
+    text-decoration: none;
+}
