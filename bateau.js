@@ -256,66 +256,69 @@ function updateScoreForGame3(matchedPairs, totalPairs) {
 }
 
 function initializeMemoryGame() {
-  const cardColors = [
-    'red',
-    'blue',
-    'green',
-    'yellow',
-    'purple',
-    'orange',
-    'pink',
-    'cyan',
-  ];
-  const cardPairs = [...cardColors, ...cardColors];
-  const shuffledCards = cardPairs.sort(() => Math.random() - 0.5);
+  const cardImages = [
+      'anchor',
+      'coral',
+      'helmet',
+      'medusa',
+      'O2',
+      'shell',
+  ]; // Liste des images
+  const cardPairs = [...cardImages, ...cardImages]; // Duplique les images pour créer des paires
+  const shuffledCards = cardPairs.sort(() => Math.random() - 0.5); // Mélange les cartes
   const memoryGameGrid = document.getElementById('memory-game');
   let firstSelectedCard = null;
   let secondSelectedCard = null;
   let matchedPairs = 0;
 
-  memoryGameGrid.innerHTML = '';
+  memoryGameGrid.innerHTML = ''; // Réinitialise la grille
   matchedPairs = 0;
 
-  shuffledCards.forEach((color, index) => {
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.dataset.color = color;
-    card.dataset.index = index;
-    card.addEventListener('click', () => onMemoryCardClick(card));
-    memoryGameGrid.appendChild(card);
+  shuffledCards.forEach((imageName, index) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.dataset.image = imageName; // Associe l'image à la carte
+      card.dataset.index = index;
+
+      // Ajoute un événement de clic pour retourner la carte
+      card.addEventListener('click', () => onMemoryCardClick(card));
+      memoryGameGrid.appendChild(card);
   });
 
   function onMemoryCardClick(card) {
-    if (card.classList.contains('flipped') || secondSelectedCard) return;
+      if (card.classList.contains('flipped') || secondSelectedCard) return;
 
-    card.style.backgroundColor = card.dataset.color;
-    card.classList.add('flipped');
+      // Affiche l'image de la carte
+      card.style.backgroundImage = `url('./assets/images/${card.dataset.image}.png')`;
+      card.style.backgroundSize = 'cover';
+      card.classList.add('flipped');
 
-    if (!firstSelectedCard) {
-      firstSelectedCard = card;
-    } else {
-      secondSelectedCard = card;
-
-      if (
-        firstSelectedCard.dataset.color === secondSelectedCard.dataset.color
-      ) {
-        matchedPairs++;
-        updateScoreForGame3(matchedPairs, cardColors.length);
-        firstSelectedCard = null;
-        secondSelectedCard = null;
+      if (!firstSelectedCard) {
+          firstSelectedCard = card;
       } else {
-        setTimeout(() => {
-          firstSelectedCard.style.backgroundColor = '';
-          secondSelectedCard.style.backgroundColor = '';
-          firstSelectedCard.classList.remove('flipped');
-          secondSelectedCard.classList.remove('flipped');
-          firstSelectedCard = null;
-          secondSelectedCard = null;
-        }, 1000);
+          secondSelectedCard = card;
+
+          // Vérifie si les deux cartes correspondent
+          if (firstSelectedCard.dataset.image === secondSelectedCard.dataset.image) {
+              matchedPairs++;
+              updateScoreForGame3(matchedPairs, cardImages.length);
+              firstSelectedCard = null;
+              secondSelectedCard = null;
+          } else {
+              // Retourne les cartes après un délai si elles ne correspondent pas
+              setTimeout(() => {
+                  firstSelectedCard.style.backgroundImage = '';
+                  secondSelectedCard.style.backgroundImage = '';
+                  firstSelectedCard.classList.remove('flipped');
+                  secondSelectedCard.classList.remove('flipped');
+                  firstSelectedCard = null;
+                  secondSelectedCard = null;
+              }, 1000);
+          }
       }
-    }
   }
 }
+
 
 // -------------------------------------------------------------------------
 // Game Control Functions
@@ -358,7 +361,7 @@ document.getElementById('confirm-button').addEventListener('click', () => {
   if (activePoint && activePoint.getAttribute('data-label') === 'HYDRA-3X') {
     document.querySelector('.container-2').style.display = 'none';
     document.querySelector('.container-3').style.display = 'flex';
-    document.querySelector('.progress').classList.remove('hidden');
+    document.querySelector('.progress-2').classList.remove('hidden');
     const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
     revealCodeDigits(2, randomDigits.map(String));
   } else {

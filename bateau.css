@@ -413,24 +413,40 @@ h2 {
 
 .memory-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    margin: 20px auto;
-    width: 320px;
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
+    gap: 10px; /* Espacement entre les cartes */
+    margin: 0 auto; /* Centre la grille horizontalement */
+    width: fit-content; /* Ajuste la largeur de la grille au contenu */
+    justify-content: center; /* Centre la grille horizontalement */
+    align-items: center; /* Centre la grille verticalement */
 }
 
 .card {
-    width: 70px;
-    height: 70px;
-    background-color: #ccc;
+    width: 90px; /* Ajustez la taille des cartes */
+    height: 90px;
+    background-color: #ccc; /* Couleur de fond par défaut */
     border: 1px solid #999;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
+    background-size: cover; /* Assure que l'image couvre toute la carte */
+    background-position: center;
+    overflow: hidden; /* Empêche les images de dépasser */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card img {
+    max-width: 100%; /* L'image occupe toute la largeur de la carte */
+    max-height: 100%; /* L'image occupe toute la hauteur de la carte */
+    object-fit: cover; /* Adapte l'image au conteneur sans la déformer */
+    border-radius: 5px; /* Applique le même arrondi que la carte */
 }
 
 .card.flipped {
     cursor: default;
+    transform: scale(1.05); /* Ajoute un léger zoom pour les cartes retournées */
 }
 
 /* ============== */
