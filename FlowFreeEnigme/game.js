@@ -425,6 +425,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateProgressInfo() {
-        progressInfo.textContent = `Completed: ${completedPairs} / ${colors.length}`;
+        progressInfo.textContent = `${completedPairs} sur ${colors.length}`;
     }
 });

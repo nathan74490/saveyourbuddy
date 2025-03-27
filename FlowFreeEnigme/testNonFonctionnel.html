@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Flow Free - Fixed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      overflow: hidden;
+      font-family: Astonpoliz, sans-serif;
       text-align: center;
       margin: 0;
-      padding: 10px;
-      background-color: #f0f0f0;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+      padding: 20px;
+      background-image: url("assets/background.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: #0A022D;
+    }
+
+    @font-face {
+      font-family: "serpentdeco";
+      src: url("./fonts/SerpentFont/serpentdeco.ttf");
+    }
+
+    @font-face {
+      font-family: "Astonpoliz";
+      src: url("fonts/Astonpoliz.ttf");
     }
 
     h1 {
@@ -20,18 +32,82 @@
       margin: 10px 0;
     }
 
+    .instructions {
+      display: flex;
+      position: absolute;
+      top: 400px;
+      left: 115px;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      font-size: 40px;
+      color: #F4AB54;
+    }
+
+    .text {
+      position: relative;
+    }
+
+    .waveFormImg {
+      position: absolute;
+      bottom: 65px;
+      right: 1430px;
+    }
+
+    .barCodeImg {
+      position: absolute;
+      top: 76px;
+      right: 510px;
+    }
+
+    .circleImg {
+      position: absolute;
+      top: 50px;
+      right: 50px;
+    }
+
+    #progress-info {
+      display: flex;
+      position: absolute;
+      top: 500px;
+      right: 230px;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      font-size: 40px;
+      color: #F4AB54;
+    }
+
+    .blur-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(244, 171, 84, 0.5);
+      /* Couleur similaire au fond */
+      filter: blur(105px);
+      z-index: -1;
+      top: 35px;
+      left: 35px;
+      right: 35px;
+      bottom: 35px;
+    }
+
     #game-container {
       display: inline-block;
-      margin: 10px auto;
+      position: absolute;
       max-width: 100%;
+      top: 200px;
+      right: 626px;
       overflow: hidden;
     }
 
     #game-board {
       display: grid;
       grid-gap: 3px;
-      background-color: #333;
-      padding: 8px;
+      background-color: #88DEB1;
+      padding: 3px;
       border-radius: 8px;
       touch-action: none;
     }
@@ -39,17 +115,17 @@
     .cell {
       width: 110px;
       height: 110px;
-      background-color: #fff;
+      background-color: #0B032D;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.2s;
       user-select: none;
     }
 
-    .cell.color-1 { background-color: #FF5252; }
-    .cell.color-2 { background-color: #FFEB3B; }
-    .cell.color-3 { background-color: #4CAF50; }
-    .cell.color-4 { background-color: #2196F3; }
+    .cell.color-1 { background-color: #254A7F; }
+    .cell.color-2 { background-color: #151F66; }
+    .cell.color-3 { background-color: #68C7AF; }
+    .cell.color-4 { background-color: #140750; }
     .cell.color-5 { background-color: #9C27B0; }
     .cell.color-6 { background-color: #FF9800; }
     .cell.color-7 { background-color: #607D8B; }
@@ -71,19 +147,20 @@
       flex-wrap: wrap;
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 1.2rem;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      min-width: 120px;
+    #restart {
+      margin-top: 50px;
+      font-family: Serpentdeco;
     }
 
-    button:hover {
-      background-color: #45a049;
+    button {
+      width: 404px;
+      height: 65px;
+      flex-shrink: 0;
+      fill: #4DADAC;
+      stroke-width: 2px;
+      stroke: #0A022D;
+      box-shadow: -4px -4px 22px 0px rgba(0, 0, 0, 0.60) inset, 4px 4px 18px 0px rgba(0, 0, 0, 0.60) inset;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.60));
     }
 
     #level-info {
@@ -92,12 +169,7 @@
       font-weight: bold;
     }
 
-    #progress-info {
-      margin: 10px 0;
-      font-size: 1.2rem;
-    }
-
-    @media (max-width: 800px) {
+    @media (max-width: 600px) {
       .cell {
         width: 80px;
         height: 80px;
@@ -110,31 +182,39 @@
       button {
         padding: 10px 20px;
         font-size: 1rem;
-        min-width: 100px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cell {
-        width: 60px;
-        height: 60px;
       }
     }
   </style>
+  <title>Flow Free Enigme</title>
 </head>
 <body>
-<h1>Flow Free - Fixed</h1>
-<div id="level-info">Level: 1 (6x6)</div>
-<div id="progress-info">Completed: 0 / 0</div>
-<div id="game-container">
-  <div id="game-board"></div>
-</div>
-<div id="controls">
-  <button id="restart">Restart</button>
-  <button id="new-game">New Game</button>
-  <button id="next-level">Next Level</button>
+<div class="instructions">
+  <div class="text">
+    <div class="blur-bg"></div>
+    <p>Connecter les fils<br>
+      de la meme couleur<br>
+      sans les superposer<br>
+      afin de rétablir<br>
+      l'alimentation</p>
+  </div>
 </div>
 
+
+<div id="game-container">
+  <div id="game-board"></div>
+  <button id="restart">recommencer</button>
+</div>
+
+<div id="progress-info">
+  <div class="text">
+    <div class="blur-bg"></div>
+    <p>0 sur 4</p>
+  </div>
+</div>
+
+<img class="barCodeImg" src="./assets/barCode.svg" alt="">
+<img class="waveFormImg" src="./assets/waveForm.svg" alt="">
+<img class="circleImg" src="./assets/circle.svg" alt="">
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const gameBoard = document.getElementById('game-board');
@@ -147,6 +227,7 @@
     // Start with a larger board for tablets
     let boardSize = 6;
     let level = 1;
+    const MAX_LEVEL = 1; // Set maximum level
     let colors = [];
     let board = [];
     let completedPaths = {};
@@ -162,6 +243,8 @@
     nextLevelBtn.addEventListener('click', nextLevel);
 
     function initGame() {
+      level = 1;
+      boardSize = 6;
       board = createEmptyBoard(boardSize);
       colors = generateColors(boardSize);
       generateSolvableLevel();
@@ -189,10 +272,29 @@
     }
 
     function nextLevel() {
+      if (level >= MAX_LEVEL) {
+        // Player has completed all levels
+        setTimeout(() => {
+          alert('Congratulations! You won the game!');
+          initGame(); // Reset to level 1
+        }, 500);
+        return;
+      }
+
       level++;
       // Increase board size more slowly for tablets
       boardSize = Math.min(8, 6 + Math.floor(level / 5));
-      initGame();
+      board = createEmptyBoard(boardSize);
+      colors = generateColors(boardSize);
+      generateSolvableLevel();
+      selectedColor = null;
+      currentPath = [];
+      completedPairs = 0;
+      completedPaths = {};
+
+      renderBoard();
+      updateLevelInfo();
+      updateProgressInfo();
     }
 
     function createEmptyBoard(size) {
@@ -496,13 +598,19 @@
       selectedColor = null;
       currentPath = [];
 
+      let linkSound = new Audio("./assets/LinkSound.mp3")
+      linkSound.volume = 0.3;
+      linkSound.play();
       updateProgressInfo();
 
       // Check if all pairs are connected
       if (completedPairs === colors.length) {
         setTimeout(() => {
-          alert('Level completed! Moving to next level.');
-          nextLevel();
+          if (level >= MAX_LEVEL) {
+            document.location.href = "../../../workshop/ShieldGame/pages/HubLevelUnlock.html";
+          } else {
+            nextLevel();
+          }
         }, 500);
       }
 
@@ -535,7 +643,7 @@
     }
 
     function updateProgressInfo() {
-      progressInfo.textContent = `Completed: ${completedPairs} / ${colors.length}`;
+      progressInfo.textContent = `${completedPairs} sur ${colors.length}`;
     }
   });
 </script>

@@ -20,15 +20,60 @@ h1 {
     margin: 10px 0;
 }
 
-.flex {
+.instructions {
     display: flex;
+    position: absolute;
+    top: 400px;
+    left: 115px;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     font-size: 40px;
     color: #F4AB54;
-    width: 90%;
-    height: 100%;
+}
+
+.text {
+    position: relative;
+}
+
+.waveFormImg {
+    position: absolute;
+    bottom: 65px;
+    right: 1430px;
+}
+
+.barCodeImg {
+    position: absolute;
+    top: 76px;
+    right: 527px;
+}
+
+#progress-info {
+    display: flex;
+    position: absolute;
+    top: 500px;
+    right: 230px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-size: 40px;
+    color: #F4AB54;
+}
+
+.blur-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(244, 171, 84, 0.5);
+    /* Couleur similaire au fond */
+    filter: blur(105px);
+    z-index: -1;
+    top: 35px;
+    left: 35px;
+    right: 35px;
+    bottom: 35px;
 }
 
 #game-container {

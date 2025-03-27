@@ -8,19 +8,32 @@
   <title>Flow Free Enigme</title>
 </head>
 <body>
-<div class="flex">
-  <p>Connecter les fils<br>
-  de la meme couleur<br>
-  sans les superposer<br>
-  afin de rétablir<br>
-  l'alimentation</p>
-  <div id="game-container">
-    <div id="game-board"></div>
-    <button id="restart">Restart</button>
+<div class="instructions">
+  <div class="text">
+    <div class="blur-bg"></div>
+    <p>Connecter les fils<br>
+      de la meme couleur<br>
+      sans les superposer<br>
+      afin de rétablir<br>
+      l'alimentation</p>
   </div>
-  <div id="progress-info">Completed: 0 / 0</div>
 </div>
 
+
+  <div id="game-container">
+    <div id="game-board"></div>
+    <button id="restart">Recommencer</button>
+  </div>
+
+  <div id="progress-info">
+      <div class="text">
+        <div class="blur-bg"></div>
+        <p>0 sur 4</p>
+      </div>
+    </div>
+
+<img class="barCodeImg" src="./assets/barCode.svg" alt="">
+<img class="waveFormImg" src="./assets/waveForm.svg" alt="">
 <script src="game.js"></script>
 </body>
 </html>
