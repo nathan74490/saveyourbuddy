@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
         selectedColor = null;
         currentPath = [];
 
-        let linkSound = new Audio("./assets/LinkSound.mp3")
+        let linkSound = new Audio("../assets/sounds/LinkSound.mp3")
         linkSound.volume = 0.3;
         linkSound.play();
         updateProgressInfo();
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (level >= MAX_LEVEL) {
                     const endScreen = document.getElementById('endScreen');
                     endScreen.classList.add('show');
-                    let successSound = new Audio('./assets/SuccessSong.mp3')
+                    let successSound = new Audio('../assets/sounds/SuccessSong.mp3')
                     successSound.volume = 1;
                     successSound.play();
                 } else {

@@ -4,7 +4,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 20px;
-    background-image: url("assets/background.svg");
+    background-image: url("../assets/images/background.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #0A022D;
@@ -12,12 +12,12 @@ body {
 
 @font-face {
     font-family: "serpentdeco";
-    src: url("./fonts/SerpentFont/serpentdeco.ttf");
+    src: url("../assets/fonts/SerpentFont/serpentdeco.ttf");
 }
 
 @font-face {
     font-family: "Astonpoliz";
-    src: url("fonts/Astonpoliz.ttf");
+    src: url("../assets/fonts/Astonpoliz.ttf");
 }
 
 h1 {
@@ -205,8 +205,8 @@ button {
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.5s ease;
-    background-image: url("../ShieldGame/assets/images/SystemeComCadre.svg"),
-    url('../ShieldGame/assets/images/FondCercles.svg');
+    background-image: url("../assets/images/SystemeComCadre.svg"),
+    url('../assets/images/FondCercles.svg');
     background-repeat: no-repeat;
     background-position: center;
 
