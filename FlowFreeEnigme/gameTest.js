@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (level >= MAX_LEVEL) {
                     alert('Congratulations! You won the game!');
-                    document.location.href = "../pages/HubLevelUnlock";
+                    initGame(); // Reset to level 1
                 } else {
                     alert('Level completed! Moving to next level.');
                     nextLevel();
