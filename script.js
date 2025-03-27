@@ -49,35 +49,7 @@ window.addEventListener('message', (event) => {
 //   createGame(gameStatus); // on crée la partie
 // });
 
-// cette fonction crée un jeu en envoyant des données à l'API
-function createGame(gameStatus) {
-  const gameData = {
-    type: 'game',
-    game_status: gameStatus,
-  };
-
-  // on fait un fetch pour créer le jeu via l'API
-  fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(gameData),
-  })
-    .then((response) => response.json()) // on récupère la réponse de l'API
-    .then((data) => {
-      console.log(data);
-      console.log(data.game_id);
-      let id_game = data.game_id;
-      localStorage.setItem('id_game', id_game); // on stocke l'id du jeu dans localStorage
-
-      // on récupère les modules du jeu dès qu'il est créé
-      getGame(id_game);
-    })
-    .catch(console.error);
-}
-
-function getGame(gameId) {
+function getGameForModule(gameId) {
   const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
 
   fetch(url)
@@ -96,14 +68,6 @@ function getGame(gameId) {
         console.log('aucun module en cours, la partie est peut-être finie.');
         localStorage.removeItem('id_game'); // on retire l'id du jeu de localStorage si plus de modules en cours
       }
-
-      /********TIMER********/
-      if (game && game.game_time) {
-        // Convert MySQL datetime to JavaScript Date object
-        const startTime = new Date(game.game_time.replace(' ', 'T'));
-        console.log(startTime); // Log the converted date
-        initializeOxygenBar(startTime);
-      }
     })
     .catch(console.error);
 }
@@ -111,8 +75,7 @@ function getGame(gameId) {
 // cette fonction charge les modules dans l'iframe
 function loadModules(gameId, modules) {
   const container = document.querySelector('.table-iframe');
-  // const divGauge = document.querySelector('.gauge');
-  // divGauge.style.display = 'block';
+
   container.innerHTML = ''; // on vide le conteneur avant d'ajouter de nouveaux modules
 
   modules.forEach((module) => {
@@ -124,6 +87,11 @@ function loadModules(gameId, modules) {
 
     container.appendChild(iframe); // on ajoute l'iframe au conteneur
   });
+}
+function GetIdGame() {
+  let gameId = localStorage.getItem('id_game');
+  console.log('id du script.js ' + gameId);
+  getGameForModule(gameId);
 }
 
 // cette fonction met à jour le statut d'un module dans l'API
@@ -171,6 +139,7 @@ function checkIfAllModulesSuccess() {
         console.log(
           `Tous les modules du jeu ${game.id_game} ne sont pas encore en succès.`
         );
+        containerModule.style.display = 'none';
       }
     } else {
       console.log(
@@ -182,63 +151,6 @@ function checkIfAllModulesSuccess() {
       );
     }
   });
-}
-
-/**********************************OXYGEN************************************************************/
-function initializeOxygenBar(startTime) {
-  const maxTime = 30 * 60 * 1000; // 30 minutes in milliseconds
-  const oxygenLevel = document.getElementById('oxygenLevel');
-  const needle = document.querySelector('.needle');
-  const bar = document.querySelector('.bar');
-
-  function updateOxygenBar() {
-    const currentTime = new Date();
-    const elapsedTime = currentTime - startTime;
-
-    // Check if game is finished
-    if (elapsedTime >= maxTime) {
-      needle.style.transform = 'rotate(-90deg)';
-      bar.style.transform = 'rotate(-90deg)';
-      clearInterval(timerInterval);
-      return;
-    }
-
-    // Calculate remaining oxygen and time
-    const remainingTime = maxTime - elapsedTime;
-    const percentageRemaining = (remainingTime / maxTime) * 100;
-
-    // Calculate rotation angle (-90 to 90 degrees based on percentage)
-    const rotationAngle = -90 + percentageRemaining * 1.8; // 1.8 = 180/100
-
-    // Update needle and bar rotation
-    needle.style.transform = `rotate(${rotationAngle}deg)`;
-    bar.style.transform = `rotate(${rotationAngle}deg)`;
-
-    /*  // Convert remaining time to minutes and seconds
-      const remainingMinutes = Math.floor(remainingTime / 60000);
-      const remainingSeconds = Math.floor((remainingTime % 60000) / 1000); */
-
-    // Update oxygen bar
-    oxygenLevel.style.width = percentageRemaining + '%';
-    oxygenLevel.textContent = `${Math.round(percentageRemaining)}%`;
-
-    // Change color based on remaining oxygen
-    if (percentageRemaining < 20) {
-      bar.style.backgroundColor = 'red';
-    } else if (percentageRemaining < 50) {
-      bar.style.backgroundColor = 'orange';
-    }
-  }
-
-  // Remove default animation
-  needle.style.animation = 'none';
-  bar.style.animation = 'none';
-
-  // Initial update
-  updateOxygenBar();
-
-  // Update every second
-  const timerInterval = setInterval(updateOxygenBar, 1000);
 }
 
 // Start the game

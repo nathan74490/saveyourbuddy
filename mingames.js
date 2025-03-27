@@ -1,7 +1,7 @@
 let tabMindGames = [];
 const container = document.querySelector('.table-iframe-mindgames');
 const containerModule = document.querySelector('.table-iframe');
-let id_game = localStorage.getItem('id_game') || null;
+let id_game = localStorage.getItem('id_game');
 if (!id_game) console.log('Aucun ID de jeu trouvé dans le localStorage.');
 
 console.log(id_game);
@@ -25,14 +25,16 @@ window.addEventListener('message', (event) => {
       };
       tabMindGames.push(gameMindGames);
     } else {
-      const gameMindGamesExists = gameMindGames.modules.some(
+      const moduleIndex = gameMindGames.modules.findIndex(
         (module) => module.nbMindGamesNumber === mindGamesNumber
       );
-      if (!gameMindGamesExists) {
+      if (moduleIndex === -1) {
         gameMindGames.modules.push({
           nbMindGamesNumber: mindGamesNumber,
           modelStatus: status,
         });
+      } else {
+        gameMindGames.modules[moduleIndex].modelStatus = status;
       }
     }
 
@@ -67,6 +69,8 @@ function createGame(gameStatus) {
       let id_game = data.game_id;
       localStorage.setItem('id_game', id_game);
       getGame(id_game);
+      containerModule.style.display = 'none';
+      GetIdGame();
     })
     .catch(console.error);
 }
@@ -143,27 +147,77 @@ function updateMindGamesStatus(id_game, mindGamesNumber, status) {
 function checkIfAllMindGameSuccess() {
   tabMindGames.forEach((game) => {
     const allModulesSuccess = game.modules.every(
-      (module) => module.modelStatus === 'success'
+      (module) => module.modelStatus === 'sucess'
     );
 
-    if (game.modules.length === 2) {
-      if (allModulesSuccess) {
-        console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
-      } else {
-        console.log(
-          `Tous les modules du jeu ${game.id_game} ne sont pas encore en succès.`
-        );
-        container.style.display = 'none';
-        containerModule.style.display = 'block';
-      }
+    if (allModulesSuccess) {
+      console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
+      container.style.display = 'none';
+      containerModule.style.display = 'block';
     } else {
+      const remainingModules = game.modules.filter(
+        (module) => module.modelStatus !== 'sucess'
+      ).length;
       console.log(
-        `Le jeu ${
-          game.id_game
-        } n'a pas encore tous ses modules. Modules restants: ${
-          2 - game.modules.length
-        }`
+        `Le jeu ${game.id_game} n'a pas encore tous ses modules en succès. Modules restants: ${remainingModules}`
       );
     }
   });
+}
+
+/**********************************OXYGEN************************************************************/
+function initializeOxygenBar(startTime) {
+  const maxTime = 30 * 60 * 1000; // 30 minutes in milliseconds
+  const oxygenLevel = document.getElementById('oxygenLevel');
+  const needle = document.querySelector('.needle');
+  const bar = document.querySelector('.bar');
+
+  function updateOxygenBar() {
+    const currentTime = new Date();
+    const elapsedTime = currentTime - startTime;
+
+    // Check if game is finished
+    if (elapsedTime >= maxTime) {
+      needle.style.transform = 'rotate(-90deg)';
+      bar.style.transform = 'rotate(-90deg)';
+      clearInterval(timerInterval);
+      return;
+    }
+
+    // Calculate remaining oxygen and time
+    const remainingTime = maxTime - elapsedTime;
+    const percentageRemaining = (remainingTime / maxTime) * 100;
+
+    // Calculate rotation angle (-90 to 90 degrees based on percentage)
+    const rotationAngle = -90 + percentageRemaining * 1.8; // 1.8 = 180/100
+
+    // Update needle and bar rotation
+    needle.style.transform = `rotate(${rotationAngle}deg)`;
+    bar.style.transform = `rotate(${rotationAngle}deg)`;
+
+    /*  // Convert remaining time to minutes and seconds
+      const remainingMinutes = Math.floor(remainingTime / 60000);
+      const remainingSeconds = Math.floor((remainingTime % 60000) / 1000); */
+
+    // Update oxygen bar
+    oxygenLevel.style.width = percentageRemaining + '%';
+    oxygenLevel.textContent = `${Math.round(percentageRemaining)}%`;
+
+    // Change color based on remaining oxygen
+    if (percentageRemaining < 20) {
+      bar.style.backgroundColor = 'red';
+    } else if (percentageRemaining < 50) {
+      bar.style.backgroundColor = 'orange';
+    }
+  }
+
+  // Remove default animation
+  needle.style.animation = 'none';
+  bar.style.animation = 'none';
+
+  // Initial update
+  updateOxygenBar();
+
+  // Update every second
+  const timerInterval = setInterval(updateOxygenBar, 1000);
 }
