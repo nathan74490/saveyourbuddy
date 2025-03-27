@@ -28,7 +28,6 @@ inputs.forEach((input, index) => {
 });
 
 
-
 let id_game = localStorage.getItem('id_game');
 console.log(id_game);
 
