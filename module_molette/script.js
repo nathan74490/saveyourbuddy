@@ -23,11 +23,12 @@ const ledData = [
     { x: 90, y: 100, haut: 0, bas: 0, gauche: 0, droite: 1 },
     { x: 190, y: 60, haut: 1, bas: 0, gauche: 1, droite: 1 },
     { x: 270, y: 6, haut: 1, bas: 1, gauche: 0, droite: 1 },
+
     { x: -210, y: 90, haut: 1, bas: 1, gauche: 1, droite: 1 },
-    { x: -140, y: 140, haut: 1, bas: 1, gauche: 0, droite: 1 },
+    { x: -140, y: 140, haut: 1, bas: 1, gauche: 0, droite: 0 },
     { x: -40, y: 170, haut: 1, bas: 1, gauche: 0, droite: 1 },
-    { x: 90, y: 180, haut: 1, bas: 1, gauche: 1, droite: 0 },
-    { x: 220, y: 150, haut: 0, bas: 0, gauche: 1, droite: 1 },
+    { x: 90, y: 180, haut: 1, bas: 1, gauche: 1, droite: 1 },
+    { x: 220, y: 150, haut: 0, bas: 0, gauche: 1, droite: 0},
     { x: 290, y: 90, haut: 1, bas: 1, gauche: 1, droite: 0 }
 ];
 
@@ -44,43 +45,50 @@ ledData.forEach(pos => {
 });
 
 //& Fonction pour mettre à jour l'affichage des LEDs
+
 function updateLEDs() {
     leds.forEach((led, index) => {
         let currentLed = ledData[index];
-        let active = ledRotation === 0 ? currentLed.haut :
-                     ledRotation === 90 ? currentLed.droite :
-                     ledRotation === 180 ? currentLed.bas :
-                     currentLed.gauche;
+        // Vérifie l'orientation de l'aiguille et affiche les LEDs correspondantes
+        let active = false;
+        switch (rotation) {
+            case 0:
+                active = currentLed.haut;
+                break;
+            case 90:
+                active = currentLed.droite;
+                break;
+            case 180:
+                active = currentLed.bas;
+                break;
+            case 270:
+                active = currentLed.gauche;
+                break;
+        }
         led.style.backgroundColor = active ? "yellow" : "white";
         led.style.boxShadow = active ? "0 0 10px 1px white" : "none";
     });
 }
 
-// Lancer immédiatement
-updateLEDs();
 
-//& Gestion du clic sur la sonar
-sonar.addEventListener("click", () => {
-    rotation = (rotation + 90) % 360;  // Tourne de 90° et revient à 0 après 360°
-    aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
-});
-
-//& Changement automatique des lumières toutes les 5 secondes
+// Mise à jour des LEDs toutes les 5 secondes, en fonction de la rotation de l'aiguille
 setInterval(() => {
-    ledRotation = (ledRotation + 90) % 360;  // Tourne les LEDs indépendamment
+    ledRotation = (ledRotation + 90) % 360;  // Rotation indépendante des LEDs
     updateLEDs();  // Mise à jour des LEDs après rotation
-}, 15000);
+}, 9000);
 
-//& Gestion du clic sur le bouton de validation
+// &Fonction de validation des réponses
 validateBtn.addEventListener("click", () => {
+    // Vérifie si l'aiguille est dans la position correcte
     if (rotation === correctPosition) {
         checkCircle.style.backgroundColor = "green";
         correctAnswers++;
         if (correctAnswers >= 4) {
-            messageBox.innerText = "mission accomplie";
+            messageBox.innerText = "mission accomplie!";
             messageBox.style.display = "flex";
             validateBtn.disabled = true;
             sonar.style.pointerEvents = "none";
+            updateModuleStatus('success'); 
             setTimeout(() => {
                 messageBox.style.display = "none";
                 validateBtn.disabled = false;
@@ -93,10 +101,11 @@ validateBtn.addEventListener("click", () => {
         checkCircle.style.backgroundColor = "red";
         mistakes++;
         if (mistakes >= maxMistakes) {
-            messageBox.innerText = "error";
+            messageBox.innerText = "erreur!";
             messageBox.style.display = "flex";
             validateBtn.disabled = true;
             sonar.style.pointerEvents = "none";
+            updateModuleStatus('failed'); 
             setTimeout(() => {
                 messageBox.style.display = "none";
                 validateBtn.disabled = false;
@@ -108,5 +117,17 @@ validateBtn.addEventListener("click", () => {
     }
 });
 
-//& Initialisation des LEDs 
+// Initialisation des LEDs
 updateLEDs();
+
+
+
+//& Gestion du clic sur la sonar
+sonar.addEventListener("click", () => {
+    rotation = (rotation + 90) % 360;  // Tourne de 90° et revient à 0 après 360°
+    aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
+});
+
+
+
+
