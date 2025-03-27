@@ -54,7 +54,13 @@ body {
 }
 
 
-
+#finish{
+    font-size: clamp(30px, 4.167vw,80px);
+    font-family: 'serpent';
+    color: rgba(226, 124, 5, 1);
+    text-align: center;
+    line-height: 500%;
+}
 #count {
     position: absolute;
     right: 0%;

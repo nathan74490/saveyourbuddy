@@ -170,7 +170,8 @@ function game() {
                 Array.from(document.body.children).forEach(element => element.classList.add("brigthning"))
                 setTimeout(() => {
                     Array.from(document.body.children).forEach(element => element.remove());
-                    document.body.innerHTML = "<p id='finish'>bmission acconmplis</p>"
+                    document.body.innerHTML = "<p id='finish'>mission accomplis</p>"
+                    document.body.style.backgroundImage="url('img/background_win.svg')"
                     updateModuleStatus("sucess")
                 },2000)
 
