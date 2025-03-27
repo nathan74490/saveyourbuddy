@@ -75,7 +75,7 @@ h2 {
 .info {
     background-color: var(--pasteldark);
     color: #ffffff;
-    width: 30%;
+    width: 25%;
     height: 75%;
     position: absolute;
     top: 50%;
@@ -84,6 +84,7 @@ h2 {
     border: 2.5px solid var(--cyan);
     border-radius: 10px;
     box-shadow: 0 0 5px 2.5px var(--cyan);
+    padding: 10px;
 }
 
 .progress {
@@ -413,40 +414,40 @@ h2 {
 
 .memory-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
-    gap: 10px; /* Espacement entre les cartes */
-    margin: 0 auto; /* Centre la grille horizontalement */
-    width: fit-content; /* Ajuste la largeur de la grille au contenu */
-    justify-content: center; /* Centre la grille horizontalement */
-    align-items: center; /* Centre la grille verticalement */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 0 auto;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
-    width: 90px; /* Ajustez la taille des cartes */
+    width: 90px;
     height: 90px;
-    background-color: #ccc; /* Couleur de fond par défaut */
+    background-color: #ccc;
     border: 1px solid #999;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
-    background-size: cover; /* Assure que l'image couvre toute la carte */
+    background-size: cover;
     background-position: center;
-    overflow: hidden; /* Empêche les images de dépasser */
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .card img {
-    max-width: 100%; /* L'image occupe toute la largeur de la carte */
-    max-height: 100%; /* L'image occupe toute la hauteur de la carte */
-    object-fit: cover; /* Adapte l'image au conteneur sans la déformer */
-    border-radius: 5px; /* Applique le même arrondi que la carte */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .card.flipped {
     cursor: default;
-    transform: scale(1.05); /* Ajoute un léger zoom pour les cartes retournées */
+    transform: scale(1.05);
 }
 
 /* ============== */
@@ -480,19 +481,24 @@ h2 {
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    transition: transform 0.1s ease; /* Ajoute un effet de clic */
+    transition: transform 0.1s ease;
 }                   
 
 .confirm-button:active {
-    transform: scale(0.95); /* Réduit légèrement la taille pour un effet de clic */
+    transform: scale(0.95);
 }
 
 .confirmation-section {
-    width: 30%;
+    width: 100%;
     height: fit-content;
     position: absolute;
-    top: 100%;
+    top: 110%;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 75px;
     
 }
 
@@ -500,36 +506,35 @@ h2 {
     font-size: 1.2rem;
     font-family: 'astonpoliz', Arial, sans-serif;
     color: #ffffff;
-    margin-top: -10%; /* Réduit l'espace entre le bouton et le texte */
+    margin-top: -10%;
     text-align: center;
+    text-wrap: nowrap;
 }
 
-/* Conteneur du bouton */
 .confirm-button {
+    background-repeat: no-repeat;
     position: relative;
-    width: 200px; /* Augmentez la largeur */
-    height: 100px; /* Augmentez la hauteur */
+    width: 200px;
     margin: 0 auto;
     cursor: pointer;
     display: block;
-    overflow: hidden; /* Assurez-vous que rien ne dépasse */
+    overflow: hidden;
 }
 
-/* Image de base (button.png) */
 .button-image {
+    background-repeat: no-repeat;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Adapte l'image au conteneur sans la couper */
+    object-fit: contain;
     z-index: 1;
 }
 
-/* Image animée (confirm.png) */
 .confirm-image {
     position: absolute;
-    top: -15px; /* Ajustez pour positionner légèrement au-dessus de button.png */
+    top: -15px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -538,12 +543,10 @@ h2 {
     transition: transform 0.1s ease;
 }
 
-/* Animation au clic */
 .confirm-button:active .confirm-image {
     transform: translateY(10px);
 }
 
-/* Animation de haut en bas */
 @keyframes bounce {
     0% {
         transform: translateY(-90%);
