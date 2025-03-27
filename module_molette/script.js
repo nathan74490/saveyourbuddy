@@ -129,9 +129,12 @@ sonar.addEventListener('click', () => {
   // Les LEDs ne changent pas ici
 });
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     const ambianceSound = new Audio('./song/ambiance.mp3'); // Assurez-vous que le chemin est correct
-//     ambianceSound.loop = true; // Pour que le son tourne en boucle
-//     ambianceSound.volume = 0.5; // Ajuste le volume si nécessaire
-//     ambianceSound.play().catch(error => console.log('Lecture automatique bloquée par le navigateur:', error));
-//   });
+// Sélection de l'élément audio
+const ambientSound = document.getElementById('ambientSound');
+
+// Fonction pour démarrer le son dès le chargement de la page
+window.addEventListener('load', () => {
+  ambientSound.play().catch((error) => {
+    console.log('Erreur lors de la lecture du son d\'ambiance:', error);
+  });
+});
