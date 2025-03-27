@@ -78,49 +78,64 @@ function updateLEDs() {
 // Fonction de validation des réponses
 // Fonction de validation des réponses
 validateBtn.addEventListener('click', () => {
-  if (rotation === correctPosition) {
-    // Changer la couleur des cercles en vert pour la réponse correcte
-    document.querySelectorAll('.circle').forEach((circle) => {
-      circle.style.backgroundColor = 'green'; // Tout devient vert
-    });
-    checkCircle.style.backgroundColor = 'green';
-    setTimeout(() => {
-      document.querySelectorAll('.circle').forEach((circle) => {
-        circle.style.backgroundColor = 'black'; // Tout devient vert
+    if (rotation === correctPosition) {
+      correctAnswers++; // Incrémenter le nombre de bonnes réponses
+  
+      // Changer la couleur des cercles en vert pour chaque bonne réponse
+      const circles = document.querySelectorAll('.circle');
+      circles.forEach((circle, index) => {
+        if (index < correctAnswers) {
+          circle.style.backgroundColor = 'green'; // Vert pour les réponses correctes
+        } else {
+          circle.style.backgroundColor = 'black'; // Noir pour les réponses restantes
+        }
       });
-    }, 500);
-    correctAnswers++;
-    console.log(correctAnswers);
-    newCorrectPosition();
-    updateLEDs();
-
-    console.log(correctPosition);
-    if (correctAnswers >= 4) {
-      messageBox.innerText = 'Mission accomplie!';
-      messageBox.style.display = 'flex';
-      validateBtn.disabled = true;
-      sonar.style.pointerEvents = 'none';
-      updateModuleStatus('sucess');
+  
+      // Mettre à jour le dernier cercle en rouge avec le nombre de fautes
+      const lastCircle = document.getElementById('lastCircle');
+      lastCircle.style.backgroundColor = 'red';
+      lastCircle.innerText = `${5 - correctAnswers} fautes`; // Affichage des fautes
+  
+      setTimeout(() => {
+        // Réinitialiser le dernier cercle après un court délai
+        lastCircle.innerText = '';
+      }, 500);
+  
+      console.log(correctAnswers);
+      newCorrectPosition();
+      updateLEDs();
+  
+      if (correctAnswers >= 4) {
+        messageBox.innerText = 'mission accomplie!';
+        messageBox.style.display = 'flex';
+        validateBtn.disabled = true;
+        sonar.style.pointerEvents = 'none';
+        updateModuleStatus('sucess');
+      }
+    } else {
+      // Si la réponse est incorrecte, réinitialiser les cercles
+      const circles = document.querySelectorAll('.circle');
+      circles.forEach((circle) => {
+        circle.style.backgroundColor = 'black'; // Réinitialiser tous les cercles à noir
+      });
+  
+      const lastCircle = document.getElementById('lastCircle');
+      lastCircle.style.backgroundColor = 'red'; // Le dernier cercle devient rouge en cas d'échec
+      lastCircle.innerText = `${5 - correctAnswers} fautes`; // Affichage des fautes
+  
+      setTimeout(() => {
+        lastCircle.style.backgroundColor = 'black'; // Réinitialiser après un délai
+        lastCircle.innerText = ''; // Effacer le texte
+      }, 500);
+  
+      console.log(correctAnswers);
+      correctAnswers = 0; // Réinitialiser les bonnes réponses en cas d'échec
     }
-  } else {
-    // Si la réponse est incorrecte, changer `lastCircle` en rouge
-    document.querySelectorAll('.circle').forEach((circle) => {
-      circle.style.backgroundColor = 'green'; // Rendre les autres cercles verts
-    });
-    const lastCircle = document.getElementById('lastCircle');
-    lastCircle.style.backgroundColor = 'red'; // `lastCircle` devient rouge en cas d'erreur
-
-    checkCircle.style.backgroundColor = 'red';
-    console.log(correctAnswers);
-    setTimeout(() => {
-      checkCircle.style.backgroundColor = 'black';
-    }, 500);
-    correctAnswers = 0; // Réinitialiser les bonnes réponses en cas d'échec
-  }
-});
-
-// Initialisation des LEDs
-updateLEDs();
+  });
+  
+  // Initialisation des LEDs
+  updateLEDs();
+  
 
 // Gestion du clic sur la sonar
 sonar.addEventListener('click', () => {
@@ -131,10 +146,24 @@ sonar.addEventListener('click', () => {
 
 // Sélection de l'élément audio
 const ambientSound = document.getElementById('ambientSound');
+const aiguilleSound = document.getElementById('aiguilleSound');
 
 // Fonction pour démarrer le son dès le chargement de la page
 window.addEventListener('load', () => {
   ambientSound.play().catch((error) => {
     console.log('Erreur lors de la lecture du son d\'ambiance:', error);
   });
+});
+
+// Gestion du clic sur l'aiguille
+aiguille.addEventListener('click', () => {
+  // Lire le son de l'aiguille à chaque clic
+  aiguilleSound.play().catch((error) => {
+    console.log('Erreur lors de la lecture du son de l\'aiguille:', error);
+  });
+
+  // Rotation de l'aiguille comme avant
+  rotation = (rotation + 90) % 360;
+  aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
+  // Les LEDs ne changent pas ici
 });

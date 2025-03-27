@@ -9,15 +9,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #222;
     color: white;
     font-family: 'serpent' !important;
     background-image: url(./images/background.png);
-    margin: 0; 
+    background-size: contain; /* img non coupé*/
+    background-position: center center;
+    background-attachment: fixed;
+    margin: 0;
     position: relative;
-   
 }
+
+
 
 body::before {
     content: "";
@@ -65,8 +69,6 @@ header {
 #check .circle:nth-child(5) {
     margin-left: 60px; 
 }
-
-
 
 
 .led-container {
@@ -157,7 +159,9 @@ header {
     align-items: center;
     justify-content: center;
 
-}#direction-controls {
+}
+
+#direction-controls {
     position: absolute;
     font-family: 'serpent' !important;
     top: 50%;
@@ -179,6 +183,7 @@ header {
 }
 
 #up {
+    position: relative;
     bottom: 140%;
     left: 50%;
     transform: translateX(-50%);
@@ -193,6 +198,7 @@ header {
 }
 
 #right {
+    position: relative;
     top: 30%;
     left: 130%;
     transform: translateY(-50%);
@@ -206,6 +212,7 @@ header {
 }
 
 #down {
+    position: relative;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
@@ -220,6 +227,7 @@ header {
 }
 
 #left {
+    position: relative;
     top: 30%;
     right: 130%;
     transform: translateY(-50%);
