@@ -281,22 +281,25 @@ h2 {
     background-repeat: no-repeat;
 }
 
+/* Barre de chargement */
 .progress-bar-container {
-    width: 60%;
-    height: 0.75rem;
-    background-color: var(--midnight);
-    border: 2.5px solid var(--cyan);
-    box-shadow: 0 0 5px 2.5px var(--cyan);
-    overflow: hidden;
-    margin-top: 0.5rem;
-    margin-bottom: 10px;
+    width: 80%; /* Largeur totale de la barre */
+    height: 20px; /* Hauteur de la barre */
+    background-color: #ccc; /* Couleur de fond */
+    border: 2px solid #000; /* Bordure */
+    border-radius: 10px; /* Coins arrondis */
+    overflow: hidden; /* Empêche le débordement */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto; /* Centre horizontalement */
 }
 
 .progress-bar {
+    width: 20%; /* Départ de la barre */
     height: 100%;
-    width: 0%;
-    background-color: var(--sunlight);
-    transition: width 0.3s ease;
+    background-color: green; /* Couleur de la barre */
+    transition: width 3s ease; /* Animation fluide sur 3 secondes */
 }
 
 .progress-bar-2 {
@@ -556,3 +559,73 @@ h2 {
 .confirm-button:active .confirm-image {
     transform: translateY(10px);
 }
+
+/* Fenêtre d'alerte */
+.alert-screen.hidden {
+    display: none;
+}
+
+.alert-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#alert-screen-1 {
+    background-image: url('./assets/images/alert1.png');
+}
+
+#alert-screen-2 {
+    background-image: url('./assets/images/alert2.png');
+}
+
+.restart-section{
+    position: absolute;
+    bottom: 15%;
+}
+
+/* Bouton Redémarrer */
+.restart-button {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 250px; /* Augmente la largeur du bouton */
+    height: 100px; /* Augmente la hauteur du bouton */
+}
+
+.button-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adapte à la taille du bouton */
+    height: 100%; /* Adapte à la taille du bouton */
+    object-fit: contain;
+    z-index: 1;
+}
+
+.restart-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%; /* Ajuste la taille de l'image interne */
+    height: 90%; /* Ajuste la taille de l'image interne */
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.1s ease;
+}
+
+.restart-button:active .restart-image {
+    transform: translateY(10px);
+}
+

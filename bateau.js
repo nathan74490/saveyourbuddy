@@ -593,6 +593,43 @@ document.getElementById('confirm-button').addEventListener('click', () => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const alertScreen1 = document.getElementById('alert-screen-1');
+  const restartButton = document.getElementById('restart-button');
+
+  // Passe au jeu 1 lorsque le bouton "Redémarrer" est cliqué
+  restartButton.addEventListener('click', () => {
+      alertScreen1.classList.add('hidden'); // Cache l'écran d'alerte
+      document.querySelector('.container-1').style.display = 'grid'; // Affiche le jeu 1
+      startRandomSquareGame(); // Démarre le jeu 1
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const alertScreen1 = document.getElementById('alert-screen-1');
+    const alertScreen2 = document.getElementById('alert-screen-2');
+    const restartButton = document.getElementById('restart-button');
+    const progressBar = document.querySelector('.progress-bar');
+
+    // Passe à la deuxième alerte avec une barre de chargement
+    restartButton.addEventListener('click', () => {
+        alertScreen1.classList.add('hidden'); // Cache la première alerte
+        alertScreen2.classList.remove('hidden'); // Affiche la deuxième alerte
+
+        // Démarre l'animation de la barre de chargement
+        setTimeout(() => {
+            progressBar.style.width = '100%'; // Remplit la barre
+        }, 100);
+
+        // Passe au jeu 1 après la fin de la barre de chargement
+        setTimeout(() => {
+            alertScreen2.classList.add('hidden'); // Cache la deuxième alerte
+            document.querySelector('.container-1').style.display = 'grid'; // Affiche le jeu 1
+            startRandomSquareGame(); // Démarre le jeu 1
+        }, 3100); // Temps de chargement (3 secondes + un léger délai)
+    });
+});
+
 // =========================================================================
 // INITIALIZATION
 // =========================================================================
