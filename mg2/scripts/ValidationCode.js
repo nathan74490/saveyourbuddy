@@ -55,17 +55,32 @@ function verifyGameCode(userInput, id_game) {
     .then((response) => response.json())
     .then((game) => {
       console.log(game);
-      if (game && game.mindgame_code) {
+
+      // Trouver le mindgame avec le mindgame_number === 1
+      const mindGame = game.mindgames.find(
+        (mindgame) => mindgame.mindgame_number === '1'
+      );
+
+      // Vérifier si mindgame existe, a le bon statut et un code valide
+      if (
+        mindGame &&
+        mindGame.mindgame_status === 'sucess' &&
+        game.mindgame_code
+      ) {
         const code = game.mindgame_code.toString();
+
+        // Vérifier si le code entré par l'utilisateur est correct
         if (userInput.toString() === code) {
           console.log('Code correct!');
-          updateMindGamesStatus('sucess');
+          updateMindGamesStatus('sucess'); // Appeler la fonction pour mettre à jour le statut
           return true;
         } else {
           console.log('Code incorrect!');
-
           return false;
         }
+      } else {
+        console.log('Mindgame 1 n\'a pas le statut "sucess" ou pas de code.');
+        return false;
       }
     })
     .catch(console.error);
