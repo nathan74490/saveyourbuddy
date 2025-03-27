@@ -2,6 +2,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz";
 const codeCorrect = "echo";
 const codeCorrect2 = "mats"; // Les deux codes possibles
 let btn_sound = new Audio('SOUNDS/btn_pressed.wav')
+let letter_swip = new Audio('SOUNDS/ltr_swipe.wav')
 
 function turnOneDivIdToDisplayNone(id, displayStatus){
     id = document.getElementById(id);
@@ -15,8 +16,12 @@ document.querySelectorAll('.arrow').forEach(arrow => {
         let currentIndex = alphabet.indexOf(digit.textContent);
 
         if (direction === "up") {
+            letter_swip.play();
+            letter_swip.playbackRate=1.5;
             digit.textContent = alphabet[(currentIndex + 1) % alphabet.length];
         } else {
+            letter_swip.play();
+            letter_swip.playbackRate=1.5;
             digit.textContent = alphabet[(currentIndex - 1 + alphabet.length) % alphabet.length];
         }
     });
