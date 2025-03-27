@@ -90,6 +90,7 @@ let goodPosition;
 
 
 function game() {
+    let first_rep = false
     let name_of_button = [];
     //initialisation des variable aléatoire et d'une copie du tableau initiale pour effectuer des actions dessus
     let tab_words = JSON.parse(JSON.stringify(words))
@@ -132,8 +133,9 @@ function game() {
                 const currentWord = tab_words[IndexOfWordReference].reponse[i];
                 const wordIndex = name_of_button.indexOf(currentWord);
 
-                if (wordIndex !== -1) {
+                if (wordIndex !== -1 && first_rep === false) {
                     goodPosition = wordIndex;
+                    first_rep = true
                     break; // Exit the loop once we find a match
                 }
             }
