@@ -528,7 +528,6 @@ function updateGameData(gameId, finalTime, mindgameCode) {
 // CAPSULE INFO FUNCTIONS
 // =========================================================================
 function displayCapsuleInfo(capsuleName) {
-  console.log('Capsule name passed:', capsuleName); // Debugging log
   const normalizedCapsuleName = capsuleName.trim().toLowerCase();
   const capsule = capsules.find(c => c.name.trim().toLowerCase() === normalizedCapsuleName);
 
@@ -544,7 +543,6 @@ function displayCapsuleInfo(capsuleName) {
       <strong>Couleurs :</strong> ${capsule.color.join(", ")}<br>
     `;
   } else {
-    console.warn('No matching capsule found for:', capsuleName); // Debugging log
     infoDisplay.textContent = "Capsule inconnue.";
   }
 }
