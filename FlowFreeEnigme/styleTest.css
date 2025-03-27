@@ -1,18 +1,11 @@
 body {
-    overflow: hidden;
-    font-family: Astonpoliz, sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
-    padding: 20px;
-    background-image: url("assets/background.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: #0A022D;
-}
-
-@font-face {
-    font-family: "Astonpoliz";
-    src: url("fonts/Astonpoliz.ttf");
+    padding: 10px;
+    background-color: #f0f0f0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 h1 {
@@ -20,20 +13,9 @@ h1 {
     margin: 10px 0;
 }
 
-.flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    font-size: 40px;
-    color: #F4AB54;
-    width: 90%;
-    height: 100%;
-}
-
 #game-container {
     display: inline-block;
-    margin: 12vh auto;
+    margin: 10px auto;
     max-width: 100%;
     overflow: hidden;
 }
@@ -48,8 +30,8 @@ h1 {
 }
 
 .cell {
-    width: 60px;
-    height: 60px;
+    width: 110px;
+    height: 110px;
     background-color: #fff;
     border-radius: 5px;
     cursor: pointer;
@@ -103,10 +85,15 @@ button:hover {
     font-weight: bold;
 }
 
-@media (max-width: 600px) {
+#progress-info {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 800px) {
     .cell {
-        width: 50px;
-        height: 50px;
+        width: 80px;
+        height: 80px;
     }
 
     h1 {
@@ -116,5 +103,13 @@ button:hover {
     button {
         padding: 10px 20px;
         font-size: 1rem;
+        min-width: 100px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cell {
+        width: 60px;
+        height: 60px;
     }
 }
