@@ -154,7 +154,7 @@ header {
     height: 160px;
     background-color: #151F66;
     border-radius: 100px;
-    top: 46%;
+    top: 42%;
     left: 50%;
     transform-origin: bottom center;
     transform: translateX(-50%) translateY(-100%);
@@ -212,9 +212,7 @@ header {
     bottom: 130%;
     left: 50%;
     transform: translateX(-50%);
-   
 }
-
 
 #right {
     position: relative;
@@ -277,6 +275,7 @@ header {
     z-index: 9999;
     display: none; 
     font-family: 'serpent';
+    text-align: center;
 }
 .validate-btn {
     border: none;
@@ -284,14 +283,18 @@ header {
     cursor: pointer;
     border-radius: 5px;
     font-family: 'serpent';
-    position: fixed; 
-    bottom: 160px;  
-    right: 100px;   
-    z-index: 9999;   
+    position: fixed;
+    bottom: 100px;
+    right: 15px;
+    z-index: 9999;
     background: none;
     padding: 0;
-    position: fixed;
     display: inline-block;
+    transition: transform 0.1s ease-in-out;
+}
+
+.validate-btn:active {
+    transform: scale(0.9);
 }
 
 .img_valide {

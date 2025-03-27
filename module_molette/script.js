@@ -93,7 +93,7 @@ validateBtn.addEventListener('click', () => {
       // Mettre à jour le dernier cercle en rouge avec le nombre de fautes
       const lastCircle = document.getElementById('lastCircle');
       lastCircle.style.backgroundColor = 'red';
-      lastCircle.innerText = `${5 - correctAnswers} fautes`; // Affichage des fautes
+     
   
       setTimeout(() => {
         // Réinitialiser le dernier cercle après un court délai
@@ -117,7 +117,7 @@ validateBtn.addEventListener('click', () => {
       const lastCircle = document.getElementById('lastCircle');
       
       lastCircle.style.backgroundColor = 'red'; // Le dernier cercle devient rouge en cas d'échec
-      lastCircle.innerText = `${5 - correctAnswers} fautes`; // Affichage des fautes
+  
   
       setTimeout(() => {
         lastCircle.style.backgroundColor = 'black'; // Réinitialiser après un délai
