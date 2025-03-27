@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const gameBoard = document.getElementById('game-board');
-    const newGameBtn = document.getElementById('new-game');
     const restartBtn = document.getElementById('restart');
-    const nextLevelBtn = document.getElementById('next-level');
-    const levelInfo = document.getElementById('level-info');
     const progressInfo = document.getElementById('progress-info');
 
     // Start with a larger board for tablets
@@ -20,9 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initGame();
 
-    newGameBtn.addEventListener('click', initGame);
     restartBtn.addEventListener('click', restartGame);
-    nextLevelBtn.addEventListener('click', nextLevel);
 
     function initGame() {
         level = 1;
@@ -36,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         completedPaths = {};
 
         renderBoard();
-        updateLevelInfo();
         updateProgressInfo();
     }
 
@@ -418,10 +412,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-    }
-
-    function updateLevelInfo() {
-        levelInfo.textContent = `Level: ${level} (${boardSize}x${boardSize})`;
     }
 
     function updateProgressInfo() {

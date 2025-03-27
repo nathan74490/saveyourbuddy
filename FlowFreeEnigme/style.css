@@ -149,7 +149,7 @@ button {
     width: 404px;
     height: 65px;
     flex-shrink: 0;
-    fill: #4DADAC;
+    background-color: #4DADAC;
     stroke-width: 2px;
     stroke: #0A022D;
     box-shadow: -4px -4px 22px 0px rgba(0, 0, 0, 0.60) inset, 4px 4px 18px 0px rgba(0, 0, 0, 0.60) inset;
