@@ -75,7 +75,7 @@ let words = [
         "position": 3
     },
     {
-        "reference": "paradigme",
+        "reference": "paradigm",
         "reponse": ["INFILTRATE", "TACTICAL", "PROTOCOL", "NEXUS", "QUANTUM", "STELLAR", "HORIZON", "DELTA", "ALPHA", "GAMMA", "VECTOR", "SIGMA", "LAMBDA", "OMEGA", "CIPHER", "MAVERICK", "PHANTOM", "SENTINEL", "CRYPTEX", "CHARLIE", "BETA", "TAU", "ZETA", "BRAVO"],
         "position": 2
     }
@@ -85,7 +85,7 @@ let space_of_button = document.getElementById("space_button");
 let ecran = document.getElementById("ecran");
 let score = 0;
 let nbr_de_btn = 6;
-let goodPosition ;
+let goodPosition;
 
 
 
@@ -95,6 +95,9 @@ function game() {
     let tab_words = JSON.parse(JSON.stringify(words))
     let IndexOfWordInScreen = Math.floor(Math.random() * words.length)
     let IndexOfWordReference = Math.floor(Math.random() * words.length)
+    while (IndexOfWordReference === IndexOfWordInScreen){
+        IndexOfWordReference = Math.floor(Math.random() * words.length)
+    }
 
     //initialisation des positions de chaque donnée
     let positionOfWordInScreen = words[IndexOfWordInScreen].position
@@ -109,19 +112,22 @@ function game() {
         let textRandomButton = Math.floor(Math.random() * tab_words[IndexOfWordInScreen].reponse.length);
         //on ajoute ce mot a un bouton
         button.innerHTML = tab_words[IndexOfWordInScreen].reponse[textRandomButton];
+                //on affiche le mot de l'ecran
+        ecran.innerHTML = "<p>" + words[IndexOfWordInScreen].reference + "</p>"
+
         //on ajoute la valeur a un tableau en donnant le meme index que l'id du bouton
         name_of_button.push(tab_words[IndexOfWordInScreen].reponse[textRandomButton])
         //enleve le mot de la copie du tableau pour pas avoir de doublons dans les mots
         tab_words[IndexOfWordInScreen].reponse.splice(textRandomButton, 1)
-        //on affiche le mot de l'ecran
-        ecran.innerHTML = "<p>" + words[IndexOfWordInScreen].reference + "</p>"
+
+
         if (i === positionOfWordInScreen) {
             //si le bouton a le meme id que le
             button.innerHTML = tab_words[IndexOfWordReference].reference.toUpperCase()
-            
+
         }
         button.addEventListener("click", () => {
-            
+
             for (let i = 0; i < tab_words[IndexOfWordReference].reponse.length; i++) {
                 const currentWord = tab_words[IndexOfWordReference].reponse[i];
                 const wordIndex = name_of_button.indexOf(currentWord);
@@ -139,27 +145,33 @@ function game() {
             }
 
             if (i === goodPosition) {
+                console.log("img/"+(4-score)+"/bouton_good_ans.svg")
+                document.getElementsByClassName("rep")[4-score].src = "img/"+(4-score)+"/bouton_good_ans.svg"
                 score++;
                 console.log("wp")
-                document.getElementsByClassName("rep")[score].src="img/bouton_good_ans.svg"
+
                 //score_div.innerHTML = score
             } else {
-                Array.from(document.getElementsByClassName("rep")).forEach(element=>{
-                    element.src = "img/button_reponse.svg"
+                Array.from(document.getElementsByClassName("rep")).forEach((element, index) => {
+                    element.src = "img/"+index+"/button_reponse.svg"
                 })
-                
+
                 fail()
                 score = 0;
                 //score_div.innerHTML = score
             }
             //quand le joueur atteint 5 le jeux se supprime
-            if (score < 4) {
+            if (score < 5) {
                 Array.from(document.getElementsByTagName('button')).forEach(element => element.remove());
                 game()
             } else {
-                Array.from(document.body.children).forEach(element => element.remove());
-                document.body.innerHTML = "bravo tu as gagné"
-                updateModuleStatus("sucess")
+                Array.from(document.body.children).forEach(element => element.classList.add("brigthning"))
+                setTimeout(() => {
+                    Array.from(document.body.children).forEach(element => element.remove());
+                    document.body.innerHTML = "<p id='finish'>bmission acconmplis</p>"
+                    updateModuleStatus("sucess")
+                },2000)
+
             }
         });
     }
@@ -172,9 +184,11 @@ function fail() {
 
         document.getElementById("errorText").style.display = "block"
         clearTimeout(firststep); // Utilisation de clearTimeout pour arrêter le timeout
+        document.getElementById("danger").style.display = "block"
     }, 500);
 
     let reloadShow = setTimeout(() => {
+        document.getElementById("danger").style.display = "none"
         document.getElementById("errorText").innerHTML = "reloading"
         document.getElementById("loading").style.display = "block"
         clearTimeout(reloadShow); // Utilisation de clearTimeout pour arrêter le timeout
@@ -184,7 +198,7 @@ function fail() {
         document.getElementById("errorText").innerHTML = "reloading"
         document.getElementById("loading").style.display = "block"
         clearTimeout(reload); // Utilisation de clearTimeout pour arrêter le timeout
-    }, 2000);
+    }, 3000);
 
 
     let final = setInterval(() => {
@@ -193,5 +207,5 @@ function fail() {
         document.getElementById("fail").style.display = "none";
         document.getElementById("loading").style.display = "none"
         clearInterval(final);
-    }, 6000);
+    }, 7000);
 }
