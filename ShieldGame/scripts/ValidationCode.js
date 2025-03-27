@@ -29,8 +29,38 @@ inputs.forEach((input, index) => {
 
 
 
-function verifyGameCode(userInput, gameId) {
-    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
+let id_game = localStorage.getItem('id_game');
+console.log(id_game);
+
+document.getElementById("codeForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Empêche l'envoi par défaut
+
+    // Récupérer tous les inputs
+    const inputs = document.querySelectorAll(".code-input");
+    let codeComplet = "";
+
+    // Concaténer les valeurs des inputs
+    inputs.forEach(input => {
+        codeComplet += input.value;
+    });
+
+    // Créer un champ caché pour envoyer le code concaténé
+    let hiddenInput = document.createElement("input");
+    hiddenInput.type = "hidden";
+    hiddenInput.name = "full_code";
+    hiddenInput.value = codeComplet;
+
+    // Ajouter l'input caché au formulaire et soumettre
+    this.appendChild(hiddenInput);
+    this.submit();
+    verifyGameCode(codeComplet, id_game);
+});
+
+
+
+
+function verifyGameCode(userInput, id_game) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${id_game}`;
 
     fetch(url)
         .then((response) => response.json())
@@ -39,9 +69,11 @@ function verifyGameCode(userInput, gameId) {
                 const code = game.mindgame_code.toString();
                 if (userInput.toString() === code) {
                     console.log('Code correct!');
+                    updateMindGamesStatus('sucess')
                     return true;
                 } else {
                     console.log('Code incorrect!');
+
                     return false;
                 }
             }
@@ -49,5 +81,3 @@ function verifyGameCode(userInput, gameId) {
         .catch(console.error);
 }
 
-// Example usage:
-verifyGameCode(1234, 190);
