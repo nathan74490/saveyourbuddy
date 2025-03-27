@@ -24,8 +24,8 @@ body {
 }
 
 #container {
-    width: 90%;
-    height: 90%;
+    width: 95%;
+    height: 95%;
     background-image: url('./IMG/bg_letters_img.svg');
     background-size: cover;
     background-position: center;
@@ -75,9 +75,9 @@ body {
 }
 
 .digit {
-    width: 100px;
+    width: 125px;
     height: 125%;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #fff;
     display: flex;
     align-items: center;

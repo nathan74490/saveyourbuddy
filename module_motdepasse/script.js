@@ -1,7 +1,7 @@
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
-const codesCorrects = ["echo", "mats"]; // Les deux codes possibles
-let toggle = 0; // Alterne entre 0 et 1
-
+const codeCorrect = "echo";
+const codeCorrect2 = "mats"; // Les deux codes possibles
+let btn_sound = new Audio('SOUNDS/btn_pressed.wav')
 
 function turnOneDivIdToDisplayNone(id, displayStatus){
     id = document.getElementById(id);
@@ -23,14 +23,14 @@ document.querySelectorAll('.arrow').forEach(arrow => {
 });
 
 document.querySelector('#validate').addEventListener('click', () => {
+    btn_sound.play();
     const code = Array.from(document.querySelectorAll('.digit'))
         .map(d => d.textContent).join('');
 
-    if (code === codesCorrects[toggle]) {
+    if (code === codeCorrect || code === codeCorrect2) {
         turnOneDivIdToDisplayNone('validate', 'none');
         turnOneDivIdToDisplayNone('screen', 'none');
         turnOneDivIdToDisplayNone('screenFinish', 'block');
-        toggle = 1 - toggle; // Alterne entre 0 et 1
         updateModuleStatus('sucess');
     } 
 });
