@@ -14,13 +14,13 @@ body {
     color: white;
     font-family: 'serpent' !important;
     background-image: url(./images/background.png);
-    background-size: contain; /* img non coupé*/
+    background-size: cover;
+    background-size: contain; 
     background-position: center center;
     background-attachment: fixed;
     margin: 0;
     position: relative;
 }
-
 
 
 body::before {
@@ -35,7 +35,7 @@ body::before {
     background-size: cover;
     background-repeat: no-repeat;
     z-index: -1; 
-    pointer-events: none; /* Pour éviter que l'image bloque l'interaction */
+    pointer-events: none;
 }
 
 header {
@@ -70,6 +70,31 @@ header {
     margin-left: 60px; 
 }
 
+@media (max-width: 768px) {
+    .circle {
+        width: 15vw; 
+        height: 15vw;
+    }
+    #check .circle:nth-child(5) {
+        margin-left: 15vw;
+    }
+    body {
+        background-size: cover;  
+    }
+}
+
+@media (max-width: 480px) {
+    .circle {
+        width: 20vw; 
+        height: 20vw;
+    }
+    #check .circle:nth-child(5) {
+        margin-left: 20vw;
+    }
+    body {
+        background-size: cover;
+    }
+}
 
 .led-container {
     position: relative;
@@ -184,31 +209,18 @@ header {
 
 #up {
     position: relative;
-    bottom: 140%;
-    left: 50%;
-    transform: translateX(-50%);
-   
-}
-
-#img_up {
     bottom: 130%;
     left: 50%;
     transform: translateX(-50%);
    
 }
 
+
 #right {
     position: relative;
     top: 30%;
     left: 130%;
     transform: translateY(-50%);
-}
-
-#img_right {
-    top: 30%;
-    left: 130%;
-    transform: translateY(-50%);
-   
 }
 
 #down {
@@ -219,13 +231,6 @@ header {
 
 }
 
-#img_down {
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-   
-}
-
 #left {
     position: relative;
     top: 30%;
@@ -233,11 +238,27 @@ header {
     transform: translateY(-50%);
 }
 
-#img_left {
-    top: 30%;
-    right: 130%;
-    transform: translateY(-50%);
-   
+
+@media (max-width: 768px) {
+    #direction-controls {
+        width: 30vw;
+        height: 30vw;
+    }
+
+    #direction-controls p {
+        font-size: 5vw;
+    }
+}
+
+@media (max-width: 480px) {
+    #direction-controls {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    #direction-controls p {
+        font-size: 6vw;
+    }
 }
 
 #messageBox {
