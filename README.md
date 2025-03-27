@@ -137,6 +137,7 @@ function updateMindgameStatus(gameId, mindgameNumber, mindgameStatus) {
 }
 ```
 
+<<<<<<< HEAD
 ### 7. ## Exemples d'utilisation
 ```javascript
 // Créer une nouvelle partie
@@ -154,3 +155,220 @@ getGameModule(12, 2);
 // Obtenir les informations d'un casse-tête
 getGameMindgame(12, 1);
 ```
+=======
+### 8.Get une team
+```javascript
+function getTeam(teamId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?team=${teamId}`;
+    
+    fetch(url)
+        .then((response) => response.json())
+        .then((team) => {
+            console.log(team);
+        })
+        .catch(console.error);
+}
+```
+
+### 9.Creer un user
+```javascript
+function createUser(nom, prenom, idTeam) {
+    const userData = {
+        type: 'user',
+        nom: nom,
+        prenom: prenom,
+        id_team: idTeam
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+
+```
+
+### 10.Update une team sur le id_game
+```javascript
+function updateTeamGame(teamId, gameId) {
+    const updateData = {
+        type: 'team',
+        id_team: teamId,
+        id_game: gameId
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+```
+
+### 11.create team
+```javascript
+function createTeam(teamName, numero) {
+    const teamData = {
+        type: 'team',
+        team_name: teamName,
+        numero: numero
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(teamData)
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log(data);
+    })
+    .catch(console.error);
+}
+```
+
+### 12. get Game info
+```javascript
+function getGame(gameId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
+    
+    fetch(url)
+        .then((response) => response.json())
+        .then((game) => {
+            console.log(game);
+        })
+        .catch(console.error);
+}
+```
+### 13. get All Teams
+```javascript
+function getTeams() {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?teams`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((teams) => {
+            console.log(teams);
+        })
+        .catch(console.error);
+}
+```
+
+### 14. Update game final time
+```javascript
+function updateGameFinalTime(gameId, finalTime) {
+    const updateData = {
+        type: 'game',
+        id_game: gameId,
+        final_time: finalTime
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+```
+// Example usage:
+updateGameFinalTime(18, '50:00'); // Update final time for game 1
+
+### 15. create random code and Update game code
+```javascript
+
+function generateRandomCode() {
+    const min = 500;
+    const max = 999999;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const randomCode = generateRandomCode();
+console.log(randomCode);
+
+function updateGameData(gameId, finalTime, mindgameCode) {
+    const updateData = {
+        type: 'game',
+        id_game: gameId,
+        final_time: finalTime,
+        mindgame_code: mindgameCode
+    };
+
+    fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updateData)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        })
+        .catch(console.error);
+}
+
+updateGameData(190, null, 1234); 
+```
+
+### 16. Verify if user submarine code is the right one
+```javascript
+function verifyGameCode(userInput, gameId) {
+    const url = `http://192.168.4.60/workshopAPI/api/v1/index.php?game=${gameId}`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((game) => {
+            if (game && game.mindgame_code) {
+                const code = game.mindgame_code.toString();
+                if (userInput.toString() === code) {
+                    console.log('Code correct!');
+                    return true;
+                } else {
+                    console.log('Code incorrect!');
+                    return false;
+                }
+            }
+        })
+        .catch(console.error);
+}
+
+// Example usage:
+verifyGameCode(1234, 190);
+```
+
+### ID-Module:
+
+1. Téléphone cheminement
+2. Retro-proj
+3. Minitel
+4. Configuration led
+
+### ID-Casse-tête:
+
+1. Equipe Bateau
+2. Equipe Sous-Marin
+>>>>>>> 30c443182074b6cfcac20735508eea4392fe773e

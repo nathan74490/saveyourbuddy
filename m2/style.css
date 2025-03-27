@@ -12,27 +12,21 @@
     src: url("font/Astonpoliz.ttf");
 }
 
-#ecran p{
-    font-family: 24pt;
-}
 
 #ecran {
     height: 20vh;
-    width: 60vw;
-    background-color: rgb(0, 0, 0);
-    color: black;
+    width: 50vw;
+    background-image: url("img/bgd_screen.svg");
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'serpent' ;
-    font-size: 40pt;
-    background-size: cover;
+    font-size: clamp(16px, 1.667vw,32px);
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
     color: white;
-    border: solid rgba(226, 124, 5, 1);
-    box-shadow: 0px 0px 30px rgba(226, 124, 5, 1);
 }
 
 
@@ -49,32 +43,42 @@ body {
     padding: 0;
     background-image: url("img/background.svg");
     background-color: black;
+    background-size: cover;
+}
+
+#finish p{
+    color: green;
+    font-family: "serpent";
+    font-size: 56pt;
+    text-align: center;
 }
 
 
 
 #count {
     position: absolute;
-    right: 5%;
-    height: 80%;
-    width: 7%;
+    right: 0%;
+    width: 20%;
     color: white;
     display: flex;
     flex-direction: column;
     gap: 30px;
-
+    
+}
+#count img{
+    width: 100%;
 }
 
 #space_button button {
-    width: 29vw;
+    width: 20vw;
     height: 15vh;
     color: white;
-    font-size: 40pt;
+    font-size:clamp(16px, 1.667vw,32px);
     font-family: 'astropliz';
     border-radius: 12px;
     border: 2px solid #000;
     background: #E07902;
-    box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25), 4px 4px 22px 0px rgba(255, 255, 255, 0.40) inset, -4px -4px 18px 0px rgba(0, 0, 0, 0.40) inset;
+    box-shadow: 0px 4px 12px 9px rgba(0, 0, 0, 0.25), 4px 4px 22px 0px rgba(255, 255, 255, 0.40) inset, -4px -4px 18px 0px rgba(0, 0, 0, 0.40) inset,0px 10px   rgba(102, 55, 0, 1);
     cursor: pointer;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 
@@ -84,11 +88,11 @@ body {
 
 #space_button {
     height: 60vh;
-    width: 60vw;
+    width: 50vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -104,11 +108,14 @@ body {
     align-items: center;
     text-align: center;
 }
+#fail img{
+    display: none;
+}
 
 #fail p {
     display: none;
-    font-size: 80pt;
-    color: rgba(226, 124, 5, 1);
+    font-size: clamp(30px, 4.167vw,80px);
+    color: rgba(225, 7, 10, 1);
     font-family: 'serpent';
     height: 10vh;
 }
@@ -116,7 +123,7 @@ body {
 #loading {
     height: 2vh;
     width: 90vw;
-    background-color: rgba(226, 124, 5, 1);
+    background-color: rgba(225, 7, 10, 1);
     display: none;
 }
 
@@ -132,19 +139,64 @@ body {
         width: 0%;
     }
 
-    10% {
+    5% {
         width: 0%;
     }
 
-    80% {
+    60% {
         width: 50%;
     }
 
-    100% {
+    70% {
         width: 90%;
+        opacity: 1;
+    }
+    75%{
+        opacity: 0;
+    }
+    80%{
+        opacity: 1;
+    }
+    85%{
+        opacity: 0;
+    }
+    90%{
+        opacity: 1;
+
+    }
+    95%{
+        background-color: rgba(225, 7, 10, 1);
+    }
+    100%{
+        opacity: 1;
+        background-color: #E07902;
     }
 }
 
+
+.brigthning {
+    animation: brigth 2s forwards;
+}
+
+
+@keyframes brigth{
+    0%{
+        filter: brightness(1);
+    }
+    25%{
+        filter: brightness(2);
+    }
+    50%{
+        filter: brightness(1);
+    }
+    75%{
+        filter: brightness(2);
+    }
+    100%{
+        filter: brightness(2);
+    }
+
+}
 .key {
     cursor: pointer;
     transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -152,5 +204,6 @@ body {
 
 #space_button button:active {
     transform: translate(0px, 8px);
-    box-shadow: 0px 0px 2px 2px var(--tertiary);
+    box-shadow: 0px 0px;
+    border: solid 2px rgb(255, 190, 39);
 }
