@@ -1,115 +1,165 @@
-*{
-    font-family: 'Minecraftia', sans-serif;
+* {
+    font-family: 'Serpent', sans-serif;
+    box-sizing: border-box;
 }
 
-:root{
-    --primary: #377a97;
-    --tertiary: #343332;
+@font-face {
+    font-family: 'Serpent';
+    src: url('./FONTS/serpent.ttf');
 }
+
 body {
     background-image: url('./IMG/bg_img.svg');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #fff;
     text-align: center;
     margin: 0;
+    width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.checkCircle{
-    position: absolute;
-    top: 100px;
-    right: 100px;
-    width: 200px; 
-    height: 200px;
-    background-repeat: no-repeat;
 
-}
-.container {
-    width: 95vw;
-    height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-}
-.screen {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-content: center;
-    background-color: black;
+#container {
+    width: 90%;
+    height: 90%;
+    background-image: url('./IMG/bg_letters_img.svg');
     background-size: cover;
     background-position: center;
-    padding: 30px;
-    border-radius: 10px;
-    width: fit-content;
-    border: 5px solid #377a97;
-    gap: 0;
-    position: relative;
-    box-shadow: 0px 0px 40px 5px #377a97;
-}
-.column {
     display: flex;
     flex-direction: column;
-    justify-content : center;
+    justify-content: center;
     align-items: center;
-    padding: 100px;
-    position: relative;
-    gap: 75px;
+}
 
+#screen {
+    display: flex;
+    justify-content: center;
+    padding: 12%;
+    gap: 10%;
+    position: relative;
+    transform: translateY(-70px);
 }
-.column:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    height: 110%;
-    width: 5px;
-    background-color: #347590; /* Blanc semi-transparent */
-}
+
 .arrow {
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     user-select: none;
-    color: #fff;
-    width: 30px;
-    height: 30px;
+    width: 50%;
+    height: 50%;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    margin-left: 30%;
 }
+
+.up {
+    margin-bottom: 2%;
+}
+
+.up:active {
+    transform: translate(0px, 8px);
+    fill: white;
+}
+
+.down {
+    margin-top: 2%;
+}
+
+.down:active {
+    transform: translate(0px, -8px);
+    fill: white;
+}
+
 .digit {
-    width: 80px;
-    height: 200px;
-    font-size: 7rem;
-    color: #ff0;
+    width: 100px;
+    height: 125%;
+    font-size: 2.5rem;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
-    margin-left: 15px;
+    margin-left: 10px;
+    border: solid 5px #387995;
 }
-.validate {
-    background: linear-gradient() ;
-    background-color: var(--primary);
-    width: 12%;
+
+#validate {
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
+    flex-direction: column;
+
+    position: relative;
+
+}
+
+#validate img:first-child {
+    margin-left: 20%;
+    width: 60%;
+    z-index: 10;
     cursor: pointer;
-    box-shadow: 0px 9px 1px var(--tertiary);
-    border-radius: 10px;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    color : white;
-    font-size: 1.5rem;
-    margin-top: 50px;
-    padding: 25px;
+}
+
+#validate img:active {
+    transform: translate(0px, 10px);
+}
+
+#validate p {
+    z-index: 20;
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+
+    user-select: none;
+}
+
+#backButton {
+    margin-left: 20%;
+    width: 60%;
+    position: absolute;
+    bottom: -30%;
+    z-index: 1;
+}
+
+#screenFinish {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    font-family: Serpent;
+    /* display: block; */
+    display: none;
+ 
 }
  
-.validate:active {
-    transform: translateY(4px);
-    border-radius: 2px;
-    box-shadow: 0px 0px 0px var(--tertiary);
+#backgroundFinish {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+#backgroundFinish img {
+    /* width: 100%; */
+    /* height: 100%; */
+    object-fit: cover;
+    max-width: 200%;
+    max-height: 200%;
+}
+ 
+#screenFinish p {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
  

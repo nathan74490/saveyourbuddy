@@ -1,7 +1,12 @@
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const codesCorrects = ["ECHO", "MATS"]; // Les deux codes possibles
+const alphabet = "abcdefghijklmnopqrstuvwxyz";
+const codesCorrects = ["echo", "mats"]; // Les deux codes possibles
 let toggle = 0; // Alterne entre 0 et 1
 
+
+function turnOneDivIdToDisplayNone(id, displayStatus){
+    id = document.getElementById(id);
+    id.style.display = displayStatus;
+}
 document.querySelectorAll('.arrow').forEach(arrow => {
     arrow.addEventListener('click', () => {
         let index = arrow.dataset.index;
@@ -17,18 +22,15 @@ document.querySelectorAll('.arrow').forEach(arrow => {
     });
 });
 
-document.querySelector('.validate').addEventListener('click', () => {
+document.querySelector('#validate').addEventListener('click', () => {
     const code = Array.from(document.querySelectorAll('.digit'))
         .map(d => d.textContent).join('');
 
     if (code === codesCorrects[toggle]) {
-        document.querySelector('.checkCircle').style.backgroundImage = "url('IMG/green_btn.svg')";
+        turnOneDivIdToDisplayNone('validate', 'none');
+        turnOneDivIdToDisplayNone('screen', 'none');
+        turnOneDivIdToDisplayNone('screenFinish', 'block');
         toggle = 1 - toggle; // Alterne entre 0 et 1
         updateModuleStatus('sucess');
-    } else {
-        document.querySelector('.checkCircle').style.backgroundImage = "url('IMG/red_btn.svg')";
-        setTimeout(() => {
-            document.querySelector('.checkCircle').style.backgroundImage = "url('IMG/gray_btn.svg')";
-        }, 1000);
-    }
+    } 
 });
