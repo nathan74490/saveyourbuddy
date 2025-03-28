@@ -341,6 +341,26 @@ function verifyGameCode(userInput, gameId) {
 verifyGameCode(1234, 190);
 ```
 
+### 17 mettre à jour le satus d'une partie : 
+async function updateGameStatus(gameId, status) {
+    return fetch('http://localhost:8888/workshopAPI/api/v1/index.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            type: 'game',
+            id_game: gameId,
+            game_status: status
+        })
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Usage example:
+updateGameStatus(351, "sucess");
+
 ### ID-Module:
 
 1. Téléphone cheminement
