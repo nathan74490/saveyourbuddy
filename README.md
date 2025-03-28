@@ -344,7 +344,7 @@ verifyGameCode(1234, 190);
 ### 17 mettre à jour le satus d'une partie : 
 ```javascript
 async function updateGameStatus(gameId, status) {
-    return fetch('http://localhost:8888/workshopAPI/api/v1/index.php', {
+    return fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
