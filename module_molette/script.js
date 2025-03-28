@@ -5,6 +5,7 @@ const ledContainer = document.getElementById('ledContainer');
 const validateBtn = document.getElementById('validate');
 const messageBox = document.getElementById('messageBox');
 const checkCircle = document.querySelector('.circle');
+const correctSound = document.getElementById('correctSound');
 
 // Variables de suivi du jeu
 let rotation = 0;
@@ -77,41 +78,36 @@ function updateLEDs() {
 }
 // Fonction de validation des réponses
 validateBtn.addEventListener('click', () => {
-    if (rotation === correctPosition) {
-      correctAnswers++; // Incrémenter le nombre de bonnes réponses
-  
-      // Changer la couleur des cercles en vert pour chaque bonne réponse
+  if (rotation === correctPosition) {
+      correctAnswers++;
+
+      // Lire le son de validation
+      correctSound.play().catch(error => console.log('Erreur de lecture du son:', error));
+
+      // Mettre à jour l'affichage des cercles
       const circles = document.querySelectorAll('.circle');
       circles.forEach((circle, index) => {
-        if (index < correctAnswers) {
-          circle.style.backgroundColor = 'green'; // Vert pour les réponses correctes
-        } else if (circle.style.backgroundColor !== 'green') {
-          circle.style.backgroundColor = 'black'; // Noir pour les réponses restantes
-        }
+          if (index < correctAnswers) {
+              circle.style.backgroundColor = 'green';
+          } else if (circle.style.backgroundColor !== 'green') {
+              circle.style.backgroundColor = 'black';
+          }
       });
-  
-      // Mettre à jour le dernier cercle en rouge avec le nombre de fautes
-      const lastCircle = document.getElementById('lastCircle');
-      lastCircle.style.backgroundColor = 'red';
-     
-  
-      setTimeout(() => {
-        // Réinitialiser le dernier cercle après un court délai
-        lastCircle.innerText = '';
-      }, 500);
-  
-      console.log(correctAnswers);
+
+      // Vérifier si la mission est accomplie
+      if (correctAnswers >= 4) {
+          messageBox.innerText = 'Mission accomplie!';
+          messageBox.style.display = 'flex';
+          validateBtn.disabled = true;
+          sonar.style.pointerEvents = 'none';
+      }
+
       newCorrectPosition();
       updateLEDs();
+  } else {
+      // Mauvaise réponse → gestion des erreurs (déjà existante)
   
-      if (correctAnswers >= 4) {
-        messageBox.innerText = 'mission accomplie!';
-        messageBox.style.display = 'flex';
-        validateBtn.disabled = true;
-        sonar.style.pointerEvents = 'none';
-        updateModuleStatus('sucess');
-      }
-    } else {
+
       // Ne pas réinitialiser les cercles verts, mais seulement mettre le dernier cercle en rouge
       const circles = document.querySelectorAll('.circle');
       const lastCircle = document.getElementById('lastCircle');
