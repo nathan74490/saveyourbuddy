@@ -328,7 +328,7 @@ function updateScoreForGame1() {
   if (currentScore >= maxGame1Score) {
     clearInterval(game1Interval);
     gameContainer1.innerHTML = '';
-    showTransitionScreen("la capsule est a 6000 m de profondeur mais on ne connais pas sa localisation. Trouve la grâce au radar et vérifie les informations lorsque tu clique sur les points.", "phase 2 redémarrage");
+    showTransitionScreen("la capsule est a 6000 m de profondeur mais on ne connais pas sa localisation. Trouve la grâce au radar et vérifie les informations lorsque tu clique sur les points.", "phase 2 redemarrage");
     currentGameState = gameStates.TRANSITION1;
   }
 }
@@ -512,7 +512,6 @@ function showTransitionScreen(message, title) {
 
   transitionScreen.style.display = 'flex';
 
-  // Hide all game containers
   document.querySelectorAll('.container-1, .container-2, .container-3').forEach(el => {
     el.style.display = 'none';
   });
@@ -635,12 +634,21 @@ document.getElementById('confirm-button').addEventListener('click', () => {
   const confirmationMessage = document.getElementById('confirmation-message');
 
   if (activePoint && activePoint.getAttribute('data-label') === 'HYDRA-3X') {
-    showTransitionScreen("Retrouve les paires  pour restaurer les données et reactiver les connexions a la capsule.", "phase 3 redémarrage");
+    showTransitionScreen("Retrouve les paires  pour restaurer les données et reactiver les connexions a la capsule.", "phase 3 redemarrage");
     currentGameState = gameStates.TRANSITION2;
   } else {
     confirmationMessage.textContent = 'Échec ! Ce n\'est pas la bonne capsule.';
     confirmationMessage.style.color = 'red';
   }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const alertScreen = document.getElementById('alert-screen-1');
+  const restartButton = document.getElementById('restart-button');
+
+  restartButton.addEventListener('click', () => {
+      alertScreen.classList.add('hidden');
+  });
 });
 
 // =========================================================================
@@ -654,5 +662,4 @@ function initializeGame() {
   initializeMemoryGame();
 }
 
-// Start the game
 initializeGame();

@@ -35,7 +35,7 @@
 }
 
 body {
-    height: 100dvh;
+    height: 100vh;
     background-color: var(--midnight);
     display: flex;
     justify-content: center;
@@ -703,3 +703,69 @@ h2 {
     margin: 2rem 0;
   }
   
+
+/* Fenêtre d'alerte */
+.alert-screen.hidden {
+    display: none;
+}
+
+.alert-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#alert-screen-1 {
+    background-image: url('./assets/images/alert.svg');
+}
+
+.restart-section{
+    position: absolute;
+    bottom: 15%;
+}
+
+/* Bouton Redémarrer */
+.restart-button {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 250px; /* Augmente la largeur du bouton */
+    height: 100px; /* Augmente la hauteur du bouton */
+}
+
+.button-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adapte à la taille du bouton */
+    height: 100%; /* Adapte à la taille du bouton */
+    object-fit: contain;
+    z-index: 1;
+}
+
+.restart-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%; /* Ajuste la taille de l'image interne */
+    height: 90%; /* Ajuste la taille de l'image interne */
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.1s ease;
+}
+
+.restart-button:active .restart-image {
+    transform: translateY(10px);
+}
+
