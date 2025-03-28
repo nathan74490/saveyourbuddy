@@ -4,7 +4,6 @@ const aiguille = document.getElementById('aiguille');
 const ledContainer = document.getElementById('ledContainer');
 const validateBtn = document.getElementById('validate');
 const messageBox = document.getElementById('messageBox');
-const correctSound = document.getElementById('correctSound');
 
 // Variables de suivi du jeu
 let rotation = 0;
@@ -114,10 +113,31 @@ sonar.addEventListener("click", () => {
 });
 
 
-// sonar.addEventListener("click", () => {
-//   rotation  += 90;  // Tourner de 90° à chaque clic (Nord -> Est -> Sud -> Ouest)
-  
-//   if (rotation > 360) rotation = 90;  // Réinitialiser la rotation à 0 (Nord) après avoir atteint 360°
-  
-//   aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;  // Appliquer la rotation
-// });
+// Sélection de l'élément audio
+const ambientSound = document.getElementById('ambientSound');
+const aiguilleSound = document.getElementById('aiguilleSound');
+const correctSound = document.getElementById('correctSound');
+
+
+// Fonction pour démarrer le son dès le chargement de la page
+window.addEventListener('load', () => {
+    ambientSound.volume = 0.1;
+  ambientSound.play().catch((error) => {
+    console.log('Erreur lors de la lecture du son d\'ambiance:', error);
+  });
+});
+
+// Gestion du clic sur l'aiguille
+aiguille.addEventListener('click', () => {
+
+    aiguilleSound.volume = 1; 
+  // Lire le son de l'aiguille à chaque clic
+  aiguilleSound.play().catch((error) => {
+    console.log('Erreur lors de la lecture du son de l\'aiguille:', error);
+  });
+
+  // Rotation de l'aiguille
+  rotation = (rotation + 90) % 360;
+  aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
+
+});
