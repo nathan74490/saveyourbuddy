@@ -194,10 +194,9 @@
 //   const timerInterval = setInterval(updateOxygenBar, 1000);
 // }
 
-
-
 const containerModule = document.querySelector('.table-iframe');
 const container = document.querySelector('.table-iframe-mindgames');
+const timer = document.querySelector('.gauge');
 const play = document.querySelector('#play');
 
 play.addEventListener('click', () => {
@@ -210,9 +209,13 @@ function getGames() {
     .then((games) => {
       let IdGame = games[games.length - 1];
       lastIdGame = IdGame.id_game;
+      mysqlDateTime = IdGame.game_time;
+      console.log(mysqlDateTime);
       console.log('id de la game (bateau): ' + lastIdGame);
       localStorage.setItem('idGame', lastIdGame);
       loadMindGAmes(lastIdGame);
+      timer.style.display = 'block';
+      //initializeOxygenBar(mysqlDateTime);
     })
     .catch(console.error);
 }
@@ -221,3 +224,5 @@ function loadMindGAmes(lastIdGame) {
   iframeMindGames = `<iframe src="mg1?idGame=${lastIdGame}&nbMindGame="1" frameborder="0"></iframe>`;
   container.innerHTML = iframeMindGames;
 }
+
+

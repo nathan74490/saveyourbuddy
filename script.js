@@ -149,6 +149,7 @@
 let tabMindGames = [];
 const containerModule = document.querySelector('.table-iframe');
 const container = document.querySelector('.table-iframe-mindgames');
+const timer = document.querySelector('.gauge');
 const play = document.querySelector('#play');
 
 window.addEventListener('message', (event) => {
@@ -196,6 +197,7 @@ window.addEventListener('message', (event) => {
 play.addEventListener('click', () => {
   getGames();
   containerModule.style.display = 'none';
+  play.style.display = 'none';
 });
 
 function getGames() {
@@ -204,10 +206,13 @@ function getGames() {
     .then((games) => {
       let IdGame = games[games.length - 1];
       lastIdGame = IdGame.id_game;
+      mysqlDateTime = IdGame.game_time;
       console.log('id de la game (capsule): ' + lastIdGame);
       localStorage.setItem('idGame', lastIdGame);
       loadMindGAmes(lastIdGame);
       loadModule(lastIdGame);
+      timer.style.display = 'block';
+      //initializeOxygenBar(mysqlDateTime);
     })
     .catch(console.error);
 }
@@ -367,6 +372,25 @@ function checkIfAllModulesSuccess() {
     ) {
       console.log(`Tous les modules du jeu ${game.id_game} sont en succès !`);
       containerModule.style.display = 'none';
+      timer.style.display = 'block';
+      /*mettre à jour le statut de la gamevisual*/
+      updateGameStatus(game.id_game, 'sucess');
     }
   });
+}
+
+async function updateGameStatus(gameId, status) {
+  return fetch('http://192.168.4.60/workshopAPI/api/v1/index.php', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      type: 'game',
+      id_game: gameId,
+      game_status: status,
+    }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error('Error:', error));
 }
