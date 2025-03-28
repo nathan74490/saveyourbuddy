@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPath = [];
     let completedPairs = 0;
     let isTouchDevice = 'ontouchstart' in window;
+    let isDrawing = false;
+    let lastDrawnCell = null;
+
 
     initGame();
 
@@ -232,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+// Modify your renderBoard function to include better touch handling
     function renderBoard() {
         gameBoard.innerHTML = '';
         gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 110px)`;
@@ -243,13 +247,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (board[x][y] > 0) {
                     cell.classList.add(`color-${board[x][y]}`);
-
-                    // Mark endpoints
                     if (isEndpoint(x, y, board[x][y])) {
                         cell.classList.add('endpoint');
                     }
-
-                    // If this is part of a completed path (but not an endpoint)
                     if (completedPaths[`${x},${y}`] && !isEndpoint(x, y, board[x][y])) {
                         cell.classList.add('path');
                     }
@@ -258,34 +258,63 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.dataset.x = x;
                 cell.dataset.y = y;
 
-                // Use both touch and mouse events for better tablet support
-                if (isTouchDevice) {
-                    cell.addEventListener('touchstart', (e) => {
-                        e.preventDefault();
-                        handleCellClick(x, y);
-                    });
-                    cell.addEventListener('touchmove', (e) => {
-                        e.preventDefault();
-                        const touch = e.touches[0];
-                        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-                        if (element && element.classList.contains('cell')) {
-                            const x = parseInt(element.dataset.x);
-                            const y = parseInt(element.dataset.y);
-                            handleCellHover(x, y);
+                // Touch events for mobile
+                cell.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    isDrawing = true;
+                    handleCellInteraction(x, y);
+                });
+
+                cell.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (!isDrawing) return;
+
+                    const touch = e.touches[0];
+                    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+                    if (element && element.classList.contains('cell')) {
+                        const x = parseInt(element.dataset.x);
+                        const y = parseInt(element.dataset.y);
+                        if (!lastDrawnCell || lastDrawnCell.x !== x || lastDrawnCell.y !== y) {
+                            handleCellInteraction(x, y);
+                            lastDrawnCell = {x, y};
                         }
-                    });
-                } else {
-                    cell.addEventListener('click', () => handleCellClick(x, y));
-                    cell.addEventListener('mouseover', () => handleCellHover(x, y));
-                }
+                    }
+                });
+
+                cell.addEventListener('touchend', () => {
+                    isDrawing = false;
+                    lastDrawnCell = null;
+                });
+
+                // Mouse events for desktop
+                cell.addEventListener('mousedown', () => {
+                    isDrawing = true;
+                    handleCellInteraction(x, y);
+                });
+
+                cell.addEventListener('mouseover', () => {
+                    if (isDrawing) {
+                        handleCellInteraction(x, y);
+                    }
+                });
+
+                cell.addEventListener('mouseup', () => {
+                    isDrawing = false;
+                });
 
                 gameBoard.appendChild(cell);
             }
         }
     }
 
-    function handleCellClick(x, y) {
+// New unified interaction handler
+    function handleCellInteraction(x, y) {
         const cellValue = board[x][y];
+
+        // If clicking on a completed path, ignore
+        if (completedPaths[`${x},${y}`]) {
+            return;
+        }
 
         // If clicking on a color dot
         if (cellValue > 0) {
@@ -293,7 +322,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (selectedColor === cellValue) {
                 // If clicking on the starting point again, continue the path
                 if (currentPath.length > 0 && currentPath[0].x === x && currentPath[0].y === y) {
-                    // Allow continuing the path
                     return;
                 }
                 // Otherwise complete the path
