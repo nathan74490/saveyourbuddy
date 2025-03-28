@@ -481,7 +481,7 @@ h2 {
 
 
 /* ============== */
-/* CONFIRMATION BUTTON (LEFT EXACTLY AS WAS) */
+/* CONFIRMATION BUTTON */
 /* ============== */
 .confirmation-section {
     width: 100%;
@@ -521,6 +521,32 @@ h2 {
     transform: scale(0.95);
 }
 
+.start-button {
+    width: 100px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.1s ease;
+}
+
+.start-button:active {
+    transform: scale(0.95);
+}
+
+.transition-button {
+    background-repeat: no-repeat;
+    position: relative;
+    width: 200px;
+    margin: 0 auto;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+}
+
 .confirm-button {
     background-repeat: no-repeat;
     position: relative;
@@ -556,3 +582,124 @@ h2 {
 .confirm-button:active .confirm-image {
     transform: translateY(10px);
 }
+
+#start-button {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+}
+
+#start-button .button-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+#start-button .confirm-image {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.1s ease;
+}
+
+#start-button:active .confirm-image {
+    transform: translateY(10px);
+}
+
+#continue-button {
+    position: relative;
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    cursor: pointer;
+    display: block;
+    overflow: hidden;
+}
+
+#continue-button .button-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+#continue-button .confirm-image {
+    position: absolute;
+    top: -15px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    transition: transform 0.1s ease;
+}
+
+#continue-button:active .confirm-image {
+    transform: translateY(10px);
+}
+
+/* ============== */
+/* START & TRANSITION SCREENS */
+/* ============== */
+.start-screen,
+.transition-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 140%;
+  background-color: #000;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-image: url('./assets/images/blank_info.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.start-screen h2 {
+  font-family: 'serpent';
+  color: var(--cyan);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--cyan);
+}
+
+.start-screen p,
+.transition-message {
+  font-family: 'astonpoliz';
+  color: var(--cyan);
+  width: 50%;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 2rem 0;
+}
+
+.transition-title {
+    font-family: 'serpent';
+    color: var(--cyan);
+    width: 50%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+  }
+  

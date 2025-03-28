@@ -13,6 +13,17 @@ const squareColors = {
 const codeDigits = ['_', '_', '_', '_', '_', '_'];
 const cardImages = ['anchor', 'coral', 'helmet', 'medusa', 'O2', 'shell'];
 
+// Game states
+const gameStates = {
+  START: 'start',
+  GAME1: 'game1',
+  TRANSITION1: 'transition1',
+  GAME2: 'game2',
+  TRANSITION2: 'transition2',
+  GAME3: 'game3',
+  END: 'end'
+};
+
 // =========================================================================
 // DOM ELEMENTS
 // =========================================================================
@@ -32,6 +43,7 @@ let currentScore = 0;
 let game1Interval;
 let activePoint = null;
 let gamesCompleted = 0;
+let currentGameState = gameStates.START;
 
 // =========================================================================
 // RADAR POINTS CONFIGURATION
@@ -316,12 +328,8 @@ function updateScoreForGame1() {
   if (currentScore >= maxGame1Score) {
     clearInterval(game1Interval);
     gameContainer1.innerHTML = '';
-    document.querySelector('.container-1').style.display = 'none';
-    document.querySelector('.container-2').style.display = 'flex';
-    document.querySelector('.progress').classList.add('hidden');
-    stopRandomSquareGame();
-    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-    revealCodeDigits(0, randomDigits.map(String));
+    showTransitionScreen("la capsule est a 6000 m de profondeur mais on ne connais pas sa localisation. Trouve la grâce au radar et vérifie les informations lorsque tu clique sur les points.", "phase 2 redémarrage");
+    currentGameState = gameStates.TRANSITION1;
   }
 }
 
@@ -485,9 +493,66 @@ function revealCodeDigits(startIndex, digits) {
 }
 
 // =========================================================================
+// SCREEN MANAGEMENT
+// =========================================================================
+function showStartScreen() {
+  currentGameState = gameStates.START;
+  document.querySelector('.start-screen').style.display = 'flex';
+  document.querySelectorAll('.container-1, .container-2, .container-3, #end-screen, .transition-screen').forEach(el => {
+    el.style.display = 'none';
+  });
+}
+
+function showTransitionScreen(message, title) {
+  currentGameState = gameStates[`TRANSITION${gamesCompleted + 1}`];
+  const transitionScreen = document.querySelector('.transition-screen');
+
+  transitionScreen.querySelector('.transition-title').textContent = title || 'Transition';
+  transitionScreen.querySelector('.transition-message').textContent = message;
+
+  transitionScreen.style.display = 'flex';
+
+  // Hide all game containers
+  document.querySelectorAll('.container-1, .container-2, .container-3').forEach(el => {
+    el.style.display = 'none';
+  });
+}
+
+function hideTransitionScreen() {
+  document.querySelector('.transition-screen').style.display = 'none';
+}
+
+function startGame1() {
+  currentGameState = gameStates.GAME1;
+  document.querySelector('.start-screen').style.display = 'none';
+  document.querySelector('.container-1').style.display = 'grid';
+  startRandomSquareGame();
+}
+
+function continueToNextGame() {
+  hideTransitionScreen();
+  
+  if (currentGameState === gameStates.TRANSITION1) {
+    currentGameState = gameStates.GAME2;
+    document.querySelector('.progress').classList.add('hidden');
+    document.querySelector('.container-2').style.display = 'flex';
+    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+    revealCodeDigits(0, randomDigits.map(String));
+  } 
+  else if (currentGameState === gameStates.TRANSITION2) {
+    currentGameState = gameStates.GAME3;
+    document.querySelector('.container-3').style.display = 'flex';
+    document.querySelector('.progress-2').classList.remove('hidden');
+    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
+    revealCodeDigits(2, randomDigits.map(String));
+  }
+}
+
+// =========================================================================
 // GAME END FUNCTIONS
 // =========================================================================
 function showEndScreen() {
+  currentGameState = gameStates.END;
   document.querySelector('.container-1').style.display = 'none';
   document.querySelector('.container-2').style.display = 'none';
   document.querySelector('.container-3').style.display = 'none';
@@ -547,20 +612,6 @@ function displayCapsuleInfo(capsuleName) {
   }
 }
 
-function decryptCapsuleData(capsuleName) {
-  const capsule = capsules.find(c => c.name === capsuleName);
-  if (capsule && capsule.name.includes('?')) {
-    capsule.name = "Decrypted Name";
-    capsule.manufacturer = "Decrypted Manufacturer";
-    capsule.year = "Decrypted Year";
-    capsule.depthLimit = "Decrypted Depth Limit";
-    capsule.survivalTime = "Decrypted Survival Time";
-    capsule.extendedSurvivalTime = "Decrypted Extended Survival Time";
-    capsule.material = "Decrypted Material";
-    capsule.color = ["Decrypted Color 1", "Decrypted Color 2"];
-  }
-}
-
 // =========================================================================
 // GAME CONTROL FUNCTIONS
 // =========================================================================
@@ -577,16 +628,15 @@ function stopRandomSquareGame() {
 // =========================================================================
 // EVENT LISTENERS
 // =========================================================================
+document.getElementById('start-button').addEventListener('click', startGame1);
+document.getElementById('continue-button').addEventListener('click', continueToNextGame);
 
 document.getElementById('confirm-button').addEventListener('click', () => {
   const confirmationMessage = document.getElementById('confirmation-message');
 
   if (activePoint && activePoint.getAttribute('data-label') === 'HYDRA-3X') {
-    document.querySelector('.container-2').style.display = 'none';
-    document.querySelector('.container-3').style.display = 'flex';
-    document.querySelector('.progress-2').classList.remove('hidden');
-    const randomDigits = [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)];
-    revealCodeDigits(2, randomDigits.map(String));
+    showTransitionScreen("Retrouve les paires  pour restaurer les données et reactiver les connexions a la capsule.", "phase 3 redémarrage");
+    currentGameState = gameStates.TRANSITION2;
   } else {
     confirmationMessage.textContent = 'Échec ! Ce n\'est pas la bonne capsule.';
     confirmationMessage.style.color = 'red';
@@ -596,8 +646,13 @@ document.getElementById('confirm-button').addEventListener('click', () => {
 // =========================================================================
 // INITIALIZATION
 // =========================================================================
-updateScoreForGame1();
-renderGridLines();
-setupRadarPoints();
-startRandomSquareGame();
-initializeMemoryGame();
+function initializeGame() {
+  showStartScreen();
+  updateScoreForGame1();
+  renderGridLines();
+  setupRadarPoints();
+  initializeMemoryGame();
+}
+
+// Start the game
+initializeGame();
