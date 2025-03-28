@@ -4,7 +4,6 @@ const aiguille = document.getElementById('aiguille');
 const ledContainer = document.getElementById('ledContainer');
 const validateBtn = document.getElementById('validate');
 const messageBox = document.getElementById('messageBox');
-const checkCircle = document.querySelector('.circle');
 const correctSound = document.getElementById('correctSound');
 
 // Variables de suivi du jeu
@@ -13,7 +12,6 @@ let correctPosition = 0;
 let leds = [];
 let correctAnswers = 0;
 const maxMistakes = 2;
-let ledRotation = 0;
 
 // Données des LEDs
 const ledData = [
@@ -47,12 +45,11 @@ function newCorrectPosition() {
   const angles = [0, 90, 180, 270];
   const randomIndex = Math.floor(Math.random() * angles.length);
   correctPosition = angles[randomIndex];
+  console.log('Nouvelle position correcte:', correctPosition);
 }
-newCorrectPosition();
 
-console.log(correctPosition);
-// Fonction pour mettre à jour l'affichage des LEDs
 function updateLEDs() {
+  console.log('Mise à jour des LEDs avec correctPosition:', correctPosition);
   leds.forEach((led, index) => {
     let currentLed = ledData[index];
     let active = false;
@@ -76,87 +73,37 @@ function updateLEDs() {
     led.style.boxShadow = active ? '0 0 10px 1px white' : 'none';
   });
 }
-// Fonction de validation des réponses
+
 validateBtn.addEventListener('click', () => {
+  console.log('Validation : rotation =', rotation, ', correctPosition =', correctPosition);
   if (rotation === correctPosition) {
-      correctAnswers++;
+    correctAnswers++;
+    correctSound.play().catch(error => console.log('Erreur de lecture du son:', error));
 
-      // Lire le son de validation
-      correctSound.play().catch(error => console.log('Erreur de lecture du son:', error));
+    document.querySelectorAll('.circle').forEach((circle, index) => {
+      circle.style.backgroundColor = index < correctAnswers ? 'green' : 'black';
+    });
 
-      // Mettre à jour l'affichage des cercles
-      const circles = document.querySelectorAll('.circle');
-      circles.forEach((circle, index) => {
-          if (index < correctAnswers) {
-              circle.style.backgroundColor = 'green';
-          } else if (circle.style.backgroundColor !== 'green') {
-              circle.style.backgroundColor = 'black';
-          }
-      });
-
-      // Vérifier si la mission est accomplie
-      if (correctAnswers >= 4) {
-          messageBox.innerText = 'Mission accomplie!';
-          messageBox.style.display = 'flex';
-          validateBtn.disabled = true;
-          sonar.style.pointerEvents = 'none';
-      }
-
-      newCorrectPosition();
-      updateLEDs();
-  } else {
-      // Mauvaise réponse → gestion des erreurs (déjà existante)
-  
-
-      // Ne pas réinitialiser les cercles verts, mais seulement mettre le dernier cercle en rouge
-      const circles = document.querySelectorAll('.circle');
-      const lastCircle = document.getElementById('lastCircle');
-      
-      lastCircle.style.backgroundColor = 'red'; // Le dernier cercle devient rouge en cas d'erreur
-  
-  
-      setTimeout(() => {
-        lastCircle.style.backgroundColor = 'black'; // Réinitialiser après un délai
-        lastCircle.innerText = ''; // Effacer le texte
-      }, 900);
-  
-      console.log(correctAnswers);
+    if (correctAnswers >= 4) {
+      messageBox.innerText = 'mission accomplie!';
+      messageBox.style.display = 'flex';
+      validateBtn.disabled = true;
+      sonar.style.pointerEvents = 'none';
     }
-  });
-  updateLEDs();  
 
-// Gestion du clic sur le sonar
+    newCorrectPosition();
+    setTimeout(updateLEDs, 100);
+  } else {
+    document.getElementById('lastCircle').style.backgroundColor = 'red';
+    setTimeout(() => {
+      document.getElementById('lastCircle').style.backgroundColor = 'black';
+    }, 900);
+  }
+});
+
+updateLEDs();
+
 sonar.addEventListener("click", () => {
-  rotation += 90;  // Tourner de 90° à chaque clic (Nord -> Est -> Sud -> Ouest)
-  
-  if (rotation === 0) rotation = 0;  // Réinitialiser la rotation à 0 (Nord) après avoir atteint 360°
-  
-  aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;  // Appliquer la rotation
-});
-
-// Sélection de l'élément audio
-const ambientSound = document.getElementById('ambientSound');
-const aiguilleSound = document.getElementById('aiguilleSound');
-
-// Fonction pour démarrer le son dès le chargement de la page
-window.addEventListener('load', () => {
-    ambientSound.volume = 0.1;
-  ambientSound.play().catch((error) => {
-    console.log('Erreur lors de la lecture du son d\'ambiance:', error);
-  });
-});
-
-// Gestion du clic sur l'aiguille
-aiguille.addEventListener('click', () => {
-
-    aiguilleSound.volume = 1; 
-  // Lire le son de l'aiguille à chaque clic
-  aiguilleSound.play().catch((error) => {
-    console.log('Erreur lors de la lecture du son de l\'aiguille:', error);
-  });
-
-  // Rotation de l'aiguille
   rotation = (rotation + 90) % 360;
   aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
-
 });

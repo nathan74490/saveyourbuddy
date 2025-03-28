@@ -139,19 +139,13 @@ header {
   
 }
 
-.front {
-    position: absolute;
-    width: 490px;
-    border-radius: 100%;
-
-   
-}
-
 .back {
+    position: absolute;
     z-index: 999;
-  
-   
+    border-radius: 100%;
+    box-shadow: 0 2px 4px 6px  #333C98;
 }
+  
 
 #aiguille {
     position: absolute;
@@ -217,7 +211,7 @@ header {
 
 #up {
     position: relative;
-    bottom: 130%;
+    bottom: 135%;
     left: 50%;
     transform: translateX(-50%);
 }
