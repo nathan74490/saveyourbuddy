@@ -429,8 +429,9 @@ h2 {
 .card {
     width: 90px;
     height: 90px;
-    background-color: #ccc;
-    border: 1px solid #999;
+    background-color: var(--midnight);
+    border: 2.5px solid var(--cyan);
+    box-shadow: 0px 0px 15px var(--cyan);
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
@@ -462,6 +463,7 @@ h2 {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -471,9 +473,11 @@ h2 {
     0% {
         transform: translateY(-90%);
     }
+
     50% {
         transform: translateY(0);
     }
+
     100% {
         transform: translateY(-90%);
     }
@@ -515,7 +519,7 @@ h2 {
     display: block;
     margin: 0 auto;
     transition: transform 0.1s ease;
-}                   
+}
 
 .confirm-button:active {
     transform: scale(0.95);
@@ -658,40 +662,40 @@ h2 {
 /* ============== */
 .start-screen,
 .transition-screen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 140%;
-  background-color: #000;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  background-image: url('./assets/images/blank_info.svg');
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 140%;
+    background-color: #000;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    background-image: url('./assets/images/blank_info.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .start-screen h2 {
-  font-family: 'serpent';
-  color: var(--cyan);
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px var(--cyan);
+    font-family: 'serpent';
+    color: var(--cyan);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px var(--cyan);
 }
 
 .start-screen p,
 .transition-message {
-  font-family: 'astonpoliz';
-  color: var(--cyan);
-  width: 50%;
-  text-align: center;
-  font-size: 1.2rem;
-  margin: 2rem 0;
+    font-family: 'astonpoliz';
+    color: var(--cyan);
+    width: 50%;
+    text-align: center;
+    font-size: 1.2rem;
+    margin: 2rem 0;
 }
 
 .transition-title {
@@ -701,10 +705,8 @@ h2 {
     text-align: center;
     font-size: 1.2rem;
     margin: 2rem 0;
-  }
-  
+}
 
-/* Fenêtre d'alerte */
 .alert-screen.hidden {
     display: none;
 }
@@ -727,12 +729,11 @@ h2 {
     background-image: url('./assets/images/alert.svg');
 }
 
-.restart-section{
+.restart-section {
     position: absolute;
     bottom: 15%;
 }
 
-/* Bouton Redémarrer */
 .restart-button {
     position: relative;
     cursor: pointer;
@@ -740,16 +741,16 @@ h2 {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 250px; /* Augmente la largeur du bouton */
-    height: 100px; /* Augmente la hauteur du bouton */
+    width: 250px;
+    height: 100px;/
 }
 
 .button-image {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Adapte à la taille du bouton */
-    height: 100%; /* Adapte à la taille du bouton */
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     z-index: 1;
 }
@@ -758,8 +759,8 @@ h2 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 90%; /* Ajuste la taille de l'image interne */
-    height: 90%; /* Ajuste la taille de l'image interne */
+    width: 90%;
+    height: 90%;
     object-fit: contain;
     z-index: 2;
     transition: transform 0.1s ease;
@@ -768,4 +769,3 @@ h2 {
 .restart-button:active .restart-image {
     transform: translateY(10px);
 }
-
