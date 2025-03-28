@@ -12,7 +12,7 @@ const Mainview = () => {
     const { status } = useStatus();
 
   return (
-    <div className='p-4  h-screen ml-[225px]'>
+    <div className='p-4  h-screen ml-[264px]'>
         {status === "addTeam" ? (
           <Addteam />
         ) : status === "A venir" ? (

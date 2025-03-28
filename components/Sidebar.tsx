@@ -48,7 +48,7 @@ useEffect(() => {
 
 console.log(onGoingTeamsData)
 return (
-  <div className='p-4 fixed top-0 left-0 space-y-16 border-r border-gray-200 min-w-[225px] h-full'>
+  <div className='p-4 fixed top-0 left-0 space-y-16 border-r border-gray-200 w-[264px] h-full'>
     <button onClick={() => setStatus("addTeam")} className='border-none px-2 py-3 font-medium bg-blue-500 text-white rounded-sm cursor-pointer flex items-center gap-2'>
       <p>Ajouter une equipe</p>
       <GoPlus size={20} />
