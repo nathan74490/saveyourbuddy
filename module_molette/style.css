@@ -1,7 +1,6 @@
 @font-face {
     font-family: 'serpent';
     src: url("font/serpent.otf") format('opentype'),
-    url(font/serpent.ttf) format('truetype');
 }
 
 body {
@@ -12,7 +11,7 @@ body {
     min-height: 100vh;
     background-color: #222;
     color: white;
-    font-family: 'serpent' !important;
+    font-family: 'serpent';
     background-image: url(./images/background.png);
     background-size: cover;
     background-size: contain; 
@@ -177,6 +176,7 @@ header {
   
 
 .poly_aig {
+    pointer-events: none;
     width: 35px;
     padding-left: 5px;
     padding-top: 5px;
@@ -199,10 +199,10 @@ header {
 
 #direction-controls p {
     position: absolute;
-    font-size: 20px;
+    font-size: 17px;
     font-family: 'serpent' !important;
     color: white;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: bold;
     transition: all 0.3s ease;
     z-index: 9999;
@@ -210,6 +210,7 @@ header {
 }
 
 #up {
+    font-family: 'serpent' !important;
     position: relative;
     bottom: 135%;
     left: 50%;
@@ -225,10 +226,9 @@ header {
 
 #down {
     position: relative;
-    top: 100%;
+    top: 103%;
     left: 50%;
     transform: translateX(-50%);
-
 }
 
 #left {

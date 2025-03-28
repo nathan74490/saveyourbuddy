@@ -57,15 +57,19 @@ function updateLEDs() {
     switch (correctPosition) {
       case 0:
         active = currentLed.haut;
+        console.log("haut")
         break;
       case 90:
         active = currentLed.droite;
+        console.log("droite")
         break;
       case 180:
         active = currentLed.bas;
+        console.log("bas")
         break;
       case 270:
         active = currentLed.gauche;
+        console.log("gauche")
         break;
     }
 
@@ -85,7 +89,7 @@ validateBtn.addEventListener('click', () => {
     });
 
     if (correctAnswers >= 4) {
-      messageBox.innerText = 'mission accomplie!';
+      messageBox.innerText = 'Mission accomplie!';
       messageBox.style.display = 'flex';
       validateBtn.disabled = true;
       sonar.style.pointerEvents = 'none';
@@ -103,7 +107,17 @@ validateBtn.addEventListener('click', () => {
 
 updateLEDs();
 
+//& Gestion du clic sur la sonar
 sonar.addEventListener("click", () => {
   rotation = (rotation + 90) % 360;
   aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
 });
+
+
+// sonar.addEventListener("click", () => {
+//   rotation  += 90;  // Tourner de 90° à chaque clic (Nord -> Est -> Sud -> Ouest)
+  
+//   if (rotation > 360) rotation = 90;  // Réinitialiser la rotation à 0 (Nord) après avoir atteint 360°
+  
+//   aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;  // Appliquer la rotation
+// });
