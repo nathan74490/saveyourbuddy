@@ -8,7 +8,7 @@ const checkCircle = document.querySelector('.circle');
 
 // Variables de suivi du jeu
 let rotation = 0;
-let correctPosition = 0; // Toujours démarrer avec 180
+let correctPosition = 0; 
 let leds = [];
 let correctAnswers = 0;
 const maxMistakes = 2;
@@ -86,7 +86,7 @@ validateBtn.addEventListener('click', () => {
         if (index < correctAnswers) {
           circle.style.backgroundColor = 'green'; // Vert pour les réponses correctes
         } else if (circle.style.backgroundColor !== 'green') {
-          circle.style.backgroundColor = 'black'; // Noir pour les réponses restantes, sans affecter les verts
+          circle.style.backgroundColor = 'black'; // Noir pour les réponses restantes
         }
       });
   
@@ -116,21 +116,20 @@ validateBtn.addEventListener('click', () => {
       const circles = document.querySelectorAll('.circle');
       const lastCircle = document.getElementById('lastCircle');
       
-      lastCircle.style.backgroundColor = 'red'; // Le dernier cercle devient rouge en cas d'échec
+      lastCircle.style.backgroundColor = 'red'; // Le dernier cercle devient rouge en cas d'erreur
   
   
       setTimeout(() => {
         lastCircle.style.backgroundColor = 'black'; // Réinitialiser après un délai
         lastCircle.innerText = ''; // Effacer le texte
-      }, 500);
+      }, 900);
   
       console.log(correctAnswers);
-      // Ne pas réinitialiser correctAnswers ici, garder les réponses précédentes intactes
     }
   });
   updateLEDs();  
 
-// Gestion du clic sur la sonar
+// Gestion du clic sur le sonar
 sonar.addEventListener("click", () => {
   rotation += 90;  // Tourner de 90° à chaque clic (Nord -> Est -> Sud -> Ouest)
   
