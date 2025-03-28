@@ -131,10 +131,12 @@ validateBtn.addEventListener('click', () => {
   updateLEDs();  
 
 // Gestion du clic sur la sonar
-sonar.addEventListener('click', () => {
-  rotation = (rotation + 90) % 360;
-  aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;
-  // Les LEDs ne changent pas ici
+sonar.addEventListener("click", () => {
+  rotation += 90;  // Tourner de 90° à chaque clic (Nord -> Est -> Sud -> Ouest)
+  
+  if (rotation === 0) rotation = 0;  // Réinitialiser la rotation à 0 (Nord) après avoir atteint 360°
+  
+  aiguille.style.transform = `translateX(-50%) translateY(-100%) rotate(${rotation}deg)`;  // Appliquer la rotation
 });
 
 // Sélection de l'élément audio

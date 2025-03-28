@@ -33,6 +33,9 @@ body::before {
     background-color: rgba(0, 0, 0, 0.7); 
     background-image: url(./images/TRAME.svg);
     background-size: cover;
+    background-size: contain; 
+    background-position: center center;
+    background-attachment: fixed;
     background-repeat: no-repeat;
     z-index: -1; 
     pointer-events: none;
@@ -53,7 +56,7 @@ header {
 #check {
     display: flex;
     margin-left: auto; 
-    margin-right: 40px;
+    margin-right: 90px;
 }
 
 .circle {
@@ -285,7 +288,7 @@ header {
     font-family: 'serpent';
     position: fixed;
     bottom: 100px;
-    right: 15px;
+    right: 60px;
     z-index: 9999;
     background: none;
     padding: 0;
